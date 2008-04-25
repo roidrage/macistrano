@@ -26,11 +26,14 @@ class ProjectController < OSX::NSWindowController
    ib_action :fire_event
    
    def fire_event
-      @webistrano_controller.fetch_projects
    end
    
    def quit(sender)
       NSApp.stop(nil)
+   end
+
+   def clicked(sender)
+     puts sender.representedObject.name
    end
    
    def build_menu
@@ -56,7 +59,7 @@ class ProjectController < OSX::NSWindowController
    end
    
    def build_project_menu
-     projects.each do |project|
+     @webistrano_controller.fetch_projects.each do |project|
        item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_(project.name, "quit:", "", 0)
        item.setTarget self
        add_stages item, project
@@ -67,26 +70,10 @@ class ProjectController < OSX::NSWindowController
      sub_menu = NSMenu.alloc.init
      
      project.stages.each do |stage|
-       sub_item = sub_menu.insertItemWithTitle_action_keyEquivalent_atIndex_(stage.name, "quit:", "", 0)
+       sub_item = sub_menu.insertItemWithTitle_action_keyEquivalent_atIndex_(stage.name, "clicked:", "", 0)
        sub_item.setTarget self
+       sub_item.setRepresentedObject stage
      end
      item.setSubmenu sub_menu
-   end
-   
-   def projects
-     project = Project.new
-     project.name = "My Project"
-     project.id = 1
-     project.stages = stages
-     [project]
-   end
-   
-   def stages
-     stage1 = Stage.new
-     stage1.name = "test"
-     
-     stage2 = Stage.new
-     stage2.name = "production"
-     [stage1, stage2]
    end
 end
