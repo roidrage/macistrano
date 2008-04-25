@@ -56,6 +56,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				FE5F03D80DC11830009DA75F /* webistrano_controller.rb */,
+				FEA7D4990DC0F900001EFBE9 /* project_controller.rb */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -95,8 +97,6 @@
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				4DDCA7110ACC9A6100E082CE /* Info.plist */,
-				FEA7D4990DC0F900001EFBE9 /* project_controller.rb */,
-				FE5F03D80DC11830009DA75F /* webistrano_controller.rb */,
 			);
 			name = macistrano;
 			sourceTree = "<group>";
