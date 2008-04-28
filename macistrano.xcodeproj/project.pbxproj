@@ -18,6 +18,7 @@
 		FE5F04210DC11D6A009DA75F /* icon-inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = FE5F04200DC11D6A009DA75F /* icon-inactive.png */; };
 		FE5F04240DC11D75009DA75F /* icon-success-building.png in Resources */ = {isa = PBXBuildFile; fileRef = FE5F04220DC11D75009DA75F /* icon-success-building.png */; };
 		FE5F04250DC11D75009DA75F /* icon-success.png in Resources */ = {isa = PBXBuildFile; fileRef = FE5F04230DC11D75009DA75F /* icon-success.png */; };
+		FE9BA8690DC65FA8008EF6F8 /* host.rb in Resources */ = {isa = PBXBuildFile; fileRef = FE9BA8680DC65FA8008EF6F8 /* host.rb */; };
 		FEA7D49A0DC0F900001EFBE9 /* project_controller.rb in Resources */ = {isa = PBXBuildFile; fileRef = FEA7D4990DC0F900001EFBE9 /* project_controller.rb */; };
 		FEC8A4670DC26DFF0083B448 /* project.rb in Resources */ = {isa = PBXBuildFile; fileRef = FEC8A4660DC26DFF0083B448 /* project.rb */; };
 		FEC8A4690DC26E300083B448 /* stage.rb in Resources */ = {isa = PBXBuildFile; fileRef = FEC8A4680DC26E300083B448 /* stage.rb */; };
@@ -39,6 +40,7 @@
 		FE5F04200DC11D6A009DA75F /* icon-inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-inactive.png"; sourceTree = "<group>"; };
 		FE5F04220DC11D75009DA75F /* icon-success-building.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-success-building.png"; sourceTree = "<group>"; };
 		FE5F04230DC11D75009DA75F /* icon-success.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-success.png"; sourceTree = "<group>"; };
+		FE9BA8680DC65FA8008EF6F8 /* host.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = host.rb; sourceTree = "<group>"; };
 		FEA7D4990DC0F900001EFBE9 /* project_controller.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = project_controller.rb; sourceTree = "<group>"; };
 		FEC8A4660DC26DFF0083B448 /* project.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = project.rb; sourceTree = "<group>"; };
 		FEC8A4680DC26E300083B448 /* stage.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = stage.rb; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 				FEA7D4990DC0F900001EFBE9 /* project_controller.rb */,
 				FEC8A4660DC26DFF0083B448 /* project.rb */,
 				FEC8A4680DC26E300083B448 /* stage.rb */,
+				FE9BA8680DC65FA8008EF6F8 /* host.rb */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -203,6 +206,7 @@
 				FE5F04250DC11D75009DA75F /* icon-success.png in Resources */,
 				FEC8A4670DC26DFF0083B448 /* project.rb in Resources */,
 				FEC8A4690DC26E300083B448 /* stage.rb in Resources */,
+				FE9BA8690DC65FA8008EF6F8 /* host.rb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

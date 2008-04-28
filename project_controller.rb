@@ -7,7 +7,7 @@
 #
 
 require 'osx/cocoa'
-# require 'project'
+require 'rubygems'
 
 class ProjectController < OSX::NSWindowController
    include OSX
@@ -59,20 +59,24 @@ class ProjectController < OSX::NSWindowController
    end
    
    def build_project_menu
+     lastIndex = 0
      @webistrano_controller.fetch_projects.each do |project|
-       item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_(project.name, "quit:", "", 0)
+       puts project.name
+       item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_(project.name.to_s, "quit:", "", lastIndex)
        item.setTarget self
+       lastIndex += 1
        add_stages item, project
      end
    end
    
    def add_stages item, project
      sub_menu = NSMenu.alloc.init
-     
+     lastIndex = 0
      project.stages.each do |stage|
-       sub_item = sub_menu.insertItemWithTitle_action_keyEquivalent_atIndex_(stage.name, "clicked:", "", 0)
+       sub_item = sub_menu.insertItemWithTitle_action_keyEquivalent_atIndex_(stage.name, "clicked:", "", lastIndex)
        sub_item.setTarget self
        sub_item.setRepresentedObject stage
+       lastIndex += 1
      end
      item.setSubmenu sub_menu
    end

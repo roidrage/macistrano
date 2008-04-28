@@ -279,7 +279,7 @@
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 0}, {186, 1084}}</string>
+							<string>{{0, 0}, {186, 311}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -291,14 +291,14 @@
 					<key>GeometryConfiguration</key>
 					<dict>
 						<key>Frame</key>
-						<string>{{0, 0}, {203, 1102}}</string>
+						<string>{{0, 0}, {203, 329}}</string>
 						<key>GroupTreeTableConfiguration</key>
 						<array>
 							<string>MainColumn</string>
 							<real>186</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>0 35 1920 1143 0 0 1920 1178 </string>
+						<string>0 808 712 370 0 0 1920 1178 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -309,12 +309,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>Info.plist</string>
+								<string>main.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -322,12 +324,17 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>Info.plist</string>
+										<string>main.m</string>
+										<key>_historyCapacity</key>
+										<integer>0</integer>
+										<key>bookmark</key>
+										<string>FE9BA85A0DC65501008EF6F8</string>
 										<key>history</key>
 										<array>
 											<string>FEDC771A0DC0FC5C00A8B40C</string>
 											<string>FE5F044A0DC11FDF009DA75F</string>
 											<string>FEC8A45F0DC26D620083B448</string>
+											<string>FEC8A4C20DC27E710083B448</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -348,18 +355,16 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1712, 802}}</string>
+								<string>{{0, 0}, {504, 0}}</string>
 								<key>RubberWindowFrame</key>
-								<string>0 35 1920 1143 0 0 1920 1178 </string>
+								<string>0 808 712 370 0 0 1920 1178 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>802pt</string>
+							<string>0pt</string>
 						</dict>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -370,18 +375,18 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 807}, {1712, 295}}</string>
+								<string>{{0, 5}, {504, 324}}</string>
 								<key>RubberWindowFrame</key>
-								<string>0 35 1920 1143 0 0 1920 1178 </string>
+								<string>0 808 712 370 0 0 1920 1178 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
 							<key>Proportion</key>
-							<string>295pt</string>
+							<string>324pt</string>
 						</dict>
 					</array>
 					<key>Proportion</key>
-					<string>1712pt</string>
+					<string>504pt</string>
 				</dict>
 			</array>
 			<key>Name</key>
@@ -396,9 +401,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>FEC8A4AD0DC272160083B448</string>
+				<string>FE9BA85B0DC65501008EF6F8</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>FEC8A4AE0DC272160083B448</string>
+				<string>FE9BA85C0DC65501008EF6F8</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -532,10 +537,13 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>1C78EAAD065D492600B07095</string>
+		<string>1CD10A99069EF8BA00B06720</string>
+		<string>FEEF499A0DBE4B3F001A6F00</string>
 		<string>/Volumes/Users/pom/Development/ruby/macistrano/macistrano.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>0 35 1920 1143 0 0 1920 1178 </string>
+	<string>0 808 712 370 0 0 1920 1178 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
@@ -612,7 +620,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>FEEF499A0DBE4B3F001A6F00</string>
-				<string>FEC8A4A00DC271E80083B448</string>
+				<string>FE9BA85D0DC65501008EF6F8</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -732,13 +740,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>FEC8A4A10DC271E80083B448</string>
+				<string>FE9BA85E0DC65501008EF6F8</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>FEC8A4A20DC271E80083B448</string>
-				<string>FEC8A4A30DC271E80083B448</string>
-				<string>FEC8A4A40DC271E80083B448</string>
-				<string>FEC8A4A50DC271E80083B448</string>
-				<string>FEC8A4A60DC271E80083B448</string>
+				<string>FE9BA85F0DC65501008EF6F8</string>
+				<string>FE9BA8600DC65501008EF6F8</string>
+				<string>FE9BA8610DC65501008EF6F8</string>
+				<string>FE9BA8620DC65501008EF6F8</string>
+				<string>FE9BA8630DC65501008EF6F8</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -865,8 +873,6 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -902,7 +908,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>FEC8A4A70DC271E80083B448</string>
+				<string>FE9BA8640DC65501008EF6F8</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>
@@ -912,7 +918,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C78EAAD065D492600B07095</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>Identifier</key>
