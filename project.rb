@@ -7,6 +7,7 @@
 #
 
 require 'osx/cocoa'
+require 'hpricot'
 
 class Project
   
@@ -20,11 +21,12 @@ class Project
 
   def to_stages response
     stages = []
-    doc = XmlSimple.xml_in response
-    doc['stage'].each do |data|
+
+    doc = Hpricot.XML response
+    (doc/'stage').each do |data|
       stage = Stage.new
-      stage.id = data['id'][0]['content']
-      stage.name = data['name'][0]
+      stage.id = (data/:id).text
+      stage.name = (data/:name).text
       stages << stage
     end
     stages

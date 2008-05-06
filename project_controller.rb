@@ -61,7 +61,6 @@ class ProjectController < OSX::NSWindowController
    def build_project_menu
      lastIndex = 0
      @webistrano_controller.fetch_projects.each do |project|
-       puts project.name
        item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_(project.name.to_s, "quit:", "", lastIndex)
        item.setTarget self
        lastIndex += 1

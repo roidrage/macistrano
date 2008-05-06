@@ -8,6 +8,7 @@
 
 require 'osx/cocoa'
 require 'rubygems'
+gem 'hpricot'
 
 class WebistranoController < OSX::NSObject
   ib_outlet :project_controller

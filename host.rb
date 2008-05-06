@@ -3,13 +3,12 @@
 #  macistrano
 #
 #  Created by Pom on 28.04.08.
-#  Copyright (c) 2008 __MyCompanyName__. All rights reserved.
+#  Copyright (c) 2008 Paperplanes. All rights reserved.
 #
 
 require 'open-uri'
 require 'rubygems'
-gem 'xml-simple'
-require 'xmlsimple'
+require 'hpricot'
 
 class Host
   attr_accessor :projects, :url, :username, :password
@@ -22,11 +21,11 @@ class Host
   
   def to_projects response
     projects = []
-    doc = XmlSimple.xml_in response
-    doc['project'].each do |data|
+    doc = Hpricot.XML response
+    (doc/'project').each do |data|
       project = Project.new
-      project.id = data['id'][0]['content']
-      project.name = data['name'][0]
+      project.id = (data/:id).text
+      project.name = (data/:name).text
       project.fetch_stages
       projects << project
     end
