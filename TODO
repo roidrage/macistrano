@@ -1,0 +1,5 @@
+* Keychain storage of passwords
+* Asynchronous HTTP calls with timeouts
+* Preferences for webistrano hosts
+* Dialog to enter a comment when starting a deployment
+* Notification center for asynchronous communication
