@@ -41,6 +41,8 @@
 		FE5F04220DC11D75009DA75F /* icon-success-building.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-success-building.png"; sourceTree = "<group>"; };
 		FE5F04230DC11D75009DA75F /* icon-success.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-success.png"; sourceTree = "<group>"; };
 		FE68C2550DD238600053FC90 /* webistrano_controller_spec.rb */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; name = webistrano_controller_spec.rb; path = spec/webistrano_controller_spec.rb; sourceTree = "<group>"; };
+		FE68C2630DD23FC00053FC90 /* host_spec.rb */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text.script.ruby; name = host_spec.rb; path = spec/host_spec.rb; sourceTree = "<group>"; };
+		FE68C2640DD23FC00053FC90 /* project_spec.rb */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text.script.ruby; name = project_spec.rb; path = spec/project_spec.rb; sourceTree = "<group>"; };
 		FE9BA8680DC65FA8008EF6F8 /* host.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = host.rb; sourceTree = "<group>"; };
 		FEA7D4990DC0F900001EFBE9 /* project_controller.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = project_controller.rb; sourceTree = "<group>"; };
 		FEC8A4660DC26DFF0083B448 /* project.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = project.rb; sourceTree = "<group>"; };
@@ -146,6 +148,8 @@
 		FE68C24C0DD238260053FC90 /* Specs */ = {
 			isa = PBXGroup;
 			children = (
+				FE68C2630DD23FC00053FC90 /* host_spec.rb */,
+				FE68C2640DD23FC00053FC90 /* project_spec.rb */,
 				FE68C2550DD238600053FC90 /* webistrano_controller_spec.rb */,
 			);
 			name = Specs;
