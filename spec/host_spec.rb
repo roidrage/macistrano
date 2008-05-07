@@ -17,6 +17,21 @@ describe Host do
     @project = Project.new
     @project.stub!(:fetch_stages)
     Project.stub!(:new).and_return @project
+    @projects_xml = <<XML
+<?xml version="1.0" encoding="UTF-8"?>
+<projects type="array">
+  <project>
+    <created-at type="datetime">2008-04-28T19:38:51Z</created-at>
+    <description>sfadf</description>
+    <id type="integer">2</id>
+    <name>Other Project</name>
+    <template>mongrel_rails</template>
+    <updated-at type="datetime">2008-04-28T19:38:51Z</updated-at>
+  </project>
+</projects>
+XML
+
+    @io.stub!(:read).and_return @projects_xml
   end
   
   it "should fetch the projects from the specified url" do
@@ -38,22 +53,22 @@ describe Host do
   end
   
   it "should convert the projects xml list to an array list" do
-    projects_xml = <<XML
-<?xml version="1.0" encoding="UTF-8"?>
-<projects type="array">
-  <project>
-    <created-at type="datetime">2008-04-28T19:38:51Z</created-at>
-    <description>sfadf</description>
-    <id type="integer">2</id>
-    <name>Other Project</name>
-    <template>mongrel_rails</template>
-    <updated-at type="datetime">2008-04-28T19:38:51Z</updated-at>
-  </project>
-</projects>
-XML
-    @io.stub!(:read).and_return projects_xml
-    @host.stub!(:open).and_return @io
     projects = @host.find_projects
     projects.should have(1).items
+  end
+  
+  it "should fetch the stages for a project" do
+    @project.should_receive(:fetch_stages)
+    @host.find_projects
+  end
+  
+  it "should assign the name of a project" do
+    projects = @host.find_projects
+    projects.first.name.should == 'Other Project'
+  end
+  
+  it "should assign the id of a project" do
+    projects = @host.find_projects
+    projects.first.id.should == "2"
   end
 end
