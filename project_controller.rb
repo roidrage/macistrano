@@ -13,15 +13,15 @@ class ProjectController < OSX::NSWindowController
    include OSX
    
    attr_reader :status_menu
+   attr_accessor :loaded
    
    def awakeFromNib
      @webistrano_controller = WebistranoController.alloc.init
      @status_menu = OSX::NSMenu.alloc.init
+     @preferences_controller = PreferencesController.alloc.init
      create_status_bar
-     
    end
    
-   ib_outlet :text_field
    
    ib_action :fire_event
    
@@ -32,6 +32,10 @@ class ProjectController < OSX::NSWindowController
       NSApp.stop(nil)
    end
 
+   def show_preferences(sender)
+     @preferences_controller.showPreferences
+   end
+   
    def clicked(sender)
      puts sender.representedObject.name
    end
@@ -54,6 +58,9 @@ class ProjectController < OSX::NSWindowController
      build_project_menu
      item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("Quit", "quit:", "", 0)
      item.setTarget self
+
+     item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("Preferences", "show_preferences:", "", 1)
+     item.setTarget self
       
      @statusItem
    end
@@ -61,7 +68,7 @@ class ProjectController < OSX::NSWindowController
    def build_project_menu
      lastIndex = 0
      @webistrano_controller.fetch_projects.each do |project|
-       item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_(project.name.to_s, "quit:", "", lastIndex)
+       item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_(project.name.to_s, "clicked:", "", lastIndex)
        item.setTarget self
        lastIndex += 1
        add_stages item, project

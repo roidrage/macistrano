@@ -6,6 +6,7 @@
 		activeExecutable = FEEF49890DBE4B28001A6F00 /* macistrano */;
 		activeTarget = 4DDCA7030ACC9A6100E082CE /* macistrano */;
 		addToTargets = (
+			4DDCA7030ACC9A6100E082CE /* macistrano */,
 		);
 		codeSenseManager = FEEF49A40DBE4B3F001A6F00 /* Code sense */;
 		executables = (
