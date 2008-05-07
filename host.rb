@@ -15,7 +15,8 @@ class Host
   
   def find_projects
     result = ""
-    open('http://localhost:3000/projects.xml', :http_basic_authentication => ['admin', 'admin']) {|f| f.each_line {|line| result << line}}
+    io = open("#{url}/projects.xml", :http_basic_authentication => [username, password])
+    result = io.read
     to_projects result
   end
   
