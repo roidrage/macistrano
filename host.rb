@@ -13,10 +13,23 @@ require 'hpricot'
 class Host
   attr_accessor :projects, :url, :username, :password
   
+  def read_xml path
+    io = open("#{url}#{path}", :http_basic_authentication => [username, password])
+    io.read
+  end
+  
+  def version_acceptable?
+    response = read_xml '/sessions/version.xml'
+    doc = Hpricot.XML response
+    element = doc/'application'
+    version = (element/:version).text if (element/:version).any?
+    name = (element/:name).text if (element/:name).any?
+    version.to_f >= 1.3 and name == 'Webistrano'
+  end
+  
   def find_projects
     result = ""
-    io = open("#{url}/projects.xml", :http_basic_authentication => [username, password])
-    result = io.read
+    result = read_xml "/projects.xml"
     to_projects result
   end
   

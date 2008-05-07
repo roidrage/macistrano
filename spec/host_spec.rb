@@ -4,7 +4,7 @@ require 'host'
 require 'project'
 require 'stage'
 
-describe Host do
+describe Host, "when finding projects" do
   before do
     @host = Host.new
     @host.url = 'http://localhost:3000'
@@ -70,5 +70,55 @@ XML
   it "should assign the id of a project" do
     projects = @host.find_projects
     projects.first.id.should == "2"
+  end
+  
+end
+
+describe Host, "when checking the version" do
+  before do
+    @host = Host.new
+    @host.url = 'http://localhost:3000'
+    @host.username = 'admin'
+    @host.password = 'admin'
+    @valid_version_xml = <<XML
+<?xml version="1.0" encoding="UTF-8"?>
+<application>
+  <name>Webistrano</name>
+  <version>1.3</version>
+</application>
+XML
+    @invalid_version_xml = <<XML
+<?xml version="1.0" encoding="UTF-8"?>
+<application>
+  <name>Webistrano</name>
+  <version>1.2</version>
+</application>
+XML
+    @murky_response = 'hello? anybody there?'
+    @io = mock "io"
+    @io.stub!(:read).and_return @valid_version_xml
+    @host.stub!(:open).and_return @io
+  end
+  
+  it "should fetch the version" do
+    @host.should_receive(:open) do |url, options|
+      url.should == 'http://localhost:3000/sessions/version.xml'
+      @io
+    end
+    @host.version_acceptable?
+  end
+  
+  it "should accept the valid version" do
+    @host.version_acceptable?.should == true
+  end
+  
+  it "should not accept an invalid version" do
+    @io.stub!(:read).and_return @invalid_version_xml
+    @host.version_acceptable?.should == false
+  end
+  
+  it "should not accept the bogus output" do
+    @io.stub!(:read).and_return @murky_response
+    @host.version_acceptable?.should == false
   end
 end
