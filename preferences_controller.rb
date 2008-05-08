@@ -13,5 +13,6 @@ class PreferencesController < OSX::NSWindowController
     NSApp.activateIgnoringOtherApps true
     self.showWindow(self)
     @preferencesWindow.makeKeyAndOrderFront(self)
+    @preferencesWindow.setTitle("Preferences")
   end
 end

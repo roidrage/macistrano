@@ -231,6 +231,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -317,7 +319,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>icon-failure.png</string>
+								<string>preferences_controller.rb</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -325,11 +327,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>icon-failure.png</string>
+										<string>preferences_controller.rb</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>FE118E120DD37E6300BD2E9E</string>
+										<string>FE118E580DD38E5A00BD2E9E</string>
 										<key>history</key>
 										<array>
 											<string>FEDC771A0DC0FC5C00A8B40C</string>
@@ -337,13 +339,14 @@
 											<string>FE9BA8960DC6728D008EF6F8</string>
 											<string>FE68C2650DD23FC70053FC90</string>
 											<string>FE68C2660DD23FC70053FC90</string>
-											<string>FE68C2670DD23FC70053FC90</string>
 											<string>FE68C2680DD23FC70053FC90</string>
 											<string>FE68C2690DD23FC70053FC90</string>
 											<string>FE68C26A0DD23FC70053FC90</string>
 											<string>FE68C26B0DD23FC70053FC90</string>
 											<string>FE68C2D70DD250270053FC90</string>
-											<string>FE25E7200DD37B9500F00F2C</string>
+											<string>FE118E530DD38E5A00BD2E9E</string>
+											<string>FE118E540DD38E5A00BD2E9E</string>
+											<string>FE118E550DD38E5A00BD2E9E</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -360,6 +363,8 @@
 											<string>FE68C26F0DD23FC70053FC90</string>
 											<string>FE68C2740DD23FC70053FC90</string>
 											<string>FE68C2750DD23FC70053FC90</string>
+											<string>FE118E560DD38E5A00BD2E9E</string>
+											<string>FE118E570DD38E5A00BD2E9E</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -381,8 +386,6 @@
 							<string>125pt</string>
 						</dict>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -555,6 +558,9 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>1CD10A99069EF8BA00B06720</string>
+		<string>FEEF499A0DBE4B3F001A6F00</string>
+		<string>1C78EAAD065D492600B07095</string>
 		<string>/Volumes/Users/pom/Development/ruby/macistrano/macistrano.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -635,7 +641,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>FEEF499A0DBE4B3F001A6F00</string>
-				<string>FE25E6AF0DD375B500F00F2C</string>
+				<string>FE118E590DD38E5A00BD2E9E</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -755,13 +761,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>FE25E6B00DD375B500F00F2C</string>
+				<string>FE118E5A0DD38E5A00BD2E9E</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>FE25E6B10DD375B500F00F2C</string>
-				<string>FE25E6B20DD375B500F00F2C</string>
-				<string>FE25E6B30DD375B500F00F2C</string>
-				<string>FE25E6B40DD375B500F00F2C</string>
-				<string>FE25E6B50DD375B500F00F2C</string>
+				<string>FE118E5B0DD38E5A00BD2E9E</string>
+				<string>FE118E5C0DD38E5A00BD2E9E</string>
+				<string>FE118E5D0DD38E5A00BD2E9E</string>
+				<string>FE118E5E0DD38E5A00BD2E9E</string>
+				<string>FE118E5F0DD38E5A00BD2E9E</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -925,7 +931,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>FE25E6B60DD375B500F00F2C</string>
+				<string>FE118E600DD38E5A00BD2E9E</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>
