@@ -1,12 +1,17 @@
 require 'osx/cocoa'
 
 class PreferencesController < OSX::NSWindowController
-   include OSX
-   ib_outlet :preferencesWindow
-   
-   def showPreferences
-     bundle = NSBundle.loadNibNamed("preferences")
-     
-     preferencesWindow.makeKeyAndOrderFront(self)
-   end
+  def init
+    self.initWithWindowNibName("preferences")
+  end
+
+  include OSX
+ 
+  ib_outlet :preferencesWindow
+ 
+  def showPreferences
+    NSApp.activateIgnoringOtherApps true
+    self.showWindow(self)
+    @preferencesWindow.makeKeyAndOrderFront(self)
+  end
 end
