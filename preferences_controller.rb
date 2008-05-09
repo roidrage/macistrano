@@ -11,6 +11,7 @@ class PreferencesController < OSX::NSWindowController
 
   ib_outlet :preferencesWindow
   ib_outlet :tableView
+  ib_outlet :newHostSheet
 
   def hosts
   end
@@ -34,7 +35,8 @@ class PreferencesController < OSX::NSWindowController
   
   ib_action :add
   def add id
-    @tableView.selectRow_byExtendingSelection(0, false)
-    @tableView.editColumn_row_withEvent_select(0, 0, nil, true)
+    NSApp.beginSheet_modalForWindow_modalDelegate_didEndSelector_contextInfo(@newHostSheet, @preferencesWindow, nil, nil, nil)
+    # @tableView.selectRow_byExtendingSelection(0, false)
+    # @tableView.editColumn_row_withEvent_select(0, 0, nil, true)
   end
 end

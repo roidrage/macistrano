@@ -16,6 +16,8 @@
 			<string>ObjC</string>
 			<key>OUTLETS</key>
 			<dict>
+				<key>newHostSheet</key>
+				<string>id</string>
 				<key>preferencesWindow</key>
 				<string>id</string>
 				<key>tableView</key>
