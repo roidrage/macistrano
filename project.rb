@@ -11,11 +11,15 @@ require 'hpricot'
 
 class Project
   
-  attr_accessor :name, :id, :stages
+  attr_accessor :name, :id, :stages, :host
+
+  def read_xml path
+    io = open("#{host.url}#{path}", :http_basic_authentication => [host.username, host.password])
+    io.read
+  end
   
   def fetch_stages
-    result = ""
-    open("http://localhost:3000/projects/#{self.id}/stages.xml", :http_basic_authentication => ['admin', 'admin']) {|f| f.each_line {|line| result << line}}
+    result = read_xml "/projects/#{self.id}/stages.xml"
     self.stages = to_stages result
   end
 

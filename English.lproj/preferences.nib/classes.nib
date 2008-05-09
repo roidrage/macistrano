@@ -5,6 +5,11 @@
 	<key>IBClasses</key>
 	<array>
 		<dict>
+			<key>ACTIONS</key>
+			<dict>
+				<key>add</key>
+				<string>id</string>
+			</dict>
 			<key>CLASS</key>
 			<string>PreferencesController</string>
 			<key>LANGUAGE</key>
@@ -12,6 +17,8 @@
 			<key>OUTLETS</key>
 			<dict>
 				<key>preferencesWindow</key>
+				<string>id</string>
+				<key>tableView</key>
 				<string>id</string>
 			</dict>
 			<key>SUPERCLASS</key>

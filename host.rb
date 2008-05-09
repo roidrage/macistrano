@@ -40,6 +40,7 @@ class Host
       project = Project.new
       project.id = (data/:id).text
       project.name = (data/:name).text
+      project.host = self
       project.fetch_stages
       projects << project
     end
