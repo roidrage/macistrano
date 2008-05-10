@@ -12,6 +12,12 @@ class PreferencesController < OSX::NSWindowController
   ib_outlet :preferencesWindow
   ib_outlet :tableView
   ib_outlet :newHostSheet
+  ib_outlet :addButton
+  ib_outlet :cancelButton
+  ib_outlet :spinner
+  ib_outlet :hostField
+  ib_outlet :usernameField
+  ib_outlet :passwordField
 
   def hosts
   end
@@ -34,9 +40,17 @@ class PreferencesController < OSX::NSWindowController
   end
   
   ib_action :add
-  def add id
+  def add(id)
     NSApp.beginSheet_modalForWindow_modalDelegate_didEndSelector_contextInfo(@newHostSheet, @preferencesWindow, nil, nil, nil)
-    # @tableView.selectRow_byExtendingSelection(0, false)
-    # @tableView.editColumn_row_withEvent_select(0, 0, nil, true)
+    # NSApp.runModalForWindow @newHostSheet
+    NSApp.endSheet @newHostSheet
+
+  end
+  
+  ib_action :cancelSheet
+  def cancelSheet(id)
+    # NSApp.endSheet @preferencesWindow
+    # NSApp.stopModal
+    @newHostSheet.orderOut self
   end
 end
