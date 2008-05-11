@@ -15,6 +15,7 @@ class PreferencesController < OSX::NSWindowController
   end
   
   def initHosts
+    registerDefaults
     hosts = NSUserDefaults.standardUserDefaults.arrayForKey("hosts")
   end
   
@@ -65,6 +66,7 @@ class PreferencesController < OSX::NSWindowController
   ib_action :cancelSheet
   def cancelSheet(id)
     closeSheet
+    resetFields
   end
   
   def closeSheet
@@ -76,15 +78,23 @@ class PreferencesController < OSX::NSWindowController
     @hosts << host
     Keychain.add_password host
     saveHostsToPreferences
+    resetFields
   end
   
   def saveHostsToPreferences
-    NSUserDefaults.standardUserDefaults.setObject_forKey(hosts_list, "hosts")
+    NSUserDefaults.standardUserDefaults.setObject_forKey(hostsAsList, "hosts")
   end
   
-  def hosts_list
+  def hostsAsList
     @hosts.collect do |host|
       [host.url, host.username]
     end
+  end
+  
+  def resetFields
+    @hostField.setStringValue ""
+    @newHostSheet.makeFirstResponder @hostField
+    @passwordField.setStringValue ""
+    @usernameField.setStringValue ""
   end
 end
