@@ -1,5 +1,4 @@
 require 'osx/cocoa'
-OSX.require_framework 'Security'
 
 class PreferencesController < OSX::NSWindowController
   attr_accessor :hosts
@@ -75,6 +74,7 @@ class PreferencesController < OSX::NSWindowController
   def addHost host
     @hosts ||= []
     @hosts << host
+    Keychain.add_password host
     saveHostsToPreferences
   end
   

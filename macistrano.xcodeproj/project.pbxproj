@@ -23,6 +23,7 @@
 		FE9BA8690DC65FA8008EF6F8 /* host.rb in Resources */ = {isa = PBXBuildFile; fileRef = FE9BA8680DC65FA8008EF6F8 /* host.rb */; };
 		FEA76B830DD7547D00D171BE /* Security.bridgesupport in Resources */ = {isa = PBXBuildFile; fileRef = FEA76B820DD7547D00D171BE /* Security.bridgesupport */; };
 		FEA76B860DD7551500D171BE /* Security.bridgesupport in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = FEA76B820DD7547D00D171BE /* Security.bridgesupport */; };
+		FEA76BB20DD75E4F00D171BE /* keychain.rb in Resources */ = {isa = PBXBuildFile; fileRef = FEA76BB10DD75E4F00D171BE /* keychain.rb */; };
 		FEA7D49A0DC0F900001EFBE9 /* project_controller.rb in Resources */ = {isa = PBXBuildFile; fileRef = FEA7D4990DC0F900001EFBE9 /* project_controller.rb */; };
 		FEC8A4670DC26DFF0083B448 /* project.rb in Resources */ = {isa = PBXBuildFile; fileRef = FEC8A4660DC26DFF0083B448 /* project.rb */; };
 		FEC8A4690DC26E300083B448 /* stage.rb in Resources */ = {isa = PBXBuildFile; fileRef = FEC8A4680DC26E300083B448 /* stage.rb */; };
@@ -65,6 +66,8 @@
 		FE68C2D30DD24F240053FC90 /* preferences_controller.rb */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text.script.ruby; path = preferences_controller.rb; sourceTree = "<group>"; };
 		FE9BA8680DC65FA8008EF6F8 /* host.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = host.rb; sourceTree = "<group>"; };
 		FEA76B820DD7547D00D171BE /* Security.bridgesupport */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text.xml; path = Security.bridgesupport; sourceTree = "<group>"; };
+		FEA76BB10DD75E4F00D171BE /* keychain.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = keychain.rb; sourceTree = "<group>"; };
+		FEA76BB90DD7649600D171BE /* keychain_spec.rb */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text.script.ruby; name = keychain_spec.rb; path = spec/keychain_spec.rb; sourceTree = "<group>"; };
 		FEA7D4990DC0F900001EFBE9 /* project_controller.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = project_controller.rb; sourceTree = "<group>"; };
 		FEC8A4660DC26DFF0083B448 /* project.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = project.rb; sourceTree = "<group>"; };
 		FEC8A4680DC26E300083B448 /* stage.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = stage.rb; sourceTree = "<group>"; };
@@ -91,6 +94,7 @@
 				FEC8A4660DC26DFF0083B448 /* project.rb */,
 				FEC8A4680DC26E300083B448 /* stage.rb */,
 				FE9BA8680DC65FA8008EF6F8 /* host.rb */,
+				FEA76BB10DD75E4F00D171BE /* keychain.rb */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -172,6 +176,7 @@
 		FE68C24C0DD238260053FC90 /* Specs */ = {
 			isa = PBXGroup;
 			children = (
+				FEA76BB90DD7649600D171BE /* keychain_spec.rb */,
 				FE68C2630DD23FC00053FC90 /* host_spec.rb */,
 				FE68C2640DD23FC00053FC90 /* project_spec.rb */,
 				FE68C2550DD238600053FC90 /* webistrano_controller_spec.rb */,
@@ -249,6 +254,7 @@
 				FE68C2D40DD24F240053FC90 /* preferences_controller.rb in Resources */,
 				FE118E830DD38FA500BD2E9E /* preferences.nib in Resources */,
 				FEA76B830DD7547D00D171BE /* Security.bridgesupport in Resources */,
+				FEA76BB20DD75E4F00D171BE /* keychain.rb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
