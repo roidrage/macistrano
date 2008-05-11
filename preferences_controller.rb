@@ -1,4 +1,5 @@
 require 'osx/cocoa'
+OSX.require_framework 'Security'
 
 class PreferencesController < OSX::NSWindowController
   attr_accessor :hosts

@@ -21,10 +21,26 @@
 		FE5F04250DC11D75009DA75F /* icon-success.png in Resources */ = {isa = PBXBuildFile; fileRef = FE5F04230DC11D75009DA75F /* icon-success.png */; };
 		FE68C2D40DD24F240053FC90 /* preferences_controller.rb in Resources */ = {isa = PBXBuildFile; fileRef = FE68C2D30DD24F240053FC90 /* preferences_controller.rb */; };
 		FE9BA8690DC65FA8008EF6F8 /* host.rb in Resources */ = {isa = PBXBuildFile; fileRef = FE9BA8680DC65FA8008EF6F8 /* host.rb */; };
+		FEA76B830DD7547D00D171BE /* Security.bridgesupport in Resources */ = {isa = PBXBuildFile; fileRef = FEA76B820DD7547D00D171BE /* Security.bridgesupport */; };
+		FEA76B860DD7551500D171BE /* Security.bridgesupport in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = FEA76B820DD7547D00D171BE /* Security.bridgesupport */; };
 		FEA7D49A0DC0F900001EFBE9 /* project_controller.rb in Resources */ = {isa = PBXBuildFile; fileRef = FEA7D4990DC0F900001EFBE9 /* project_controller.rb */; };
 		FEC8A4670DC26DFF0083B448 /* project.rb in Resources */ = {isa = PBXBuildFile; fileRef = FEC8A4660DC26DFF0083B448 /* project.rb */; };
 		FEC8A4690DC26E300083B448 /* stage.rb in Resources */ = {isa = PBXBuildFile; fileRef = FEC8A4680DC26E300083B448 /* stage.rb */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FEA76B850DD754D700D171BE /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = BridgeSupport;
+			dstSubfolderSpec = 7;
+			files = (
+				FEA76B860DD7551500D171BE /* Security.bridgesupport in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -48,6 +64,7 @@
 		FE68C2640DD23FC00053FC90 /* project_spec.rb */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text.script.ruby; name = project_spec.rb; path = spec/project_spec.rb; sourceTree = "<group>"; };
 		FE68C2D30DD24F240053FC90 /* preferences_controller.rb */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text.script.ruby; path = preferences_controller.rb; sourceTree = "<group>"; };
 		FE9BA8680DC65FA8008EF6F8 /* host.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = host.rb; sourceTree = "<group>"; };
+		FEA76B820DD7547D00D171BE /* Security.bridgesupport */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text.xml; path = Security.bridgesupport; sourceTree = "<group>"; };
 		FEA7D4990DC0F900001EFBE9 /* project_controller.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = project_controller.rb; sourceTree = "<group>"; };
 		FEC8A4660DC26DFF0083B448 /* project.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = project.rb; sourceTree = "<group>"; };
 		FEC8A4680DC26E300083B448 /* stage.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = stage.rb; sourceTree = "<group>"; };
@@ -107,6 +124,7 @@
 		29B97314FDCFA39411CA2CEA /* macistrano */ = {
 			isa = PBXGroup;
 			children = (
+				FEA76B820DD7547D00D171BE /* Security.bridgesupport */,
 				FE118E810DD38FA500BD2E9E /* preferences.nib */,
 				FE68C2D30DD24F240053FC90 /* preferences_controller.rb */,
 				FE68C24C0DD238260053FC90 /* Specs */,
@@ -178,6 +196,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4DDCA70E0ACC9A6100E082CE /* Build configuration list for PBXNativeTarget "macistrano" */;
 			buildPhases = (
+				FEA76B850DD754D700D171BE /* Copy Frameworks */,
 				4DDCA7040ACC9A6100E082CE /* Headers */,
 				4DDCA7050ACC9A6100E082CE /* Resources */,
 				4DDCA7090ACC9A6100E082CE /* Sources */,
@@ -229,6 +248,7 @@
 				FE9BA8690DC65FA8008EF6F8 /* host.rb in Resources */,
 				FE68C2D40DD24F240053FC90 /* preferences_controller.rb in Resources */,
 				FE118E830DD38FA500BD2E9E /* preferences.nib in Resources */,
+				FEA76B830DD7547D00D171BE /* Security.bridgesupport in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
