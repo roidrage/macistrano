@@ -7,7 +7,7 @@ require 'rake/testtask'
 require 'pathname'
 
 # Application own Settings
-APPNAME               = "«PROJECTNAME»"
+APPNAME               = "Macistrano"
 TARGET                = "#{APPNAME}.app"
 #APPVERSION           = "rev#{`svn info`[/Revision: (\d+)/, 1]}"
 APPVERSION            = Time.now.strftime("%Y-%m-%d")

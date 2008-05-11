@@ -19,6 +19,8 @@ class ProjectController < OSX::NSWindowController
      @webistrano_controller = WebistranoController.alloc.init
      @status_menu = OSX::NSMenu.alloc.init
      @preferences_controller = PreferencesController.alloc.init
+     puts NSUserDefaults.standardUserDefaults.objectForKey("hosts").inspect
+     
      create_status_bar
    end
    

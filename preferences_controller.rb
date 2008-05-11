@@ -4,9 +4,20 @@ class PreferencesController < OSX::NSWindowController
   attr_accessor :hosts
   
   def init
+    initHosts
     self.initWithWindowNibName("preferences")
   end
 
+  def registerDefaults
+    appDefaults = NSMutableDictionary.dictionary
+    appDefaults.setObject_forKey([], "hosts")
+    NSUserDefaults.standardUserDefaults.registerDefaults appDefaults
+  end
+  
+  def initHosts
+    hosts = NSUserDefaults.standardUserDefaults.arrayForKey("hosts")
+  end
+  
   include OSX
 
   ib_outlet :preferencesWindow
@@ -19,9 +30,6 @@ class PreferencesController < OSX::NSWindowController
   ib_outlet :usernameField
   ib_outlet :passwordField
 
-  def hosts
-  end
-  
   def showPreferences
     NSApp.activateIgnoringOtherApps true
     self.showWindow(self)
@@ -30,7 +38,6 @@ class PreferencesController < OSX::NSWindowController
   end
   
   def numberOfRowsInTableView(tableView)
-    puts "number of rows in table requested"
     1
   end
   
@@ -42,15 +49,41 @@ class PreferencesController < OSX::NSWindowController
   ib_action :add
   def add(id)
     NSApp.beginSheet_modalForWindow_modalDelegate_didEndSelector_contextInfo(@newHostSheet, @preferencesWindow, nil, nil, nil)
-    # NSApp.runModalForWindow @newHostSheet
     NSApp.endSheet @newHostSheet
-
+  end
+  
+  ib_action :addFromSheet
+  def addFromSheet(id)
+    host = Host.new
+    host.url = @hostField.stringValue
+    host.username = @usernameField.stringValue
+    host.password = @passwordField.stringValue
+    addHost host
+    @newHostSheet.orderOut self
   end
   
   ib_action :cancelSheet
   def cancelSheet(id)
-    # NSApp.endSheet @preferencesWindow
-    # NSApp.stopModal
+    closeSheet
+  end
+  
+  def closeSheet
     @newHostSheet.orderOut self
+  end
+  
+  def addHost host
+    @hosts ||= []
+    @hosts << host
+    saveHostsToPreferences
+  end
+  
+  def saveHostsToPreferences
+    NSUserDefaults.standardUserDefaults.setObject_forKey(hosts_list, "hosts")
+  end
+  
+  def hosts_list
+    @hosts.collect do |host|
+      [host.url, host.username]
+    end
   end
 end
