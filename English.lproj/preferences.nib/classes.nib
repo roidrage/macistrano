@@ -13,6 +13,8 @@
 				<string>id</string>
 				<key>cancelSheet</key>
 				<string>id</string>
+				<key>removeHost</key>
+				<string>id</string>
 			</dict>
 			<key>CLASS</key>
 			<string>PreferencesController</string>

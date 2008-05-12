@@ -75,6 +75,10 @@ class PreferencesController < OSX::NSWindowController
     addHost host
     @newHostSheet.orderOut self
     @tableView.reloadData
+    notifyHostUpdate
+  end
+
+  def notifyHostUpdate
     NSNotificationCenter.defaultCenter.postNotificationName_object "HostListUpdated", hosts
   end
   
@@ -82,6 +86,18 @@ class PreferencesController < OSX::NSWindowController
   def cancelSheet(id)
     closeSheet
     resetFields
+  end
+
+  ib_action :removeHost
+  def removeHost sender
+    unless @tableView.selectedRow < 0
+      host = @hosts[@tableView.selectedRow]
+      Keychain.remove_password host
+      @hosts.delete_at(@tableView.selectedRow)
+      saveHostsToPreferences
+      notifyHostUpdate
+      @tableView.reloadData
+    end
   end
   
   def closeSheet
