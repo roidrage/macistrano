@@ -14,6 +14,7 @@
 		4DDCA70C0ACC9A6100E082CE /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		4DDCA70D0ACC9A6100E082CE /* RubyCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8F5E24E03AEB6EC03A81C6F /* RubyCocoa.framework */; };
 		FE118E830DD38FA500BD2E9E /* preferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = FE118E810DD38FA500BD2E9E /* preferences.nib */; };
+		FE1191EC0DD89E120073164F /* task.rb in Resources */ = {isa = PBXBuildFile; fileRef = FE1191EB0DD89E120073164F /* task.rb */; };
 		FE5F03D90DC11830009DA75F /* webistrano_controller.rb in Resources */ = {isa = PBXBuildFile; fileRef = FE5F03D80DC11830009DA75F /* webistrano_controller.rb */; };
 		FE5F041F0DC11D5B009DA75F /* icon-failure.png in Resources */ = {isa = PBXBuildFile; fileRef = FE5F041E0DC11D5B009DA75F /* icon-failure.png */; };
 		FE5F04210DC11D6A009DA75F /* icon-inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = FE5F04200DC11D6A009DA75F /* icon-inactive.png */; };
@@ -55,6 +56,7 @@
 		E8F5E24E03AEB6EC03A81C6F /* RubyCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RubyCocoa.framework; path = /System/Library/Frameworks/RubyCocoa.framework; sourceTree = "<absolute>"; };
 		E8F5E25803AEB7C803A81C6F /* rb_main.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = rb_main.rb; sourceTree = "<group>"; };
 		FE118E820DD38FA500BD2E9E /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/preferences.nib; sourceTree = "<group>"; };
+		FE1191EB0DD89E120073164F /* task.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = task.rb; sourceTree = "<group>"; };
 		FE5F03D80DC11830009DA75F /* webistrano_controller.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = webistrano_controller.rb; sourceTree = "<group>"; };
 		FE5F041E0DC11D5B009DA75F /* icon-failure.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-failure.png"; sourceTree = "<group>"; };
 		FE5F04200DC11D6A009DA75F /* icon-inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-inactive.png"; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				4DDCA7110ACC9A6100E082CE /* Info.plist */,
+				FE1191EB0DD89E120073164F /* task.rb */,
 			);
 			name = macistrano;
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 				FE118E830DD38FA500BD2E9E /* preferences.nib in Resources */,
 				FEA76B830DD7547D00D171BE /* Security.bridgesupport in Resources */,
 				FEA76BB20DD75E4F00D171BE /* keychain.rb in Resources */,
+				FE1191EC0DD89E120073164F /* task.rb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

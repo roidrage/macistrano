@@ -23,8 +23,12 @@ class Stage
     @tasks = []
     result = read_xml "/projects/#{project.id}/stages/#{id}/tasks.xml"
     doc = Hpricot.XML(result)
-    (doc/'record').collect do |task|
-      @tasks << {:name => (task/:name).text, :description => (task/:description).text}
+    (doc/'record').collect do |data|
+      task = Task.new
+      task.name = (data/:name).text
+      task.description = (data/:description).text
+      task.stage = self
+      @tasks << task
     end
   end
 end
