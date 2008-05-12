@@ -84,6 +84,20 @@ class ProjectController < OSX::NSWindowController
        sub_item = sub_menu.insertItemWithTitle_action_keyEquivalent_atIndex_(stage.name, "clicked:", "", lastIndex)
        sub_item.setTarget self
        sub_item.setRepresentedObject stage
+       add_tasks sub_item, stage
+       lastIndex += 1
+     end
+     
+     item.setSubmenu sub_menu
+   end
+   
+   def add_tasks item, stage
+     sub_menu = NSMenu.alloc.init
+     lastIndex = 0
+     stage.tasks.each do |task|
+       sub_item = sub_menu.insertItemWithTitle_action_keyEquivalent_atIndex_(task[:name], "clicked:", "", lastIndex)
+       sub_item.setTarget self
+       sub_item.setRepresentedObject task
        lastIndex += 1
      end
      item.setSubmenu sub_menu

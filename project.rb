@@ -31,6 +31,8 @@ class Project
       stage = Stage.new
       stage.id = (data/:id).text
       stage.name = (data/:name).text
+      stage.project = self
+      stage.fetch_tasks
       stages << stage
     end
     stages
