@@ -70,7 +70,7 @@ class ProjectController < OSX::NSWindowController
      lastIndex = 0
      hosts = @preferences_controller.hosts
      @webistrano_controller.fetch_projects(hosts).each do |project|
-       item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_(project.name.to_s, "clicked:", "", lastIndex)
+       item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("#{project.name.to_s} (#{project.host.url})", "clicked:", "", lastIndex)
        item.setTarget self
        lastIndex += 1
        add_stages item, project
