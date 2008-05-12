@@ -62,9 +62,16 @@ class ProjectController < OSX::NSWindowController
    ib_action :closeTaskWindow
    def closeTaskWindow(sender)
      @runTaskDialog.close
+     resetFields
    end
    
    private
+   
+   def resetFields
+     @taskField.setStringValue ""
+     @descriptionField.setStringValue ""
+   end
+   
    def create_status_bar
      @statusItem = OSX::NSStatusBar.systemStatusBar.statusItemWithLength(OSX::NSVariableStatusItemLength)
      path = NSBundle.mainBundle.pathForResource_ofType("icon-failure", "png")
