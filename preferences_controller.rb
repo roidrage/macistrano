@@ -2,6 +2,17 @@ require 'osx/cocoa'
 
 class PreferencesController < OSX::NSWindowController
   attr_accessor :hosts
+  include OSX
+
+  ib_outlet :preferencesWindow
+  ib_outlet :tableView
+  ib_outlet :newHostSheet
+  ib_outlet :addButton
+  ib_outlet :cancelButton
+  ib_outlet :spinner
+  ib_outlet :hostField
+  ib_outlet :usernameField
+  ib_outlet :passwordField
   
   def init
     initHosts
@@ -16,21 +27,23 @@ class PreferencesController < OSX::NSWindowController
   
   def initHosts
     registerDefaults
-    hosts = NSUserDefaults.standardUserDefaults.arrayForKey("hosts")
+    configuredHosts = NSUserDefaults.standardUserDefaults.arrayForKey("hosts")
+    @hosts ||= []
+    configuredHosts.each do |data|
+      host = Host.new
+      host.url = data[0]
+      host.username = data[1]
+      @hosts << host
+    end
+    fetchPasswords
   end
   
-  include OSX
-
-  ib_outlet :preferencesWindow
-  ib_outlet :tableView
-  ib_outlet :newHostSheet
-  ib_outlet :addButton
-  ib_outlet :cancelButton
-  ib_outlet :spinner
-  ib_outlet :hostField
-  ib_outlet :usernameField
-  ib_outlet :passwordField
-
+  def fetchPasswords
+    @hosts.each do |host|
+      Keychain.find_password host
+    end
+  end
+  
   def showPreferences
     NSApp.activateIgnoringOtherApps true
     self.showWindow(self)
@@ -39,12 +52,11 @@ class PreferencesController < OSX::NSWindowController
   end
   
   def numberOfRowsInTableView(tableView)
-    1
+    @hosts.size
   end
   
   def tableView_objectValueForTableColumn_row(tableView, column, row)
-    puts "request for #{column}/#{row}"
-    "host"
+    @hosts[row].url
   end
   
   ib_action :add
@@ -61,6 +73,7 @@ class PreferencesController < OSX::NSWindowController
     host.password = @passwordField.stringValue
     addHost host
     @newHostSheet.orderOut self
+    @tableView.reloadData
   end
   
   ib_action :cancelSheet
@@ -74,7 +87,6 @@ class PreferencesController < OSX::NSWindowController
   end
   
   def addHost host
-    @hosts ||= []
     @hosts << host
     Keychain.add_password host
     saveHostsToPreferences
