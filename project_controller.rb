@@ -24,10 +24,15 @@ class ProjectController < OSX::NSWindowController
    end
    
    def registerObservers
+     NSNotificationCenter.defaultCenter.addObserver_selector_name_object self, "updateHostList:", "HostListUpdated", nil
    end
    
-   ib_action :fire_event
-   def fire_event
+   def updateHostList(notification)
+     @statusItem.menu.release
+     @statusItem.setMenu nil
+     @status_menu = OSX::NSMenu.alloc.init
+     @statusItem.setMenu @status_menu
+     update_menu notification.object
    end
    
    def quit(sender)
@@ -39,10 +44,6 @@ class ProjectController < OSX::NSWindowController
    end
    
    def clicked(sender)
-     puts sender.representedObject.stage.name
-   end
-   
-   def build_menu
    end
    
    def create_status_bar
@@ -51,25 +52,25 @@ class ProjectController < OSX::NSWindowController
      initial_icon = OSX::NSURL.fileURLWithPath("Resources/icon-failure.png")
      @statusItem.setImage NSImage.alloc.initByReferencingFile(path)
      @statusItem.setHighlightMode true
-     @statusItem.setMenu status_menu
+     @statusItem.setMenu @status_menu
      @statusItem.setTarget self
      update_menu
    end
    
-   def update_menu
-     build_project_menu
+   def update_menu hosts_list = nil
+     build_project_menu hosts_list
      item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("Quit", "quit:", "", 0)
      item.setTarget self
 
      item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("Preferences", "show_preferences:", "", 1)
      item.setTarget self
-      
+     
      @statusItem
    end
    
-   def build_project_menu
+   def build_project_menu hosts_list = nil
      lastIndex = 0
-     hosts = @preferences_controller.hosts
+     hosts = hosts_list || @preferences_controller.hosts
      @webistrano_controller.fetch_projects(hosts).each do |project|
        item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("#{project.name.to_s} (#{project.host.url})", nil, "", lastIndex)
        item.setTarget self

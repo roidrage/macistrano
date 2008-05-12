@@ -75,6 +75,8 @@ class PreferencesController < OSX::NSWindowController
     addHost host
     @newHostSheet.orderOut self
     @tableView.reloadData
+    puts self.inspect
+    NSNotificationCenter.defaultCenter.postNotificationName_object "HostListUpdated", hosts
   end
   
   ib_action :cancelSheet
