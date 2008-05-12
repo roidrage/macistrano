@@ -91,6 +91,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				FE68C2D30DD24F240053FC90 /* preferences_controller.rb */,
 				FE5F03D80DC11830009DA75F /* webistrano_controller.rb */,
 				FEA7D4990DC0F900001EFBE9 /* project_controller.rb */,
 				FEC8A4660DC26DFF0083B448 /* project.rb */,
@@ -130,9 +131,6 @@
 		29B97314FDCFA39411CA2CEA /* macistrano */ = {
 			isa = PBXGroup;
 			children = (
-				FEA76B820DD7547D00D171BE /* Security.bridgesupport */,
-				FE118E810DD38FA500BD2E9E /* preferences.nib */,
-				FE68C2D30DD24F240053FC90 /* preferences_controller.rb */,
 				FE68C24C0DD238260053FC90 /* Specs */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -157,6 +155,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FE118E810DD38FA500BD2E9E /* preferences.nib */,
+				FEA76B820DD7547D00D171BE /* Security.bridgesupport */,
 				FE5F04220DC11D75009DA75F /* icon-success-building.png */,
 				FE5F04230DC11D75009DA75F /* icon-success.png */,
 				FE5F04200DC11D6A009DA75F /* icon-inactive.png */,

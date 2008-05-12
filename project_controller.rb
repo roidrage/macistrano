@@ -15,6 +15,10 @@ class ProjectController < OSX::NSWindowController
    attr_reader :status_menu
    attr_accessor :loaded
    
+   ib_outlet :runTaskDialog
+   ib_outlet :taskField
+   ib_outlet :descriptionField
+   
    def awakeFromNib
      @webistrano_controller = WebistranoController.alloc.init
      @status_menu = OSX::NSMenu.alloc.init
@@ -44,8 +48,23 @@ class ProjectController < OSX::NSWindowController
    end
    
    def clicked(sender)
+     @taskField.setStringValue sender.representedObject.name
+     @runTaskDialog.makeFirstResponder @descriptionField
+     @runTaskDialog.setTitle("Run Task")
+     @runTaskDialog.makeKeyAndOrderFront(self)
+     @runTaskDialog.center
    end
    
+   ib_action :runTask
+   def runTask(sender)
+   end
+   
+   ib_action :closeTaskWindow
+   def closeTaskWindow(sender)
+     @runTaskDialog.close
+   end
+   
+   private
    def create_status_bar
      @statusItem = OSX::NSStatusBar.systemStatusBar.statusItemWithLength(OSX::NSVariableStatusItemLength)
      path = NSBundle.mainBundle.pathForResource_ofType("icon-failure", "png")
