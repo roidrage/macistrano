@@ -13,13 +13,11 @@ class Keychain
   
   def self.add_password host
     identifier = build_identifier(host)
-    OSX::SecKeychainAddGenericPassword(nil, identifier.length, identifier, host.username.length, host.username, host.password.length, host.password, nil) == 0
+    result = OSX::SecKeychainAddGenericPassword(nil, identifier.length, identifier, host.username.length, host.username, host.password.length, host.password, nil)
   end
   
   def self.find_password host
     identifier = build_identifier(host)
-    password_length = OSX::ObjcPtr.allocate_as_int32
-    password_data = OSX::ObjcPtr.allocate_as_int32
     status, *password_data = OSX::SecKeychainFindGenericPassword(nil, identifier.length, identifier, host.username.length, host.username)
     if status == 0
       length = password_data.shift

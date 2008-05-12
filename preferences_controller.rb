@@ -33,6 +33,7 @@ class PreferencesController < OSX::NSWindowController
       host = Host.new
       host.url = data[0]
       host.username = data[1]
+      Keychain.find_password host
       @hosts << host
     end
     fetchPasswords
@@ -70,7 +71,7 @@ class PreferencesController < OSX::NSWindowController
     host = Host.new
     host.url = @hostField.stringValue
     host.username = @usernameField.stringValue
-    host.password = @passwordField.stringValue
+    host.password = @passwordField.stringValue.to_s
     addHost host
     @newHostSheet.orderOut self
     @tableView.reloadData
