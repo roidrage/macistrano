@@ -23,6 +23,8 @@ class Project
     self.stages = to_stages result
   end
 
+  private
+  
   def to_stages response
     stages = []
 

@@ -48,6 +48,7 @@ class ProjectController < OSX::NSWindowController
    end
    
    def clicked(sender)
+     @runStage = sender.representedObject.stage
      @taskField.setStringValue sender.representedObject.name
      @runTaskDialog.makeFirstResponder @descriptionField
      @runTaskDialog.setTitle("Run Task")
@@ -57,6 +58,11 @@ class ProjectController < OSX::NSWindowController
    
    ib_action :runTask
    def runTask(sender)
+     taskName = @taskField.stringValue.to_s
+     description = @descriptionField.stringValue.to_s
+     @runStage.run_stage taskName, description
+     @runTaskDialog.close
+     resetFields
    end
    
    ib_action :closeTaskWindow
