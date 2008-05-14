@@ -11,6 +11,8 @@ require 'rubygems'
 require 'hpricot'
 
 class Host
+  ACCEPT_VERSION = [1, 3, 1]
+  
   attr_accessor :projects, :url, :username, :password
   
   def read_xml path
@@ -24,7 +26,21 @@ class Host
     element = doc/'application'
     version = (element/:version).text if (element/:version).any?
     name = (element/:name).text if (element/:name).any?
-    version.to_f >= 1.3 and name == 'Webistrano'
+    version = to_version_array(version)
+    version_eql_or_higher  and name == 'Webistrano'
+  end
+  
+  def version_eql_or_higher version
+    ACCEPT_VERSION.each do |part|
+    end
+  end
+  
+  def to_version_array(version)
+    if version == nil || version == ""
+      version_parts = version.split(/\./)
+      version_parts.each_with_index {|num, index| version_parts[index] = num.to_i}
+      version_parts
+    end
   end
   
   def find_projects
