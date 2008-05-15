@@ -3,6 +3,7 @@ require 'osx/cocoa'
 class PreferencesController < OSX::NSWindowController
   attr_accessor :hosts
   include OSX
+  include NotificationHub
 
   ib_outlet :preferencesWindow
   ib_outlet :tableView
@@ -13,6 +14,9 @@ class PreferencesController < OSX::NSWindowController
   ib_outlet :hostField
   ib_outlet :usernameField
   ib_outlet :passwordField
+  
+  def awakeFromNib
+  end
   
   def init
     initHosts
@@ -79,7 +83,7 @@ class PreferencesController < OSX::NSWindowController
   end
 
   def notifyHostUpdate
-    NSNotificationCenter.defaultCenter.postNotificationName_object "HostListUpdated", hosts
+    notify_host_list_updated @hosts
   end
   
   ib_action :cancelSheet

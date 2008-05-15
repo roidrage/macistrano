@@ -10,7 +10,11 @@ require 'osx/cocoa'
 require 'rubygems'
 
 class ProjectController < OSX::NSWindowController
-   include OSX
+  include OSX
+  include NotificationHub
+  
+  notify :updateHostList, :when => :host_list_updated
+  
    
    attr_reader :status_menu
    attr_accessor :loaded
@@ -23,12 +27,7 @@ class ProjectController < OSX::NSWindowController
      @webistrano_controller = WebistranoController.alloc.init
      @status_menu = OSX::NSMenu.alloc.init
      @preferences_controller = PreferencesController.alloc.init
-     registerObservers
      create_status_bar
-   end
-   
-   def registerObservers
-     NSNotificationCenter.defaultCenter.addObserver_selector_name_object self, "updateHostList:", "HostListUpdated", nil
    end
    
    def updateHostList(notification)

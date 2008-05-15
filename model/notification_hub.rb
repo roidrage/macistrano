@@ -1,21 +1,32 @@
 require 'osx/cocoa'
 
-class NotificationHub
-  class << self
-    def fetched_projects_done projects
-      NSNotificationCenter.defaultCenter.postNotificationName_object "FetchedProjectsDone", projects
+module NotificationHub
+  
+  def self.included(base)
+    base.extend(ClassMethods)
+  end
+
+  def initialize
+    registered_notifications = self.class.instance_variable_get(:@registered_notifications)
+    registered_notifications.each do |on, method|
+      OSX::NSNotificationCenter.defaultCenter.addObserver_selector_name_object self, "#{method.to_s}:", on.to_s, nil
+    end unless registered_notifications.nil?
+  end
+  
+  def method_missing(name, *args)
+    if name.to_s.match(/^notify_/)
+      event = name.to_s.gsub(/^notify_/, "")
+      OSX::NSNotificationCenter.defaultCenter.postNotificationName_object event.to_s, args[0]
+    else
+      super
     end
+  end
+  
+  module ClassMethods
     
-    def deployment_started
-      NSNoficitationCenter.defaultCenter.postNotificationName_object "DeploymentStarted", nil
-    end
-    
-    def observe_deployment_started object, selector
-      NSNotificationCenter.defaultCenter.addObserver_selector_name_object object, selector, "DeploymentStarted", nil
-    end
-    
-    def unobserve_deployment_started object
-      NSNotificationCenter.defaultCenter.removeObserver_name_object object, "DeploymentStarted", nil
+    def notify method, options
+      @registered_notifications ||= {}
+      @registered_notifications[options[:when]] = method
     end
   end
 end
