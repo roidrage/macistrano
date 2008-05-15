@@ -50,6 +50,7 @@ class ProjectController < OSX::NSWindowController
    def clicked(sender)
      @runStage = sender.representedObject.stage
      @taskField.setStringValue sender.representedObject.name
+     NSApp.activateIgnoringOtherApps true
      @runTaskDialog.makeFirstResponder @descriptionField
      @runTaskDialog.setTitle("Run Task")
      @runTaskDialog.makeKeyAndOrderFront(self)
