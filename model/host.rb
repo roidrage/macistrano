@@ -26,17 +26,27 @@ class Host
     element = doc/'application'
     version = (element/:version).text if (element/:version).any?
     name = (element/:name).text if (element/:name).any?
-    version = to_version_array(version)
-    version_eql_or_higher  and name == 'Webistrano'
+    version_eql_or_higher(to_version_array(version)) and name == 'Webistrano'
   end
   
   def version_eql_or_higher version
-    ACCEPT_VERSION.each do |part|
+    return false if version.nil? || version.size == 0
+    version[1] = 0 if version.size == 1
+    version[2] = 0 if version.size == 2
+    if version[0] > ACCEPT_VERSION[0]
+      true
+    elsif version[0] >= ACCEPT_VERSION[0] and version[1] > ACCEPT_VERSION[1]
+      true
+    elsif version[0] >= ACCEPT_VERSION[0] and version[1] == ACCEPT_VERSION[1] and version[2] >= ACCEPT_VERSION[2]
+      true
+    else
+      false
     end
+    
   end
   
   def to_version_array(version)
-    if version == nil || version == ""
+    unless version == nil || version == ""
       version_parts = version.split(/\./)
       version_parts.each_with_index {|num, index| version_parts[index] = num.to_i}
       version_parts
