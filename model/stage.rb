@@ -8,6 +8,8 @@
 
 require 'osx/cocoa'
 require 'builder'
+require 'net/http'
+require 'net/https'
 
 class Stage
   attr_accessor :id, :project, :name, :tasks
@@ -27,11 +29,10 @@ class Stage
   
   def run_stage task, comment
     url = URI.parse("#{project.host.url}/projects/#{project.id}/stages/#{self.id}/deployments.xml")
-    http             = Net::HTTP.new(url.host, url.port)
-    http.use_ssl     = url.is_a?(URI::HTTPS)
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = url.is_a?(URI::HTTPS)
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE if http.use_ssl?
-    puts new_deployment_as_xml(task, comment)
-    puts http.post(url.path, new_deployment_as_xml(task, comment).to_s, build_request_headers({}, project.host)).value
+    http.post(url.path, new_deployment_as_xml(task, comment).to_s, build_request_headers({}, project.host)).value
   end
   
   def new_deployment_as_xml task, comment
