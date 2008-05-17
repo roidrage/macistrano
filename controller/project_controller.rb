@@ -73,18 +73,55 @@ class ProjectController < OSX::NSWindowController
     description = @descriptionField.stringValue.to_s
     @runStage.run_stage taskName, description
     @runTaskDialog.close
-    resetFields
+    reset_fields
   end
    
   ib_action :closeTaskWindow
   def closeTaskWindow(sender)
     @runTaskDialog.close
-    resetFields
+    reset_fields
   end
-   
+  
+  def add_stages(notification)
+    project = notification.object
+    idx = @statusItem.menu.indexOfItemWithRepresentedObject(project)
+    if idx >= 0
+      item = @statusItem.menu.itemAtIndex(idx)
+      sub_menu = NSMenu.alloc.init
+      lastIndex = 0
+      project.stages.each do |stage|
+        sub_item = sub_menu.insertItemWithTitle_action_keyEquivalent_atIndex_(stage.name, nil, "", lastIndex)
+        sub_item.setTarget self
+        sub_item.setRepresentedObject stage
+        lastIndex += 1
+      end
+      item.setSubmenu sub_menu
+    end
+    
+  end
+  
+  def add_tasks(notification)
+    stage = notification.object
+    idx = @statusItem.menu.indexOfItemWithRepresentedObject(stage.project)
+    project_menu_item = @statusItem.menu.itemAtIndex(idx)
+    
+    idx = project_menu_item.submenu.indexOfItemWithRepresentedObject(stage)
+    stage_menu_item = project_menu_item.submenu.itemAtIndex(idx)
+    
+    tasks_menu = NSMenu.alloc.init
+    lastIndex = 0
+    stage.tasks.each do |task|
+      sub_item = tasks_menu.insertItemWithTitle_action_keyEquivalent_atIndex_(task.name, "clicked:", "", lastIndex)
+      sub_item.setTarget self
+      sub_item.setRepresentedObject task
+      lastIndex += 1
+    end
+    stage_menu_item.setSubmenu tasks_menu
+  end
+  
   private
    
-  def resetFields
+  def reset_fields
     @taskField.setStringValue ""
     @descriptionField.setStringValue ""
   end
@@ -117,42 +154,5 @@ class ProjectController < OSX::NSWindowController
     hosts.each do |host|
       host.find_projects
     end
-  end
-  
-  def build_project_menu hosts_list = nil
-    lastIndex = 0
-    hosts = hosts_list || @preferences_controller.hosts
-    @webistrano_controller.fetch_projects(hosts).each do |project|
-      item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("#{project.name.to_s} (#{project.host.url})", nil, "", lastIndex)
-      item.setTarget self
-      lastIndex += 1
-      add_stages item, project
-    end
-  end
-   
-  def add_stages item, project
-    sub_menu = NSMenu.alloc.init
-    lastIndex = 0
-    project.stages.each do |stage|
-      sub_item = sub_menu.insertItemWithTitle_action_keyEquivalent_atIndex_(stage.name, nil, "", lastIndex)
-      sub_item.setTarget self
-      sub_item.setRepresentedObject stage
-      add_tasks sub_item, stage
-      lastIndex += 1
-    end
-    
-    item.setSubmenu sub_menu
-  end
-  
-  def add_tasks item, stage
-    sub_menu = NSMenu.alloc.init
-    lastIndex = 0
-    stage.tasks.each do |task|
-      sub_item = sub_menu.insertItemWithTitle_action_keyEquivalent_atIndex_(task.name, "clicked:", "", lastIndex)
-      sub_item.setTarget self
-      sub_item.setRepresentedObject task
-      lastIndex += 1
-    end
-    item.setSubmenu sub_menu
   end
 end

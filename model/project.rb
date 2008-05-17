@@ -8,8 +8,10 @@
 
 require 'osx/cocoa'
 require 'hpricot'
+require 'notification_hub'
 
 class Project
+  include NotificationHub
   
   attr_accessor :name, :id, :stages, :host
 
@@ -18,11 +20,19 @@ class Project
     io.read
   end
   
+  def stages_url
+    "#{host.url}/projects/#{self.id}/stages.xml"
+  end
+  
   def fetch_stages
-    result = read_xml "/projects/#{self.id}/stages.xml"
-    self.stages = to_stages result
+    LoadOperationQueue.queue_request stages_url, self, {:username => host.username, :password => host.password}
   end
 
+  def url_finished(data)
+    self.stages = to_stages data
+    notify_stages_loaded self
+  end
+  
   private
   
   def to_stages response

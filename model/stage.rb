@@ -10,8 +10,11 @@ require 'osx/cocoa'
 require 'builder'
 require 'net/http'
 require 'net/https'
+require 'notification_hub'
 
 class Stage
+  include NotificationHub
+  
   attr_accessor :id, :project, :name, :tasks
   
   def default_header
@@ -45,14 +48,21 @@ class Stage
     xml.target!
   end
   
-  def read_xml path
-    io = open("#{project.host.url}#{path}", :http_basic_authentication => [project.host.username, project.host.password])
-    io.read
+  def tasks_url
+    "#{project.host.url}/projects/#{project.id}/stages/#{id}/tasks.xml"
   end
   
   def fetch_tasks
-    @tasks = []
-    result = read_xml "/projects/#{project.id}/stages/#{id}/tasks.xml"
+    LoadOperationQueue.queue_request tasks_url, self, {:username => project.host.username, :password => project.host.password}
+  end
+  
+  def url_finished(data)
+    to_tasks(data)
+    notify_tasks_loaded(self)
+  end
+  
+  def to_tasks(result)
+    @tasks ||= []
     doc = Hpricot.XML(result)
     (doc/'record').collect do |data|
       task = Task.new

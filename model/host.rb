@@ -65,9 +65,7 @@ class Host
   end
   
   def url_finished(data)
-    puts "got data #{data}"
     projects = to_projects(data)
-    puts "found #{projects.size} projects"
     notify_project_loaded :host => self, :projects => projects
   end
   
@@ -79,7 +77,7 @@ class Host
       project.id = (data/:id).text
       project.name = (data/:name).text
       project.host = self
-      # project.fetch_stages
+      project.fetch_stages
       projects << project
     end
     projects
