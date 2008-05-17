@@ -9,8 +9,11 @@
 require 'open-uri'
 require 'rubygems'
 require 'hpricot'
+require 'notification_hub'
 
 class Host
+  include NotificationHub
+  
   ACCEPT_VERSION = [1, 3, 1]
   
   attr_accessor :projects, :url, :username, :password
@@ -53,10 +56,19 @@ class Host
     end
   end
   
+  def collection_url
+    "#{url}/projects.xml"
+  end
+  
   def find_projects
-    result = ""
-    result = read_xml "/projects.xml"
-    to_projects result
+    LoadOperationQueue.queue_request collection_url, self, {:username => username, :password => password}
+  end
+  
+  def url_finished(data)
+    puts "got data #{data}"
+    projects = to_projects(data)
+    puts "found #{projects.size} projects"
+    notify_project_loaded :host => self, :projects => projects
   end
   
   def to_projects response
@@ -67,7 +79,7 @@ class Host
       project.id = (data/:id).text
       project.name = (data/:name).text
       project.host = self
-      project.fetch_stages
+      # project.fetch_stages
       projects << project
     end
     projects

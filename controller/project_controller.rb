@@ -14,7 +14,9 @@ class ProjectController < OSX::NSWindowController
   include NotificationHub
   
   notify :updateHostList, :when => :host_list_updated
-  
+  notify :add_projects, :when => :project_loaded
+  notify :add_stages, :when => :stages_loaded
+  notify :add_tasks, :when => :tasks_loaded
    
   attr_reader :status_menu
   attr_accessor :loaded
@@ -47,15 +49,24 @@ class ProjectController < OSX::NSWindowController
   end
   
   def clicked(sender)
-    @runStage = sender.representedObject.stage
-    @taskField.setStringValue sender.representedObject.name
-    NSApp.activateIgnoringOtherApps true
-    @runTaskDialog.makeFirstResponder @descriptionField
-    @runTaskDialog.setTitle("Run Task")
-    @runTaskDialog.makeKeyAndOrderFront(self)
-    @runTaskDialog.center
+    # @runStage = sender.representedObject.stage
+    # @taskField.setStringValue sender.representedObject.name
+    # NSApp.activateIgnoringOtherApps true
+    # @runTaskDialog.makeFirstResponder @descriptionField
+    # @runTaskDialog.setTitle("Run Task")
+    # @runTaskDialog.makeKeyAndOrderFront(self)
+    # @runTaskDialog.center
   end
-   
+  
+  def add_projects(notification)
+    options = notification.object
+    options[:projects].each do |project|
+      item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("#{project.name.to_s} (#{project.host.url})", nil, "", @statusItem.menu.numberOfItems)
+      item.setTarget self
+      item.setRepresentedObject project
+    end
+  end
+  
   ib_action :runTask
   def runTask(sender)
     taskName = @taskField.stringValue.to_s
@@ -90,7 +101,6 @@ class ProjectController < OSX::NSWindowController
   end
    
   def update_menu hosts_list = nil
-    build_project_menu hosts_list
     item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("Quit", "quit:", "", 0)
     item.setTarget self
 
@@ -98,8 +108,17 @@ class ProjectController < OSX::NSWindowController
     item.setTarget self
     
     @statusItem
+    
+    fetch_projects
   end
-   
+  
+  def fetch_projects
+    hosts = @preferences_controller.hosts
+    hosts.each do |host|
+      host.find_projects
+    end
+  end
+  
   def build_project_menu hosts_list = nil
     lastIndex = 0
     hosts = hosts_list || @preferences_controller.hosts

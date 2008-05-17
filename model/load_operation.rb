@@ -2,6 +2,7 @@
 require 'osx/cocoa'
 
 class LoadOperation < OSX::NSOperation
+  attr_accessor :username, :password
   include OSX
   
   def initWithURL_delegate(url, delegate)
@@ -21,7 +22,6 @@ class LoadOperation < OSX::NSOperation
   def start
     request = NSURLRequest.requestWithURL(@url)
     @connection = NSURLConnection.connectionWithRequest_delegate(request, self)
-    puts @connection.inspect
     setExecuting true
   end
   
@@ -47,8 +47,8 @@ class LoadOperation < OSX::NSOperation
   end
   
   def connection_didReceiveResponse(connection, response)
-    length = response.expectedContentLength
-    @data = NSMutableData.dataWithCapacity(length < 0 ? 0 : length)
+    @length = response.expectedContentLength
+    @data = NSMutableData.dataWithCapacity(@length < 0 ? 0 : @length)
   end
   
   def connection_didReceiveData(connection, data)
@@ -56,8 +56,9 @@ class LoadOperation < OSX::NSOperation
   end
   
   def connectionDidFinishLoading(connection)
-    xml = @data.mutableBytes
-    @delegate.url_finished(@url, xml)
+    puts "request finished"
+    xml = @data.mutableBytes.bytestr(@length)
+    @delegate.url_finished(xml)
     setExecuting false
     setFinished true
   end
@@ -67,6 +68,7 @@ class LoadOperation < OSX::NSOperation
   end
   
   def connection_didReceiveAuthenticationChallenge(connection, challenge)
+    puts "got challenge"
     newCredential = NSURLCredential.credentialWithUser_password_persistence(username, password, NSURLCredentialPersistenceNone)
     challenge.sender.useCredential_forAuthenticationChallenge newCredential, challenge
   end
