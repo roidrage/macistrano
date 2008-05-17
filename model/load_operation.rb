@@ -56,7 +56,6 @@ class LoadOperation < OSX::NSOperation
   end
   
   def connectionDidFinishLoading(connection)
-    puts "request finished"
     xml = @data.mutableBytes.bytestr(@length)
     @delegate.url_finished(xml)
     setExecuting false
@@ -68,7 +67,6 @@ class LoadOperation < OSX::NSOperation
   end
   
   def connection_didReceiveAuthenticationChallenge(connection, challenge)
-    puts "got challenge"
     newCredential = NSURLCredential.credentialWithUser_password_persistence(username, password, NSURLCredentialPersistenceNone)
     challenge.sender.useCredential_forAuthenticationChallenge newCredential, challenge
   end
