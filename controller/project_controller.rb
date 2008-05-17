@@ -96,6 +96,7 @@ class ProjectController < OSX::NSWindowController
         lastIndex += 1
       end
       item.setSubmenu sub_menu
+      item.setEnabled true
     end
     
   end
@@ -117,6 +118,7 @@ class ProjectController < OSX::NSWindowController
       lastIndex += 1
     end
     stage_menu_item.setSubmenu tasks_menu
+    stage_menu_item.setEnabled true
   end
   
   private
