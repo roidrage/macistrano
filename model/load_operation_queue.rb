@@ -28,4 +28,12 @@ class LoadOperationQueue
   
   def self.queue_post_request(url, delegate)
   end
+  
+  def self.queue
+    @@queue
+  end
+  
+  def self.items_in_queue
+    @@queue.operations.size
+  end
 end

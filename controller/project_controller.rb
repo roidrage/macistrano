@@ -17,7 +17,7 @@ class ProjectController < OSX::NSWindowController
   notify :add_projects, :when => :project_loaded
   notify :add_stages, :when => :stages_loaded
   notify :add_tasks, :when => :tasks_loaded
-   
+
   attr_reader :status_menu
   attr_accessor :loaded
    
@@ -30,6 +30,19 @@ class ProjectController < OSX::NSWindowController
     @status_menu = OSX::NSMenu.alloc.init
     @preferences_controller = PreferencesController.alloc.init
     create_status_bar
+    setup_loading_timer
+  end
+  
+  def setup_loading_timer
+    @loading_timer = OSX::NSTimer.scheduledTimerWithTimeInterval_target_selector_userInfo_repeats_(1.0, self, :loading_tick, nil, true)
+  end
+  
+  def loading_tick
+    if LoadOperationQueue.items_in_queue == 0
+      item = @statusItem.menu.itemWithTitle("Loading...")
+      @statusItem.menu.removeItem(item) unless item.nil?
+      @loading_timer.invalidate
+    end
   end
   
   def updateHostList(notification)
@@ -122,7 +135,7 @@ class ProjectController < OSX::NSWindowController
   end
   
   private
-   
+  
   def reset_fields
     @taskField.setStringValue ""
     @descriptionField.setStringValue ""
@@ -131,7 +144,6 @@ class ProjectController < OSX::NSWindowController
   def create_status_bar
     @statusItem = OSX::NSStatusBar.systemStatusBar.statusItemWithLength(OSX::NSVariableStatusItemLength)
     path = NSBundle.mainBundle.pathForResource_ofType("icon-failure", "png")
-    initial_icon = OSX::NSURL.fileURLWithPath("Resources/icon-failure.png")
     @statusItem.setImage NSImage.alloc.initByReferencingFile(path)
     @statusItem.setHighlightMode true
     @statusItem.setMenu @status_menu
@@ -140,13 +152,16 @@ class ProjectController < OSX::NSWindowController
   end
    
   def update_menu hosts_list = nil
-    item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("Quit", "quit:", "", 0)
+
+    item = NSMenuItem.alloc.initWithTitle_action_keyEquivalent("Loading...", nil, "")
+    item.setEnabled false
+    @statusItem.menu.insertItem_atIndex(item, 0)
+
+    item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("Quit", "quit:", "", 1)
     item.setTarget self
 
-    item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("Preferences", "show_preferences:", "", 1)
+    item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("Preferences", "show_preferences:", "", 2)
     item.setTarget self
-    
-    @statusItem
     
     fetch_projects
   end
