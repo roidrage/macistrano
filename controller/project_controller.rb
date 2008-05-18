@@ -62,13 +62,13 @@ class ProjectController < OSX::NSWindowController
   end
   
   def clicked(sender)
-    # @runStage = sender.representedObject.stage
-    # @taskField.setStringValue sender.representedObject.name
-    # NSApp.activateIgnoringOtherApps true
-    # @runTaskDialog.makeFirstResponder @descriptionField
-    # @runTaskDialog.setTitle("Run Task")
-    # @runTaskDialog.makeKeyAndOrderFront(self)
-    # @runTaskDialog.center
+    @runStage = sender.representedObject.stage
+    @taskField.setStringValue sender.representedObject.name
+    NSApp.activateIgnoringOtherApps true
+    @runTaskDialog.makeFirstResponder @descriptionField
+    @runTaskDialog.setTitle("Run Task")
+    @runTaskDialog.makeKeyAndOrderFront(self)
+    @runTaskDialog.center
   end
   
   def add_projects(notification)

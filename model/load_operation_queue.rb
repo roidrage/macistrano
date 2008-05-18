@@ -26,7 +26,16 @@ class LoadOperationQueue
     @@queue.addOperation operation
   end
   
-  def self.queue_post_request(url, delegate)
+  def self.queue_post_request(url, delegate, options = {})
+    if url.is_a?(String)
+      url = NSURL.URLWithString(url)
+    end
+    
+    operation = PostLoadOperation.alloc.initWithURL_delegate(url, delegate)
+    operation.username = options[:username] if options[:username]
+    operation.password = options[:password] if options[:password]
+    operation.body = options[:body] if options[:body]
+    @@queue.addOperation operation
   end
   
   def self.queue

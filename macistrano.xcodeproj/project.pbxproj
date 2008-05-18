@@ -31,6 +31,15 @@
 		FEA7D49A0DC0F900001EFBE9 /* project_controller.rb in Resources */ = {isa = PBXBuildFile; fileRef = FEA7D4990DC0F900001EFBE9 /* project_controller.rb */; };
 		FEC8A4670DC26DFF0083B448 /* project.rb in Resources */ = {isa = PBXBuildFile; fileRef = FEC8A4660DC26DFF0083B448 /* project.rb */; };
 		FEC8A4690DC26E300083B448 /* stage.rb in Resources */ = {isa = PBXBuildFile; fileRef = FEC8A4680DC26E300083B448 /* stage.rb */; };
+		FEC9EB610DE099A600ABA9C8 /* post_load_operation.rb in Resources */ = {isa = PBXBuildFile; fileRef = FEC9EB600DE099A600ABA9C8 /* post_load_operation.rb */; };
+		FEC9EB730DE099B900ABA9C8 /* host.rb in Resources */ = {isa = PBXBuildFile; fileRef = FEC9EB6B0DE099B900ABA9C8 /* host.rb */; };
+		FEC9EB740DE099B900ABA9C8 /* keychain.rb in Resources */ = {isa = PBXBuildFile; fileRef = FEC9EB6C0DE099B900ABA9C8 /* keychain.rb */; };
+		FEC9EB750DE099B900ABA9C8 /* load_operation.rb in Resources */ = {isa = PBXBuildFile; fileRef = FEC9EB6D0DE099B900ABA9C8 /* load_operation.rb */; };
+		FEC9EB760DE099B900ABA9C8 /* load_operation_queue.rb in Resources */ = {isa = PBXBuildFile; fileRef = FEC9EB6E0DE099B900ABA9C8 /* load_operation_queue.rb */; };
+		FEC9EB770DE099B900ABA9C8 /* notification_hub.rb in Resources */ = {isa = PBXBuildFile; fileRef = FEC9EB6F0DE099B900ABA9C8 /* notification_hub.rb */; };
+		FEC9EB780DE099B900ABA9C8 /* project.rb in Resources */ = {isa = PBXBuildFile; fileRef = FEC9EB700DE099B900ABA9C8 /* project.rb */; };
+		FEC9EB790DE099B900ABA9C8 /* stage.rb in Resources */ = {isa = PBXBuildFile; fileRef = FEC9EB710DE099B900ABA9C8 /* stage.rb */; };
+		FEC9EB7A0DE099B900ABA9C8 /* task.rb in Resources */ = {isa = PBXBuildFile; fileRef = FEC9EB720DE099B900ABA9C8 /* task.rb */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -79,6 +88,15 @@
 		FEA7D4990DC0F900001EFBE9 /* project_controller.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = project_controller.rb; path = controller/project_controller.rb; sourceTree = "<group>"; };
 		FEC8A4660DC26DFF0083B448 /* project.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = project.rb; path = model/project.rb; sourceTree = "<group>"; };
 		FEC8A4680DC26E300083B448 /* stage.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = stage.rb; path = model/stage.rb; sourceTree = "<group>"; };
+		FEC9EB600DE099A600ABA9C8 /* post_load_operation.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = post_load_operation.rb; sourceTree = "<group>"; };
+		FEC9EB6B0DE099B900ABA9C8 /* host.rb */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text.script.ruby; path = host.rb; sourceTree = "<group>"; };
+		FEC9EB6C0DE099B900ABA9C8 /* keychain.rb */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text.script.ruby; path = keychain.rb; sourceTree = "<group>"; };
+		FEC9EB6D0DE099B900ABA9C8 /* load_operation.rb */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text.script.ruby; path = load_operation.rb; sourceTree = "<group>"; };
+		FEC9EB6E0DE099B900ABA9C8 /* load_operation_queue.rb */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text.script.ruby; path = load_operation_queue.rb; sourceTree = "<group>"; };
+		FEC9EB6F0DE099B900ABA9C8 /* notification_hub.rb */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text.script.ruby; path = notification_hub.rb; sourceTree = "<group>"; };
+		FEC9EB700DE099B900ABA9C8 /* project.rb */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text.script.ruby; path = project.rb; sourceTree = "<group>"; };
+		FEC9EB710DE099B900ABA9C8 /* stage.rb */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text.script.ruby; path = stage.rb; sourceTree = "<group>"; };
+		FEC9EB720DE099B900ABA9C8 /* task.rb */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text.script.ruby; path = task.rb; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +159,7 @@
 		29B97314FDCFA39411CA2CEA /* macistrano */ = {
 			isa = PBXGroup;
 			children = (
+				FEC9EB6A0DE099B900ABA9C8 /* model */,
 				FE68C24C0DD238260053FC90 /* Specs */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -194,6 +213,22 @@
 				FE68C2550DD238600053FC90 /* webistrano_controller_spec.rb */,
 			);
 			name = Specs;
+			sourceTree = "<group>";
+		};
+		FEC9EB6A0DE099B900ABA9C8 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				FEC9EB600DE099A600ABA9C8 /* post_load_operation.rb */,
+				FEC9EB6B0DE099B900ABA9C8 /* host.rb */,
+				FEC9EB6C0DE099B900ABA9C8 /* keychain.rb */,
+				FEC9EB6D0DE099B900ABA9C8 /* load_operation.rb */,
+				FEC9EB6E0DE099B900ABA9C8 /* load_operation_queue.rb */,
+				FEC9EB6F0DE099B900ABA9C8 /* notification_hub.rb */,
+				FEC9EB700DE099B900ABA9C8 /* project.rb */,
+				FEC9EB710DE099B900ABA9C8 /* stage.rb */,
+				FEC9EB720DE099B900ABA9C8 /* task.rb */,
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,6 +306,15 @@
 				FEA7AD5D0DDCB2E00032FE31 /* notification_hub.rb in Resources */,
 				FE33BD980DDDFB3D003ACBAA /* load_operation.rb in Resources */,
 				FE517D860DDF2B5B00CA0249 /* load_operation_queue.rb in Resources */,
+				FEC9EB610DE099A600ABA9C8 /* post_load_operation.rb in Resources */,
+				FEC9EB730DE099B900ABA9C8 /* host.rb in Resources */,
+				FEC9EB740DE099B900ABA9C8 /* keychain.rb in Resources */,
+				FEC9EB750DE099B900ABA9C8 /* load_operation.rb in Resources */,
+				FEC9EB760DE099B900ABA9C8 /* load_operation_queue.rb in Resources */,
+				FEC9EB770DE099B900ABA9C8 /* notification_hub.rb in Resources */,
+				FEC9EB780DE099B900ABA9C8 /* project.rb in Resources */,
+				FEC9EB790DE099B900ABA9C8 /* stage.rb in Resources */,
+				FEC9EB7A0DE099B900ABA9C8 /* task.rb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
