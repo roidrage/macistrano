@@ -38,6 +38,14 @@ class Stage
     LoadOperationQueue.queue_post_request(deployments_url, self, {:username => project.host.username, :password => project.host.password, :body => new_deployment_as_xml(task, comment).to_s})
   end
   
+  def post_url_finished(data)
+    notify_deployment_started self
+  end
+  
+  def post_url_failed(error)
+    notify_starting_deployment_failed self
+  end
+  
   def new_deployment_as_xml task, comment
     xml = Builder::XmlMarkup.new(:indent => 2)
     xml.instruct!
