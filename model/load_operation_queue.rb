@@ -7,6 +7,8 @@
 #
 
 require 'osx/cocoa'
+require 'load_operation'
+require 'post_load_operation'
 
 class LoadOperationQueue
   include OSX

@@ -10,6 +10,7 @@ require 'open-uri'
 require 'rubygems'
 require 'hpricot'
 require 'notification_hub'
+require 'load_operation_queue'
 
 class Host
   include NotificationHub

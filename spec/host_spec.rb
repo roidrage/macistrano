@@ -1,19 +1,18 @@
+require File.join(File.dirname(__FILE__), '/spec_helper')
 require 'rubygems'
 gem 'rspec'
-require 'model/host'
-require 'model/project'
-require 'model/stage'
+require 'host'
+require 'project'
+require 'stage'
+require 'notification_hub'
 
-describe Host, "when finding projects" do
+describe Host, "when converting xml data to projects" do
   before do
     @host = Host.new
     @host.url = 'http://localhost:3000'
     @host.username = 'admin'
     @host.password = 'admin'
     
-    @io = mock "io"
-    @io.stub!(:read).and_return ''
-    @host.stub!(:open).and_return @io
     @project = Project.new
     @project.stub!(:fetch_stages)
     Project.stub!(:new).and_return @project
@@ -30,48 +29,43 @@ describe Host, "when finding projects" do
   </project>
 </projects>
 XML
-
-    @io.stub!(:read).and_return @projects_xml
-  end
-  
-  it "should fetch the projects from the specified url" do
-    @host.should_receive(:open) do |url, options|
-      url.should == 'http://localhost:3000/projects.xml'
-      @io
-    end
-    
-    @host.find_projects
-  end
-  
-  it "should use user and password for authentication" do
-    @host.should_receive(:open) do |url, options|
-      options[:http_basic_authentication].should == ['admin', 'admin']
-      @io
-    end
-    
-    @host.find_projects
   end
   
   it "should convert the projects xml list to an array list" do
-    projects = @host.find_projects
+    projects = @host.to_projects(@projects_xml)
     projects.should have(1).items
   end
   
   it "should fetch the stages for a project" do
     @project.should_receive(:fetch_stages)
-    @host.find_projects
+    @host.to_projects(@projects_xml)
   end
   
   it "should assign the name of a project" do
-    projects = @host.find_projects
+    projects = @host.to_projects(@projects_xml)
     projects.first.name.should == 'Other Project'
   end
   
   it "should assign the id of a project" do
-    projects = @host.find_projects
+    projects = @host.to_projects(@projects_xml)
     projects.first.id.should == "2"
   end
   
+end
+
+describe Host, "when finding projects" do
+  before do
+    @host = Host.new
+    @host.url = 'http://localhost:3000'
+    @host.username = 'admin'
+    @host.password = 'admin'
+    
+  end
+  
+  it "should fetch the projects from the specified url" do
+    LoadOperationQueue.should_receive(:queue_request).with(@host.collection_url, @host, :username => "admin", :password => "admin")
+    @host.find_projects
+  end
 end
 
 describe Host, "when checking the version" do
