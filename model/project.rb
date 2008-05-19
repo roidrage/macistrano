@@ -9,17 +9,13 @@
 require 'osx/cocoa'
 require 'hpricot'
 require 'notification_hub'
+require 'host'
 
 class Project
   include NotificationHub
   
   attr_accessor :name, :id, :stages, :host
 
-  def read_xml path
-    io = open("#{host.url}#{path}", :http_basic_authentication => [host.username, host.password])
-    io.read
-  end
-  
   def stages_url
     "#{host.url}/projects/#{self.id}/stages.xml"
   end
