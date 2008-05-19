@@ -8,9 +8,8 @@
 
 require 'osx/cocoa'
 require 'builder'
-require 'net/http'
-require 'net/https'
 require 'notification_hub'
+require 'task'
 
 class Stage
   include NotificationHub
@@ -66,5 +65,6 @@ class Stage
       task.stage = self
       @tasks << task
     end
+    @tasks
   end
 end
