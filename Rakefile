@@ -154,3 +154,10 @@ if ["update", "add", "create"].include? ARGV[0]
   Rake.application[ARGV[0].to_sym].invoke
   exit # will not reach
 end
+
+require 'spec/rake/spectask'
+
+desc "Run all spec"
+Spec::Rake::SpecTask.new('spec') do |t|
+  t.spec_files = FileList['spec/**/*.rb']
+end
