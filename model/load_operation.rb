@@ -2,7 +2,7 @@
 require 'osx/cocoa'
 
 class LoadOperation < OSX::NSOperation
-  attr_accessor :username, :password
+  attr_accessor :username, :password, :on_success, :on_error
   include OSX
   
   def initWithURL_delegate(url, delegate)
@@ -41,7 +41,11 @@ class LoadOperation < OSX::NSOperation
   
   # NSURLConnection Delegate methods
   def connection_didFailWithError(connection, error)
-    @delegate.load_url_failed(@url, error)
+    unless on_error.nil?
+      @delegate.send(on_error.to_sym, @url, error)
+    else
+      @delegate.load_url_failed(@url, error)
+    end
     setExecuting false
     setFinished true
   end
@@ -57,7 +61,11 @@ class LoadOperation < OSX::NSOperation
   
   def connectionDidFinishLoading(connection)
     xml = @data.mutableBytes.bytestr(@length)
-    @delegate.url_finished(xml)
+    unless on_success.nil?
+      @delegate.send(:on_success, data)
+    else
+      @delegate.url_finished(xml)
+    end
     setExecuting false
     setFinished true
   end

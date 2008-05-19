@@ -17,26 +17,25 @@ class LoadOperationQueue
   @@queue.setMaxConcurrentOperationCount 5
   
   def self.queue_request(url, delegate, options = {})
-    if url.is_a?(String)
-      url = NSURL.URLWithString(url)
-    end
-    
-    operation = LoadOperation.alloc.initWithURL_delegate(url, delegate)
-    operation.username = options[:username] if options[:username]
-    operation.password = options[:password] if options[:password]
-    
-    @@queue.addOperation operation
+    init_and_add_operation(LoadOperation, url, delegate, options)
   end
   
   def self.queue_post_request(url, delegate, options = {})
+    init_and_add_operation(PostLoadOperation, url, delegate, options)
+  end
+  
+  def self.init_and_add_operation(clazz, url, delegate, options)
     if url.is_a?(String)
       url = NSURL.URLWithString(url)
     end
-    
-    operation = PostLoadOperation.alloc.initWithURL_delegate(url, delegate)
+
+    operation = clazz.alloc.initWithURL_delegate(url, delegate)
     operation.username = options[:username] if options[:username]
     operation.password = options[:password] if options[:password]
-    operation.body = options[:body] if options[:body]
+    operation.body = options[:body] if options[:body] && operation.respond_to?(:body)
+    operation.on_success = options[:on_success] if options[:on_success]
+    operation.on_error = options[:on_error] if options[:on_error]
+    
     @@queue.addOperation operation
   end
   

@@ -24,8 +24,15 @@ class Host
     io.read
   end
   
-  def version_acceptable?
-    response = read_xml '/sessions/version.xml'
+  def version_url
+    "#{url}/sessions/version.xml"
+  end
+  
+  def schedule_version_check
+    LoadOperationQueue.queue_request(version_url, self, :username => username, :password => :password, :callback => :version_check_finished, :on_error => :version_check_failed)
+  end
+  
+  def version_acceptable?(response)
     doc = Hpricot.XML response
     element = doc/'application'
     version = (element/:version).text if (element/:version).any?

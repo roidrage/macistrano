@@ -95,26 +95,16 @@ XML
     @host.stub!(:open).and_return @io
   end
   
-  it "should fetch the version" do
-    @host.should_receive(:open) do |url, options|
-      url.should == 'http://localhost:3000/sessions/version.xml'
-      @io
-    end
-    @host.version_acceptable?
-  end
-  
   it "should accept the valid version" do
-    @host.version_acceptable?.should == true
+    @host.version_acceptable?(@valid_version_xml).should == true
   end
   
   it "should not accept an invalid version" do
-    @io.stub!(:read).and_return @invalid_version_xml
-    @host.version_acceptable?.should == false
+    @host.version_acceptable?(@invalid_version_xml).should == false
   end
   
   it "should not accept the bogus output" do
-    @io.stub!(:read).and_return @murky_response
-    @host.version_acceptable?.should == false
+    @host.version_acceptable?(@murky_response).should == false
   end
 end
 
@@ -156,4 +146,8 @@ describe Host, "version_eql_or_higher" do
   it "should not accept 1" do
     @host.version_eql_or_higher([1]).should be_false
   end
+end
+
+describe Host, "when checking for the host version" do
+  
 end

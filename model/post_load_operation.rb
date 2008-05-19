@@ -26,19 +26,4 @@ class PostLoadOperation < LoadOperation
     @connection = NSURLConnection.connectionWithRequest_delegate(request, self)
     setExecuting true
   end
-  
-  def connection_didFailWithError(connection, error)
-    @delegate.post_url_failed(@url, error)
-    setExecuting false
-    setFinished true
-  end
-  
-  def connectionDidFinishLoading(connection)
-    xml = @data.mutableBytes.bytestr(@length)
-    @delegate.post_url_finished(xml)
-    setExecuting false
-    setFinished true
-  end
-  
-  
 end
