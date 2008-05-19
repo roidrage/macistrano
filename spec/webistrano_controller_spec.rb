@@ -1,3 +1,5 @@
+require File.join(File.dirname(__FILE__), '/spec_helper')
+
 require 'rubygems'
 gem 'rspec'
 require 'webistrano_controller'
@@ -13,6 +15,6 @@ describe WebistranoController do
   
   it "should fetch new projects for a host" do
     @host.should_receive(:find_projects)
-    @controller.fetch_projects
+    @controller.fetch_projects([@host])
   end
 end
