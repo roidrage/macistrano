@@ -25,7 +25,7 @@ class Stage
   end
   
   def run_stage task, comment
-    LoadOperationQueue.queue_post_request(deployments_url, self, {:username => project.host.username, :password => project.host.password, :body => new_deployment_as_xml(task, comment).to_s}, :on_success => :post_url_finished, :on_error => :post_url_failed)
+    LoadOperationQueue.queue_post_request(deployments_url, self, :username => project.host.username, :password => project.host.password, :body => new_deployment_as_xml(task, comment).to_s, :on_success => :post_url_finished, :on_error => :post_url_failed)
   end
   
   def post_url_finished(data)

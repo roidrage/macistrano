@@ -62,7 +62,7 @@ class LoadOperation < OSX::NSOperation
   def connectionDidFinishLoading(connection)
     xml = @data.mutableBytes.bytestr(@length)
     unless on_success.nil?
-      @delegate.send(:on_success, data)
+      @delegate.send(on_success.to_sym, xml)
     else
       @delegate.url_finished(xml)
     end

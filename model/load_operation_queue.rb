@@ -24,7 +24,7 @@ class LoadOperationQueue
     init_and_add_operation(PostLoadOperation, url, delegate, options)
   end
   
-  def self.init_and_add_operation(clazz, url, delegate, options)
+  def self.init_and_add_operation(clazz, url, delegate, options = {})
     if url.is_a?(String)
       url = NSURL.URLWithString(url)
     end
