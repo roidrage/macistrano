@@ -13,7 +13,7 @@ class Keychain
   
   def self.add_password host
     identifier = build_identifier(host)
-    result = OSX::SecKeychainAddGenericPassword(nil, identifier.length, identifier, host.username.length, host.username, host.password.length, host.password, nil)
+    OSX::SecKeychainAddGenericPassword(nil, identifier.length, identifier, host.username.length, host.username, host.password.length, host.password, nil) == 0
   end
   
   def self.find_password host
