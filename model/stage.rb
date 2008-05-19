@@ -16,22 +16,13 @@ class Stage
   include NotificationHub
   
   attr_accessor :id, :project, :name, :tasks
-  
-  def default_header
-    @default_header ||= { 'Content-Type' => 'text/xml' }
-  end
-  
-  def build_request_headers(headers, host)
-    authorization_header(host).update(default_header).update(headers)
-  end
-  
-  # Sets authorization header; authentication information is pulled from credentials provided with site URI.
-  def authorization_header(host)
-    { 'Authorization' => 'Basic ' + ["#{host.username}:#{ host.password}"].pack('m').delete("\r\n") }
-  end
-  
+
   def deployments_url
     "#{project.host.url}/projects/#{project.id}/stages/#{self.id}/deployments.xml"
+  end
+
+  def tasks_url
+    "#{project.host.url}/projects/#{project.id}/stages/#{id}/tasks.xml"
   end
   
   def run_stage task, comment
@@ -54,10 +45,6 @@ class Stage
       xml.description comment
     end
     xml.target!
-  end
-  
-  def tasks_url
-    "#{project.host.url}/projects/#{project.id}/stages/#{id}/tasks.xml"
   end
   
   def fetch_tasks
