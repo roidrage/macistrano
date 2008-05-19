@@ -29,8 +29,6 @@ class Project
     notify_stages_loaded self
   end
   
-  private
-  
   def to_stages response
     stages = []
 
