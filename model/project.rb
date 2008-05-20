@@ -13,7 +13,7 @@ require 'host'
 
 class Project
   include NotificationHub
-  
+  notify :stage_loaded, :when => :stage_tasks_loaded
   attr_accessor :name, :id, :stages, :host
 
   def stages_url
@@ -27,6 +27,9 @@ class Project
   def url_finished(data)
     self.stages = to_stages data
     notify_stages_loaded self
+  end
+  
+  def stage_loaded(stage)
   end
   
   def to_stages response

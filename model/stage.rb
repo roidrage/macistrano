@@ -14,8 +14,12 @@ require 'task'
 class Stage
   include NotificationHub
   
-  attr_accessor :id, :project, :name, :tasks
-
+  attr_accessor :id, :project, :name, :tasks, :fully_loaded
+  
+  def fully_loaded?
+    fully_loaded
+  end
+  
   def deployments_url
     "#{project.host.url}/projects/#{project.id}/stages/#{self.id}/deployments.xml"
   end
@@ -52,6 +56,7 @@ class Stage
   
   def url_finished(data)
     to_tasks(data)
+    self.fully_loaded = true
     notify_tasks_loaded(self)
   end
   

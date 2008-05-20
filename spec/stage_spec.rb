@@ -61,3 +61,21 @@ END
     @stage.to_tasks(@tasks_xml).first.stage.should == @stage
   end
 end
+
+describe Stage, "after fetching tasks" do
+  before do
+    @tasks = []
+    @stage = Stage.new
+    @stage.stub!(:to_tasks).and_return @tasks
+  end
+  
+  it "should notify that it's done" do
+    @stage.should_receive(:notify_tasks_loaded)
+    @stage.url_finished("some data")
+  end
+  
+  it "should mark itself as fully loaded" do
+    @stage.url_finished("some data")
+    @stage.fully_loaded?.should == true
+  end
+end
