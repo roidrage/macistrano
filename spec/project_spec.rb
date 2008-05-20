@@ -69,4 +69,37 @@ END
     @stage.should_receive(:fetch_tasks).at_least(:once)
     @project.to_stages(@stages_xml)
   end
+  
+  it "should not notify if stages were found" do
+    @project.should_not_receive(:notify_project_fully_loaded)
+    @project.to_stages(@stages_xml)
+  end
+  
+  it "should notify that the project was fully loaded when there are no stages in it" do
+    @project.should_receive(:notify_project_fully_loaded)
+    @project.to_stages("")
+  end
+end
+
+describe Project, "when being notified of a stage being loaded" do
+  before do
+    @project = Project.new
+    @stage1 = Stage.new
+    @stage2 = Stage.new
+    @project.stages = [@stage1, @stage2]
+  end
+  
+  it "should notify that all its stages were loaded when all are fully loaded" do
+    @stage2.fully_loaded = true
+    @stage1.fully_loaded = true
+    @project.should_receive(:notify_project_fully_loaded)
+    @project.stage_loaded(stub("notification", :object => @stage1))
+  end
+  
+  it "should not notify that all its stages were loaded when not all are fully loaded" do
+    @stage2.fully_loaded = true
+    @stage1.fully_loaded = false
+    @project.should_not_receive(:notify_project_fully_loaded)
+    @project.stage_loaded(stub("notification", :object => @stage1))
+  end
 end

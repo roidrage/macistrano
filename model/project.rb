@@ -14,7 +14,12 @@ require 'host'
 class Project
   include NotificationHub
   notify :stage_loaded, :when => :stage_tasks_loaded
-  attr_accessor :name, :id, :stages, :host
+  
+  attr_accessor :name, :id, :stages, :host, :fully_loaded
+  
+  def fully_loaded?
+    fully_loaded
+  end
 
   def stages_url
     "#{host.url}/projects/#{self.id}/stages.xml"
@@ -29,7 +34,8 @@ class Project
     notify_stages_loaded self
   end
   
-  def stage_loaded(stage)
+  def stage_loaded(notification)
+    notify_project_fully_loaded(self) if stages.select{|stage| !stage.fully_loaded?}.empty?
   end
   
   def to_stages response
@@ -44,6 +50,7 @@ class Project
       stage.fetch_tasks
       stages << stage
     end
+    notify_project_fully_loaded(self) if stages.empty?
     stages
   end
 end
