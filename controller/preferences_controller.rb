@@ -34,7 +34,7 @@ class PreferencesController < OSX::NSWindowController
     configuredHosts = NSUserDefaults.standardUserDefaults.arrayForKey("hosts")
     @hosts ||= []
     configuredHosts.each do |data|
-      host = Host.new
+      host = Host.alloc.init
       host.url = data[0]
       host.username = data[1]
       Keychain.find_password host
@@ -72,6 +72,7 @@ class PreferencesController < OSX::NSWindowController
   
   ib_action :addFromSheet
   def addFromSheet(id)
+    # @spinner.startAnimation(self)
     host = Host.new
     host.url = @hostField.stringValue
     host.username = @usernameField.stringValue

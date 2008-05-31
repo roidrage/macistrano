@@ -151,3 +151,29 @@ end
 describe Host, "when checking for the host version" do
   
 end
+
+describe Host, "when notified that a project finished loading" do
+  before do
+    @host = Host.new
+  end
+  
+  it "should notify that the host was fully loaded when all the projects are fully loaded" do
+    @project1 = Project.new
+    @project2 = Project.new
+    @project1.stub!(:fully_loaded?).and_return true
+    @project2.stub!(:fully_loaded?).and_return true
+    @host.should_receive(:notify_host_fully_loaded).with(@host)
+    @host.projects = [@project1, @project2]
+    @host.project_loaded nil
+  end
+  
+  it "should not notify the host was fully loaded when one of the projects isn't fully loaded" do
+    @project1 = Project.new
+    @project2 = Project.new
+    @project1.stub!(:fully_loaded?).and_return true
+    @project2.stub!(:fully_loaded?).and_return false
+    @host.should_not_receive(:notify_host_fully_loaded).with(@host)
+    @host.projects = [@project1, @project2]
+    @host.project_loaded nil
+  end
+end

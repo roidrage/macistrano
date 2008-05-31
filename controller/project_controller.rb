@@ -13,10 +13,7 @@ class ProjectController < OSX::NSWindowController
   include OSX
   include NotificationHub
   
-  notify :updateHostList, :when => :host_list_updated
-  notify :add_projects, :when => :project_loaded
-  notify :add_stages, :when => :stages_loaded
-  notify :add_tasks, :when => :tasks_loaded
+  notify :add_host, :when => :host_fully_loaded
 
   attr_reader :status_menu
   attr_accessor :loaded
@@ -45,14 +42,15 @@ class ProjectController < OSX::NSWindowController
     end
   end
   
-  def updateHostList(notification)
-    @statusItem.menu.release
-    @statusItem.setMenu nil
-    @status_menu = OSX::NSMenu.alloc.init
-    @statusItem.setMenu @status_menu
-    update_menu notification.object
+  def add_host(notification)
+    notification.object.projects.each do |project|
+      item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("#{project.name.to_s} (#{project.host.url})", nil, "", @statusItem.menu.numberOfItems)
+      item.setTarget self
+      item.setRepresentedObject project
+      add_stages project
+    end
   end
-   
+  
   def quit(sender)
     NSApp.stop(nil)
   end
@@ -95,8 +93,7 @@ class ProjectController < OSX::NSWindowController
     reset_fields
   end
   
-  def add_stages(notification)
-    project = notification.object
+  def add_stages(project)
     idx = @statusItem.menu.indexOfItemWithRepresentedObject(project)
     if idx >= 0
       item = @statusItem.menu.itemAtIndex(idx)
@@ -107,20 +104,15 @@ class ProjectController < OSX::NSWindowController
         sub_item.setTarget self
         sub_item.setRepresentedObject stage
         lastIndex += 1
+        add_tasks(stage, sub_item)
       end
       item.setSubmenu sub_menu
       item.setEnabled true
     end
-    
   end
   
-  def add_tasks(notification)
-    stage = notification.object
-    idx = @statusItem.menu.indexOfItemWithRepresentedObject(stage.project)
-    project_menu_item = @statusItem.menu.itemAtIndex(idx)
-    
-    idx = project_menu_item.submenu.indexOfItemWithRepresentedObject(stage)
-    stage_menu_item = project_menu_item.submenu.itemAtIndex(idx)
+  def add_tasks(stage, parent_item)
+    stage_menu_item = parent_item
     
     tasks_menu = NSMenu.alloc.init
     lastIndex = 0
@@ -152,17 +144,15 @@ class ProjectController < OSX::NSWindowController
   end
    
   def update_menu hosts_list = nil
-
     item = NSMenuItem.alloc.initWithTitle_action_keyEquivalent("Loading...", nil, "")
     item.setEnabled false
     @statusItem.menu.insertItem_atIndex(item, 0)
-
+    
     item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("Quit", "quit:", "", 1)
     item.setTarget self
 
     item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("Preferences", "show_preferences:", "", 2)
     item.setTarget self
-    
     fetch_projects
   end
   

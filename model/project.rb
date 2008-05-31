@@ -11,14 +11,14 @@ require 'hpricot'
 require 'notification_hub'
 require 'host'
 
-class Project
+class Project < OSX::NSObject
   include NotificationHub
   notify :stage_loaded, :when => :stage_tasks_loaded
   
   attr_accessor :name, :id, :stages, :host
   
   def fully_loaded?
-    stages.select{|stage| !stage.fully_loaded?}.empty?
+    @stages && @stages.select{|stage| !stage.fully_loaded?}.empty?
   end
 
   def stages_url
@@ -35,22 +35,23 @@ class Project
   end
   
   def stage_loaded(notification)
+    return unless notification.object.project == self
     notify_project_fully_loaded(self) if fully_loaded?
   end
   
   def to_stages response
-    stages = []
+    @stages = []
 
     doc = Hpricot.XML response
     (doc/'stage').each do |data|
-      stage = Stage.new
+      stage = Stage.alloc.init
       stage.id = (data/:id).text
       stage.name = (data/:name).text
       stage.project = self
+      @stages << stage
       stage.fetch_tasks
-      stages << stage
     end
-    notify_project_fully_loaded(self) if stages.empty?
-    stages
+    notify_project_fully_loaded(self) if @stages.empty?
+    @stages
   end
 end

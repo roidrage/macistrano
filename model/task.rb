@@ -6,6 +6,8 @@
 #  Copyright (c) 2008 __MyCompanyName__. All rights reserved.
 #
 
-class Task
+require 'osx/cocoa'
+
+class Task < OSX::NSObject
   attr_accessor :stage, :name, :description
 end

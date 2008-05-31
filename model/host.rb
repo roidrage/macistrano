@@ -12,8 +12,9 @@ require 'hpricot'
 require 'notification_hub'
 require 'load_operation_queue'
 
-class Host
+class Host < OSX::NSObject
   include NotificationHub
+  notify :project_loaded, :when => :project_fully_loaded
   
   ACCEPT_VERSION = [1, 3, 1]
   
@@ -30,6 +31,26 @@ class Host
   
   def schedule_version_check
     LoadOperationQueue.queue_request(version_url, self, :username => username, :password => :password, :callback => :version_check_finished, :on_error => :version_check_failed)
+  end
+  
+  def fully_loaded?
+    @projects && @projects.select{|project| !project.fully_loaded?}.empty?
+  end
+  
+  def project_loaded(notification)
+    return unless notification.object.host == self
+    notify_host_fully_loaded(self) if fully_loaded?
+  end
+  
+  def load_url_failed(url, error)
+  end
+  
+  def version_check_finished(data)
+    
+  end
+  
+  def version_check_failed(error)
+    puts error.inspect
   end
   
   def version_acceptable?(response)
@@ -73,22 +94,21 @@ class Host
   end
   
   def url_finished(data)
-    projects = to_projects(data)
+    to_projects(data)
     notify_project_loaded :host => self, :projects => projects
   end
   
   def to_projects response
-    projects = []
+    @projects = []
     doc = Hpricot.XML response
     (doc/'project').each do |data|
       project = Project.new
       project.id = (data/:id).text
       project.name = (data/:name).text
       project.host = self
+      @projects << project
       project.fetch_stages
-      projects << project
     end
-    projects
   end
   
 end

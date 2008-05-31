@@ -11,7 +11,7 @@ require 'builder'
 require 'notification_hub'
 require 'task'
 
-class Stage
+class Stage < OSX::NSObject
   include NotificationHub
   
   attr_accessor :id, :project, :name, :tasks, :fully_loaded
@@ -58,13 +58,14 @@ class Stage
     to_tasks(data)
     self.fully_loaded = true
     notify_tasks_loaded(self)
+    notify_stage_tasks_loaded(self)
   end
   
   def to_tasks(result)
     @tasks ||= []
     doc = Hpricot.XML(result)
     (doc/'record').collect do |data|
-      task = Task.new
+      task = Task.alloc.init
       task.name = (data/:name).text
       task.description = (data/:description).text
       task.stage = self
