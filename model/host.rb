@@ -54,7 +54,7 @@ class Host < OSX::NSObject
   end
   
   def version_check_failed(error)
-
+    puts "here"
   end
   
   def version_acceptable?(response)

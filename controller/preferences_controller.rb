@@ -6,7 +6,7 @@ class PreferencesController < OSX::NSWindowController
   include NotificationHub
 
   notify :host_version_accepted, :when => :host_version_acceptable
-  notify :host_version_not_accepted, :when => :host_version_not_acceptable
+  notify :host_version_not_accepted, :when => :host_version_inacceptable
   
   ib_outlet :preferencesWindow
   ib_outlet :tableView
@@ -81,7 +81,6 @@ class PreferencesController < OSX::NSWindowController
     host.url = @hostField.stringValue
     host.username = @usernameField.stringValue
     host.password = @passwordField.stringValue.to_s
-    puts self.inspect
     host.schedule_version_check
   end
 
@@ -97,8 +96,17 @@ class PreferencesController < OSX::NSWindowController
   end
   
   def host_version_not_accepted(notification)
+    return if @hostField.nil?
     host = notification.object
+    alert = NSAlert.alloc.init
+    alert.addButtonWithTitle "OK"
+    alert.setMessageText "The Webistrano version you're running is not suitable for use with Macistrano"
+    alert.setInformativeText "You need at least version #{Host::ACCEPT_VERSION.join(".")}."
+    alert.setAlertStyle NSWarningAlertStyle
+    alert.runModal
+    alert.release
     
+    reset_spinner
   end
   
   def reset_spinner
