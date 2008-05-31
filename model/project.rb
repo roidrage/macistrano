@@ -15,10 +15,10 @@ class Project
   include NotificationHub
   notify :stage_loaded, :when => :stage_tasks_loaded
   
-  attr_accessor :name, :id, :stages, :host, :fully_loaded
+  attr_accessor :name, :id, :stages, :host
   
   def fully_loaded?
-    fully_loaded
+    stages.select{|stage| !stage.fully_loaded?}.empty?
   end
 
   def stages_url
@@ -35,7 +35,7 @@ class Project
   end
   
   def stage_loaded(notification)
-    notify_project_fully_loaded(self) if stages.select{|stage| !stage.fully_loaded?}.empty?
+    notify_project_fully_loaded(self) if fully_loaded?
   end
   
   def to_stages response
