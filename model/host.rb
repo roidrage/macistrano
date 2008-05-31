@@ -53,8 +53,13 @@ class Host < OSX::NSObject
     end
   end
   
-  def version_check_failed(error)
-    puts "here"
+  def version_check_failed(url, error)
+    case error.code
+    when -1003:
+      notify_host_unreachable self
+    when -1012:
+      notify_host_credentials_invalid self
+    end
   end
   
   def version_acceptable?(response)

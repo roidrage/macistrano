@@ -75,8 +75,12 @@ class LoadOperation < OSX::NSOperation
   end
   
   def connection_didReceiveAuthenticationChallenge(connection, challenge)
-    newCredential = NSURLCredential.credentialWithUser_password_persistence(username, password, NSURLCredentialPersistenceNone)
-    challenge.sender.useCredential_forAuthenticationChallenge newCredential, challenge
+    if challenge.previousFailureCount == 0
+      newCredential = NSURLCredential.credentialWithUser_password_persistence(username, password, NSURLCredentialPersistenceNone)
+      challenge.sender.useCredential_forAuthenticationChallenge newCredential, challenge
+    else
+      challenge.sender.cancelAuthenticationChallenge challenge
+    end
   end
   
   private

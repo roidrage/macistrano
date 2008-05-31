@@ -7,6 +7,7 @@ class PreferencesController < OSX::NSWindowController
 
   notify :host_version_accepted, :when => :host_version_acceptable
   notify :host_version_not_accepted, :when => :host_version_inacceptable
+  notify :host_credentials_invalid, :when => :host_credentials_invalid
   
   ib_outlet :preferencesWindow
   ib_outlet :tableView
@@ -98,15 +99,24 @@ class PreferencesController < OSX::NSWindowController
   def host_version_not_accepted(notification)
     return if @hostField.nil?
     host = notification.object
+    show_alert("The Webistrano version you're running is not suitable for use with Macistrano", "You need at least version #{Host::ACCEPT_VERSION.join(".")}.")
+    reset_spinner
+  end
+
+  def host_credentials_invalid(notification)
+    return if @hostField.nil?
+    show_alert("The specified credentials are invalid.", "Please check username and password and try again.")
+    reset_spinner
+  end
+  
+  def show_alert(message, extended)
     alert = NSAlert.alloc.init
     alert.addButtonWithTitle "OK"
-    alert.setMessageText "The Webistrano version you're running is not suitable for use with Macistrano"
-    alert.setInformativeText "You need at least version #{Host::ACCEPT_VERSION.join(".")}."
+    alert.setMessageText message
+    alert.setInformativeText extended
     alert.setAlertStyle NSWarningAlertStyle
     alert.runModal
     alert.release
-    
-    reset_spinner
   end
   
   def reset_spinner
