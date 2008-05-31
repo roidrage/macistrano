@@ -1,0 +1,3 @@
+Macistrano is a simple Mac client to run and monitor deployments with
+Webistrano (http://labs.peritor.com/webistrano), an enhanced web
+frontend for Capistrano (http://capify.org).

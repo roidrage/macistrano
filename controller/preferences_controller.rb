@@ -98,6 +98,7 @@ class PreferencesController < OSX::NSWindowController
   
   def host_version_not_accepted(notification)
     host = notification.object
+    
   end
   
   def reset_spinner
