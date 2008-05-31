@@ -5,6 +5,9 @@ class PreferencesController < OSX::NSWindowController
   include OSX
   include NotificationHub
 
+  notify :host_version_accepted, :when => :host_version_acceptable
+  notify :host_version_not_accepted, :when => :host_version_not_acceptable
+  
   ib_outlet :preferencesWindow
   ib_outlet :tableView
   ib_outlet :newHostSheet
@@ -72,25 +75,41 @@ class PreferencesController < OSX::NSWindowController
   
   ib_action :addFromSheet
   def addFromSheet(id)
-    # @spinner.startAnimation(self)
+    @spinner.startAnimation(self)
+    @spinner.setHidden(false)
     host = Host.new
     host.url = @hostField.stringValue
     host.username = @usernameField.stringValue
     host.password = @passwordField.stringValue.to_s
+    puts self.inspect
+    host.schedule_version_check
+  end
+
+  def host_version_accepted(notification)
+    # ignore messages to instances not connected to the nib. weird side effect of having an instance
+    # of the controller in the project_controller
+    return if @hostField.nil?
+    host = notification.object
     addHost host
     @newHostSheet.orderOut self
     @tableView.reloadData
-    notifyHostUpdate
+    host.find_projects
   end
-
-  def notifyHostUpdate
-    notify_host_list_updated @hosts
+  
+  def host_version_not_accepted(notification)
+    host = notification.object
+  end
+  
+  def reset_spinner
+    @spinner.stopAnimation(self)
+    @spinner.setHidden(true)
   end
   
   ib_action :cancelSheet
   def cancelSheet(id)
     closeSheet
     resetFields
+    reset_spinner
   end
 
   ib_action :removeHost
@@ -100,7 +119,7 @@ class PreferencesController < OSX::NSWindowController
       Keychain.remove_password host
       @hosts.delete_at(@tableView.selectedRow)
       saveHostsToPreferences
-      notifyHostUpdate
+      # notifyHostUpdate
       @tableView.reloadData
     end
   end

@@ -30,7 +30,7 @@ class Host < OSX::NSObject
   end
   
   def schedule_version_check
-    LoadOperationQueue.queue_request(version_url, self, :username => username, :password => :password, :callback => :version_check_finished, :on_error => :version_check_failed)
+    LoadOperationQueue.queue_request(version_url, self, :username => username, :password => :password, :on_success => :version_check_finished, :on_error => :version_check_failed)
   end
   
   def fully_loaded?
@@ -46,7 +46,11 @@ class Host < OSX::NSObject
   end
   
   def version_check_finished(data)
-    
+    if version_acceptable?(data)
+      notify_host_version_acceptable self
+    else
+      notify_host_version_inacceptable self
+    end
   end
   
   def version_check_failed(error)
