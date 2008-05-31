@@ -127,8 +127,8 @@ class PreferencesController < OSX::NSWindowController
       host = @hosts[@tableView.selectedRow]
       Keychain.remove_password host
       @hosts.delete_at(@tableView.selectedRow)
-      saveHostsToPreferences
-      # notifyHostUpdate
+      save_hosts_to_preferences
+      notify_host_removed host
       @tableView.reloadData
     end
   end
@@ -140,15 +140,15 @@ class PreferencesController < OSX::NSWindowController
   def addHost host
     @hosts << host
     Keychain.add_password host
-    saveHostsToPreferences
+    save_hosts_to_preferences
     resetFields
   end
   
-  def saveHostsToPreferences
-    NSUserDefaults.standardUserDefaults.setObject_forKey(hostsAsList, "hosts")
+  def save_hosts_to_preferences
+    NSUserDefaults.standardUserDefaults.setObject_forKey(hosts_as_list, "hosts")
   end
   
-  def hostsAsList
+  def hosts_as_list
     @hosts.collect do |host|
       [host.url, host.username]
     end

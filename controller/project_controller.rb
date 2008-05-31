@@ -14,6 +14,7 @@ class ProjectController < OSX::NSWindowController
   include NotificationHub
   
   notify :add_host, :when => :host_fully_loaded
+  notify :remove_host, :when => :host_removed
 
   attr_reader :status_menu
   attr_accessor :loaded
@@ -48,6 +49,14 @@ class ProjectController < OSX::NSWindowController
       item.setTarget self
       item.setRepresentedObject project
       add_stages project
+    end
+  end
+  
+  def remove_host(notification)
+    host = notification.object
+    host.projects.each do |project|
+      idx = @statusItem.menu.indexOfItemWithRepresentedObject(project)
+      @statusItem.menu.removeItemAtIndex idx
     end
   end
   
