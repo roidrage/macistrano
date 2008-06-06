@@ -20,6 +20,11 @@ class Host < OSX::NSObject
   
   attr_accessor :projects, :url, :username, :password
   
+  def init
+    @projects = []
+    self
+  end
+  
   def read_xml path
     io = open("#{url}#{path}", :http_basic_authentication => [username, password])
     io.read

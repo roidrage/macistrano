@@ -127,7 +127,7 @@ class PreferencesController < OSX::NSWindowController
   ib_action :cancelSheet
   def cancelSheet(id)
     closeSheet
-    resetFields
+    reset_fields
     reset_spinner
   end
 
@@ -151,7 +151,8 @@ class PreferencesController < OSX::NSWindowController
     @hosts << host
     Keychain.add_password host
     save_hosts_to_preferences
-    resetFields
+    reset_fields
+    reset_spinner
   end
   
   def save_hosts_to_preferences
@@ -164,7 +165,7 @@ class PreferencesController < OSX::NSWindowController
     end
   end
   
-  def resetFields
+  def reset_fields
     @hostField.setStringValue ""
     @newHostSheet.makeFirstResponder @hostField
     @passwordField.setStringValue ""
