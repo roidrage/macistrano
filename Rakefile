@@ -12,7 +12,7 @@ TARGET                = "#{APPNAME}.app"
 #APPVERSION           = "rev#{`svn info`[/Revision: (\d+)/, 1]}"
 APPVERSION            = Time.now.strftime("%Y-%m-%d")
 PUBLISH               = 'yourname@yourhost:path'
-DEFAULT_TARGET        = APPNAME
+DEFAULT_TARGET        = 'macistrano'
 DEFAULT_CONFIGURATION = 'Release'
 RELEASE_CONFIGURATION = 'Release'
 
@@ -26,6 +26,14 @@ end
 
 desc 'Build the default target using the default configuration'
 task :build => "xcode:build:#{DEFAULT_TARGET}:#{DEFAULT_CONFIGURATION}"
+
+desc "Build the default and run it."
+task :run_debug => [:build_debug] do
+  sh %{open "build/Debug/#{APPNAME}.app"}
+end
+
+desc 'Build the default target using the default configuration'
+task :build_debug => "xcode:build:#{DEFAULT_TARGET}:Debug"
 
 desc 'Deep clean of everything'
 task :clean do
