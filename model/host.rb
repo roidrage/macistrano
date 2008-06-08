@@ -117,12 +117,13 @@ class Host < OSX::NSObject
     doc = Hpricot.XML response
     (doc/'project').each do |data|
       project = Project.new
-      project.id = (data/:id).text
+      project.webistrano_id = (data/:id).text
       project.name = (data/:name).text
       project.host = self
       @projects << project
       project.fetch_stages
     end
+    @projects
   end
   
 end

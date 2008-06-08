@@ -11,6 +11,10 @@ describe Project, "when fetching stages" do
     @host.username = 'admin'
     @host.password = 'admin'
     @project.host = @host
+    class Project < OSX::NSObject
+      alias_method :fetch_stages, :fetch_stages_old
+    end
+
   end
 
   it "should queue the request" do
@@ -23,11 +27,13 @@ describe Project, "when converting stages from xml" do
   
   before do
     @project = Project.new
-    @project.stub!(:fetch_tasks)
     
-    @stage = Stage.new
-    @stage.stub!(:fetch_tasks)
-    Stage.stub!(:new).and_return @stage
+    class Stage < OSX::NSObject
+      attr_accessor :tasks_fetched
+      def fetch_tasks
+        @tasks_fetched = true
+      end
+    end
     
     @stages_xml = <<END
     <?xml version="1.0" encoding="UTF-8"?>
@@ -66,8 +72,8 @@ END
   end
   
   it "should fetch the tasks for the stages" do
-    @stage.should_receive(:fetch_tasks).at_least(:once)
-    @project.to_stages(@stages_xml)
+    stages = @project.to_stages(@stages_xml)
+    stages.first.tasks_fetched.should be_true
   end
   
   it "should not notify if stages were found" do
@@ -85,7 +91,9 @@ describe Project, "when being notified of a stage being loaded" do
   before do
     @project = Project.new
     @stage1 = Stage.new
+    @stage1.project = @project
     @stage2 = Stage.new
+    @stage2.project = @project
     @project.stages = [@stage1, @stage2]
   end
   

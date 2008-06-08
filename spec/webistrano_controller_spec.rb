@@ -9,12 +9,16 @@ describe WebistranoController do
   before do
     @controller = WebistranoController.new
     @host = Host.new
-    @host.stub!(:find_projects)
-    Host.stub!(:new).and_return @host
+    class Host < OSX::NSObject
+      attr_accessor :projects_fetched
+      def find_projects
+        @projects_fetched = true
+      end
+    end
   end
   
   it "should fetch new projects for a host" do
-    @host.should_receive(:find_projects)
     @controller.fetch_projects([@host])
+    @host.projects_fetched.should be_true
   end
 end

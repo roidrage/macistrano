@@ -14,18 +14,18 @@ require 'task'
 class Stage < OSX::NSObject
   include NotificationHub
   
-  attr_accessor :id, :project, :name, :tasks, :fully_loaded
+  attr_accessor :webistrano_id, :project, :name, :tasks, :fully_loaded
   
   def fully_loaded?
     fully_loaded
   end
   
   def deployments_url
-    "#{project.host.url}/projects/#{project.id}/stages/#{self.id}/deployments.xml"
+    "#{project.host.url}/projects/#{project.webistrano_id}/stages/#{self.webistrano_id}/deployments.xml"
   end
 
   def tasks_url
-    "#{project.host.url}/projects/#{project.id}/stages/#{id}/tasks.xml"
+    "#{project.host.url}/projects/#{project.webistrano_id}/stages/#{webistrano_id}/tasks.xml"
   end
   
   def run_stage task, comment

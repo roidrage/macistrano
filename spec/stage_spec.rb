@@ -7,9 +7,9 @@ require 'task'
 describe Stage, "when generating urls" do
   before do
     @stage = Stage.new
-    @stage.id = 1
+    @stage.webistrano_id = 1
     @project = Project.new
-    @project.id = 2
+    @project.webistrano_id = 2
     @stage.project = @project
     @host = Host.new
     @host.url = "http://webistrano.de"
@@ -28,7 +28,7 @@ end
 describe Stage, "when converting tasks from xml" do
   before do
     @stage = Stage.new
-    @stage.id = 1
+    @stage.webistrano_id = 1
     
     @tasks_xml =<<END
     <?xml version="1.0" encoding="UTF-8"?>

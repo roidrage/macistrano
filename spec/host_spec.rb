@@ -7,6 +7,14 @@ require 'project'
 require 'stage'
 require 'notification_hub'
 
+class Project < OSX::NSObject
+  attr_accessor :stages_fetched
+  alias_method :fetch_stages_old, :fetch_stages
+  def fetch_stages
+    @stages_fetched = true
+  end
+end
+
 describe Host, "when converting xml data to projects" do
   before do
     @host = Host.new
@@ -14,9 +22,6 @@ describe Host, "when converting xml data to projects" do
     @host.username = 'admin'
     @host.password = 'admin'
     
-    @project = Project.new
-    @project.stub!(:fetch_stages)
-    Project.stub!(:new).and_return @project
     @projects_xml = <<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <projects type="array">
@@ -38,8 +43,8 @@ XML
   end
   
   it "should fetch the stages for a project" do
-    @project.should_receive(:fetch_stages)
-    @host.to_projects(@projects_xml)
+    projects = @host.to_projects(@projects_xml)
+    projects.first.stages_fetched.should be_true
   end
   
   it "should assign the name of a project" do
@@ -49,7 +54,7 @@ XML
   
   it "should assign the id of a project" do
     projects = @host.to_projects(@projects_xml)
-    projects.first.id.should == "2"
+    projects.first.webistrano_id.should == "2"
   end
   
 end
@@ -160,11 +165,12 @@ describe Host, "when notified that a project finished loading" do
   it "should notify that the host was fully loaded when all the projects are fully loaded" do
     @project1 = Project.new
     @project2 = Project.new
+    @project1.host = @host
     @project1.stub!(:fully_loaded?).and_return true
     @project2.stub!(:fully_loaded?).and_return true
     @host.should_receive(:notify_host_fully_loaded).with(@host)
     @host.projects = [@project1, @project2]
-    @host.project_loaded nil
+    @host.project_loaded stub("notification", :object => @project1)
   end
   
   it "should not notify the host was fully loaded when one of the projects isn't fully loaded" do
@@ -172,8 +178,9 @@ describe Host, "when notified that a project finished loading" do
     @project2 = Project.new
     @project1.stub!(:fully_loaded?).and_return true
     @project2.stub!(:fully_loaded?).and_return false
+    @project1.host = @host
     @host.should_not_receive(:notify_host_fully_loaded).with(@host)
     @host.projects = [@project1, @project2]
-    @host.project_loaded nil
+    @host.project_loaded stub("notification", :object => @project1)
   end
 end

@@ -15,14 +15,14 @@ class Project < OSX::NSObject
   include NotificationHub
   notify :stage_loaded, :when => :stage_tasks_loaded
   
-  attr_accessor :name, :id, :stages, :host
+  attr_accessor :name, :webistrano_id, :stages, :host
   
   def fully_loaded?
     @stages && @stages.select{|stage| !stage.fully_loaded?}.empty?
   end
 
   def stages_url
-    "#{host.url}/projects/#{self.id}/stages.xml"
+    "#{host.url}/projects/#{self.webistrano_id}/stages.xml"
   end
   
   def fetch_stages
@@ -45,7 +45,7 @@ class Project < OSX::NSObject
     doc = Hpricot.XML response
     (doc/'stage').each do |data|
       stage = Stage.alloc.init
-      stage.id = (data/:id).text
+      stage.webistrano_id = (data/:id).text
       stage.name = (data/:name).text
       stage.project = self
       @stages << stage
