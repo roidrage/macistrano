@@ -54,9 +54,10 @@ class ProjectController < OSX::NSWindowController
   
   def remove_host(notification)
     host = notification.object
-    host.projects.each do |project|
-      idx = @statusItem.menu.indexOfItemWithRepresentedObject(project)
-      @statusItem.menu.removeItemAtIndex idx
+    @statusItem.menu.itemArray.each do |item|
+      if item.representedObject.is_a?(Project)
+        @statusItem.menu.removeItem(item) if item.representedObject.host.eql?(host)
+      end
     end
   end
   

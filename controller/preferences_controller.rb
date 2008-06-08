@@ -23,21 +23,21 @@ class PreferencesController < OSX::NSWindowController
   end
   
   def init
-    initHosts
+    init_hosts
     self.initWithWindowNibName("preferences")
   end
 
-  def registerDefaults
+  def register_defaults
     appDefaults = NSMutableDictionary.dictionary
     appDefaults.setObject_forKey([], "hosts")
     NSUserDefaults.standardUserDefaults.registerDefaults appDefaults
   end
   
-  def initHosts
-    registerDefaults
-    configuredHosts = NSUserDefaults.standardUserDefaults.arrayForKey("hosts")
+  def init_hosts
+    register_defaults
+    configured_hosts = NSUserDefaults.standardUserDefaults.arrayForKey("hosts")
     @hosts ||= []
-    configuredHosts.each do |data|
+    configured_hosts.each do |data|
       host = Host.alloc.init
       host.url = data[0]
       host.username = data[1]
@@ -90,7 +90,7 @@ class PreferencesController < OSX::NSWindowController
     # of the controller in the project_controller
     return if @hostField.nil?
     host = notification.object
-    addHost host
+    add_host host
     @newHostSheet.orderOut self
     @tableView.reloadData
     host.find_projects
@@ -147,7 +147,7 @@ class PreferencesController < OSX::NSWindowController
     @newHostSheet.orderOut self
   end
   
-  def addHost host
+  def add_host host
     @hosts << host
     Keychain.add_password host
     save_hosts_to_preferences
@@ -157,6 +157,7 @@ class PreferencesController < OSX::NSWindowController
   
   def save_hosts_to_preferences
     NSUserDefaults.standardUserDefaults.setObject_forKey(hosts_as_list, "hosts")
+    NSUserDefaults.standardUserDefaults.synchronize
   end
   
   def hosts_as_list

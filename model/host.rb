@@ -125,5 +125,8 @@ class Host < OSX::NSObject
     end
     @projects
   end
-  
+
+  def eql?(host)
+    return host.url == self.url && host.username == self.username
+  end
 end
