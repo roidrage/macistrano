@@ -1,5 +1,6 @@
-* Keychain storage of passwords
-* Asynchronous HTTP calls with timeouts
-* Preferences for webistrano hosts
-* Dialog to enter a comment when starting a deployment
-* Notification center for asynchronous communication
+* Poll stage build status regularly
+* Mark stage build status in status bar
+* Add HTTP timeouts
+* Set default timeout
+* Add growl notifications
+* Open preferences when no hosts configured
