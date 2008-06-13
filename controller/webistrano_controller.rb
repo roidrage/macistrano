@@ -8,16 +8,22 @@
 
 require 'osx/cocoa'
 require 'rubygems'
-gem 'hpricot'
+require 'notification_hub'
 
 class WebistranoController < OSX::NSObject
-  ib_outlet :project_controller
+  include NotificationHub
+  attr_accessor :hosts
+
+  notify :host_loaded, :when => :host_fully_loaded
+  notify :remove_host, :when => :host_removed
+
+  def host_loaded(notification)
+    return unless @hosts
+    notify_all_hosts_loaded if @hosts.select{|host| !host.fully_loaded?}.empty?
+  end
   
-  def fetch_projects(hosts)
-    projects = []
-    hosts.each do |host|
-      projects << host.find_projects
-    end
-    projects.flatten
+  def remove_host(notification)
+    host = notification.object
+    @hosts.delete(host) if @hosts
   end
 end

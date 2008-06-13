@@ -3,7 +3,7 @@
 #  macistrano
 #
 #  Created by Pom on 24.04.08.
-#  Copyright (c) 2008 __MyCompanyName__. All rights reserved.
+#  Copyright (c) 2008 Paperplanes, Mathias Meyer. All rights reserved.
 #
 
 require 'osx/cocoa'
@@ -27,6 +27,7 @@ class ProjectController < OSX::NSWindowController
     @webistrano_controller = WebistranoController.alloc.init
     @status_menu = OSX::NSMenu.alloc.init
     @preferences_controller = PreferencesController.alloc.init
+    @webistrano_controller.hosts = @preferences_controller.hosts
     create_status_bar
     setup_loading_timer
   end
