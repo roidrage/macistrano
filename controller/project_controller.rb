@@ -15,7 +15,8 @@ class ProjectController < OSX::NSWindowController
   
   notify :add_host, :when => :host_fully_loaded
   notify :remove_host, :when => :host_removed
-
+  notify :remove_loading, :when => :all_hosts_loaded
+  
   attr_reader :status_menu
   attr_accessor :loaded
    
@@ -29,19 +30,11 @@ class ProjectController < OSX::NSWindowController
     @preferences_controller = PreferencesController.alloc.init
     @webistrano_controller.hosts = @preferences_controller.hosts
     create_status_bar
-    setup_loading_timer
   end
   
-  def setup_loading_timer
-    @loading_timer = OSX::NSTimer.scheduledTimerWithTimeInterval_target_selector_userInfo_repeats_(1.0, self, :loading_tick, nil, true)
-  end
-  
-  def loading_tick
-    if LoadOperationQueue.items_in_queue == 0
-      item = @statusItem.menu.itemWithTitle("Loading...")
-      @statusItem.menu.removeItem(item) unless item.nil?
-      @loading_timer.invalidate
-    end
+  def remove_loading(notification)
+    item = @statusItem.menu.itemWithTitle("Loading...")
+    @statusItem.menu.removeItem(item) unless item.nil?
   end
   
   def add_host(notification)
