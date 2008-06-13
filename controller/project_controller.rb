@@ -82,8 +82,7 @@ class ProjectController < OSX::NSWindowController
     end
   end
   
-  ib_action :runTask
-  def runTask(sender)
+  ib_action :runTask do
     taskName = @taskField.stringValue.to_s
     description = @descriptionField.stringValue.to_s
     @runStage.run_stage taskName, description
@@ -91,8 +90,7 @@ class ProjectController < OSX::NSWindowController
     reset_fields
   end
    
-  ib_action :closeTaskWindow
-  def closeTaskWindow(sender)
+  ib_action :closeTaskWindow do
     @runTaskDialog.close
     reset_fields
   end

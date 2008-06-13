@@ -68,14 +68,12 @@ class PreferencesController < OSX::NSWindowController
     @hosts[row].url
   end
   
-  ib_action :add
-  def add(id)
+  ib_action :add do
     NSApp.beginSheet_modalForWindow_modalDelegate_didEndSelector_contextInfo(@newHostSheet, @preferencesWindow, nil, nil, nil)
     NSApp.endSheet @newHostSheet
   end
   
-  ib_action :addFromSheet
-  def addFromSheet(id)
+  ib_action :addFromSheet do
     @spinner.startAnimation(self)
     @spinner.setHidden(false)
     host = Host.new
@@ -124,15 +122,13 @@ class PreferencesController < OSX::NSWindowController
     @spinner.setHidden(true)
   end
   
-  ib_action :cancelSheet
-  def cancelSheet(id)
+  ib_action :cancelSheet do
     closeSheet
     reset_fields
     reset_spinner
   end
 
-  ib_action :removeHost
-  def removeHost sender
+  ib_action :removeHost do
     unless @tableView.selectedRow < 0
       host = @hosts[@tableView.selectedRow]
       Keychain.remove_password host
