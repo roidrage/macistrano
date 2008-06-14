@@ -102,6 +102,7 @@ class Stage < OSX::NSObject
       deployment.task = (deployment_data/:task).text
       deployment.completed_at = DateTime.parse((deployment_data/:"completed-at").text)
       deployment.created_at = DateTime.parse((deployment_data/:"created-at").text)
+      deployment.success = (deployment_data/:success).text == "1"
     end
     deployment
   end

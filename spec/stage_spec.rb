@@ -143,5 +143,8 @@ END
     deployment.created_at.year.should == 2008
   end
 
-  
+  it "should set the success flag" do
+    deployment = @stage.deployment_from_xml(@xml_data)
+    deployment.success.should be_false
+  end
 end
