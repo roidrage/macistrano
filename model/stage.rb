@@ -81,23 +81,28 @@ class Stage < OSX::NSObject
     @tasks
   end
   
-  def check_for_running_build
+  def check_for_running_build(notification)
+    puts "Checking for running builds"
     return if build_check_running?
     build_check_running!
     LoadOperationQueue.queue_request latest_deployment_url, self, {:username => project.host.username, :password => project.host.password, :on_success => :check_for_running_build_successful, :on_error => :check_for_running_build_failed}
   end
   
   def check_for_running_build_successful(data)
-    build_check_running = false
+    puts "got build data: #{data}"
+    @build_check_running = false
     deployment = deployment_from_xml(data)
     if deployment.completed_at and @last_checked and deployment.completed_at >= (@last_checked - 30)
       notify_stage_build_completed(deployment) 
     elsif deployment.completed_at.nil?
       notify_stage_build_running(deployment)
     end
+    
   end
   
   def check_for_running_build_failed(url, error)
+    puts "Error checking for build"
+    @build_check_running = false
   end
   
   def deployment_from_xml(data)

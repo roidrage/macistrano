@@ -16,7 +16,9 @@ class ProjectController < OSX::NSWindowController
   notify :add_host, :when => :host_fully_loaded
   notify :remove_host, :when => :host_removed
   notify :remove_loading, :when => :all_hosts_loaded
-  
+  notify :update_stage_build_status, :when => :stage_build_completed
+  notify :update_stage_build_status, :when => :stage_build_running
+
   attr_reader :status_menu
   attr_accessor :loaded
    
@@ -35,6 +37,7 @@ class ProjectController < OSX::NSWindowController
   def remove_loading(notification)
     item = @statusItem.menu.itemWithTitle("Loading...")
     @statusItem.menu.removeItem(item) unless item.nil?
+    @webistrano_controller.setup_build_check_timer
   end
   
   def add_host(notification)
@@ -53,6 +56,10 @@ class ProjectController < OSX::NSWindowController
         @statusItem.menu.removeItem(item) if item.representedObject.host.eql?(host)
       end
     end
+  end
+  
+  def update_stage_build_status(notification)
+    puts "Build is running for stage #{notification.object.stage.name}"
   end
   
   def quit(sender)

@@ -51,8 +51,20 @@ class LoadOperation < OSX::NSOperation
   end
   
   def connection_didReceiveResponse(connection, response)
-    @length = response.expectedContentLength
-    @data = NSMutableData.dataWithCapacity(@length < 0 ? 0 : @length)
+    if response.statusCode == 404
+      puts "got 404 error"
+      connection.cancel
+      unless on_error.nil?
+        @delegate.send(on_error.to_sym, @url, 404)
+      else
+        @delegate.load_url_failed(@url, 404)
+      end
+      setExecuting false
+      setFinished true
+    else
+      @length = response.expectedContentLength
+      @data = NSMutableData.dataWithCapacity(@length < 0 ? 0 : @length)
+    end
   end
   
   def connection_didReceiveData(connection, data)
