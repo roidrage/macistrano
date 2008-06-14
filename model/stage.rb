@@ -17,7 +17,7 @@ class Stage < OSX::NSObject
   include NotificationHub
   
   notify :check_for_running_build, :when => :check_for_running_builds
-  attr_accessor :webistrano_id, :project, :name, :tasks, :fully_loaded
+  attr_accessor :webistrano_id, :project, :name, :tasks, :fully_loaded, :build_check_running, :last_checked
   
   def fully_loaded?
     fully_loaded
@@ -108,6 +108,7 @@ class Stage < OSX::NSObject
   end
   
   def build_check_running!
+    @last_checked = Time.now
     @build_check_running = true
   end
   
