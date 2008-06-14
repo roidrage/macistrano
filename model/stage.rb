@@ -103,14 +103,13 @@ class Stage < OSX::NSObject
   def deployment_from_xml(data)
     doc = Hpricot.XML(data)
     deployment = Deployment.alloc.init
-    (doc/'deployment').collect do |deployment_data|
-      deployment.webistrano_id = (deployment_data/:id).text
-      deployment.task = (deployment_data/:task).text
-      deployment.completed_at = DateTime.parse((deployment_data/:"completed-at").text)
-      deployment.created_at = DateTime.parse((deployment_data/:"created-at").text)
-      deployment.success = (deployment_data/:success).text == "1"
-      deployment.stage = self
-    end
+    deployment_data = doc.at('/deployment')
+    deployment.webistrano_id = (deployment_data/:id).text
+    deployment.task = (deployment_data/:task).text
+    deployment.completed_at = DateTime.parse((deployment_data/:"completed-at").text) unless (doc.at("deployment/completed-at").attributes["nil"] == "true")
+    deployment.created_at = DateTime.parse((deployment_data/:"created-at").text)
+    deployment.success = (deployment_data/:success).text == "1"
+    deployment.stage = self
     deployment
   end
   

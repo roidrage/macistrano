@@ -147,6 +147,34 @@ END
     deployment = @stage.deployment_from_xml(@xml_data)
     deployment.success.should be_false
   end
+  
+  it "should not set completed_at when it's nil" do
+    @xml_data = <<END
+<?xml version="1.0" encoding="UTF-8"?>
+<deployment>
+  <completed-at type="datetime" nil="true"></completed-at>
+  <created-at type="datetime">2008-05-18T19:30:58Z</created-at>
+  <description>sdfd</description>
+  <excluded-host-ids type="yaml">--- []
+
+</excluded-host-ids>
+  <id type="integer">9</id>
+  <log>  * executing `deploy:start'
+  * executing `webistrano:mongrel:start'
+  * executing "sudo -p 'sudo password: ' -u user to run as with sudo mongrel_rails cluster::start -C PATH to mongrel_cluster.yml, you need to create it yourself --clean"
+    servers: ["my.test.host"]
+*** connection failed for: my.test.host (SocketError: getaddrinfo: nodename nor servname provided, or not known)
+</log>
+  <stage-id type="integer">4</stage-id>
+  <success type="integer">0</success>
+  <task>deploy:start</task>
+  <updated-at type="datetime">2008-05-18T19:31:00Z</updated-at>
+  <user-id type="integer">1</user-id>
+</deployment>
+END
+    deployment = @stage.deployment_from_xml(@xml_data)
+    deployment.completed_at.should be_nil
+  end
 end
 
 describe Stage, "when checking the deployment status was successful" do
