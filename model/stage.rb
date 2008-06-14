@@ -10,10 +10,13 @@ require 'osx/cocoa'
 require 'builder'
 require 'notification_hub'
 require 'task'
+require 'deployment'
+require 'date'
 
 class Stage < OSX::NSObject
   include NotificationHub
   
+  notify :check_for_running_build, :when => :check_for_running_builds
   attr_accessor :webistrano_id, :project, :name, :tasks, :fully_loaded
   
   def fully_loaded?
@@ -26,6 +29,10 @@ class Stage < OSX::NSObject
 
   def tasks_url
     "#{project.host.url}/projects/#{project.webistrano_id}/stages/#{webistrano_id}/tasks.xml"
+  end
+  
+  def latest_deployment_url
+    "#{project.host.url}/projects/#{project.webistrano_id}/stages/#{webistrano_id}/deployments/latest.xml"
   end
   
   def run_stage task, comment
@@ -72,5 +79,38 @@ class Stage < OSX::NSObject
       @tasks << task
     end
     @tasks
+  end
+  
+  def check_for_running_build
+    return if build_check_running?
+    LoadOperationQueue.queue_request latest_deployment_url, self, {:username => project.host.username, :password => project.host.password, :on_success => :check_for_running_build_successful, :on_error => :check_for_running_build_failed}
+    build_check_running!
+  end
+  
+  def check_for_running_build_successful(data)
+    deployment = deployment_from_xml(data)
+  end
+  
+  def check_for_running_build_failed(url, error)
+  end
+  
+  def deployment_from_xml(data)
+    doc = Hpricot.XML(data)
+    deployment = Deployment.alloc.init
+    (doc/'deployment').collect do |deployment_data|
+      deployment.webistrano_id = (deployment_data/:id).text
+      deployment.task = (deployment_data/:task).text
+      deployment.completed_at = DateTime.parse((deployment_data/:"completed-at").text)
+      deployment.created_at = DateTime.parse((deployment_data/:"created-at").text)
+    end
+    deployment
+  end
+  
+  def build_check_running!
+    @build_check_running = true
+  end
+  
+  def build_check_running?
+    @build_check_running
   end
 end
