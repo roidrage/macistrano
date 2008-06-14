@@ -83,12 +83,18 @@ class Stage < OSX::NSObject
   
   def check_for_running_build
     return if build_check_running?
-    LoadOperationQueue.queue_request latest_deployment_url, self, {:username => project.host.username, :password => project.host.password, :on_success => :check_for_running_build_successful, :on_error => :check_for_running_build_failed}
     build_check_running!
+    LoadOperationQueue.queue_request latest_deployment_url, self, {:username => project.host.username, :password => project.host.password, :on_success => :check_for_running_build_successful, :on_error => :check_for_running_build_failed}
   end
   
   def check_for_running_build_successful(data)
+    build_check_running = false
     deployment = deployment_from_xml(data)
+    if deployment.completed_at and @last_checked and deployment.completed_at >= (@last_checked - 30)
+      notify_stage_build_completed(deployment) 
+    elsif deployment.completed_at.nil?
+      notify_stage_build_running(deployment)
+    end
   end
   
   def check_for_running_build_failed(url, error)
@@ -103,12 +109,13 @@ class Stage < OSX::NSObject
       deployment.completed_at = DateTime.parse((deployment_data/:"completed-at").text)
       deployment.created_at = DateTime.parse((deployment_data/:"created-at").text)
       deployment.success = (deployment_data/:success).text == "1"
+      deployment.stage = self
     end
     deployment
   end
   
   def build_check_running!
-    @last_checked = Time.now
+    @last_checked = DateTime.now
     @build_check_running = true
   end
   

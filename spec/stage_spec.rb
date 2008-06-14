@@ -148,3 +148,26 @@ END
     deployment.success.should be_false
   end
 end
+
+describe Stage, "when checking the deployment status was successful" do
+  before do
+    @stage = Stage.new
+    @deployment = Deployment.new
+  end
+  
+  it "should notify of a completed deployment if it was successful and has completed since the last check" do
+    @deployment.success = 1
+    @deployment.completed_at = Time.now
+    @stage.last_checked = Time.now - 20
+    @stage.stub!(:deployment_from_xml).and_return @deployment
+    @stage.should_receive(:notify_stage_build_completed).with(@deployment)
+    @stage.check_for_running_build_successful("")
+  end
+  
+  it "should notify of a running deployment if completed_at is empty" do
+    @deployment.completed_at = nil
+    @stage.stub!(:deployment_from_xml).and_return @deployment
+    @stage.should_receive(:notify_stage_build_running).with(@deployment)
+    @stage.check_for_running_build_successful("")
+  end
+end
