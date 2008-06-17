@@ -16,8 +16,8 @@ class ProjectController < OSX::NSWindowController
   notify :add_host, :when => :host_fully_loaded
   notify :remove_host, :when => :host_removed
   notify :remove_loading, :when => :all_hosts_loaded
-  notify :update_stage_build_status, :when => :stage_build_completed
-  notify :update_stage_build_status, :when => :stage_build_running
+  notify :build_completed, :when => :stage_build_completed
+  notify :build_running, :when => :stage_build_running
 
   attr_reader :status_menu
   attr_accessor :loaded
@@ -58,8 +58,12 @@ class ProjectController < OSX::NSWindowController
     end
   end
   
-  def update_stage_build_status(notification)
+  def build_running(notification)
     puts "Build is running for stage #{notification.object.stage.name}"
+  end
+  
+  def build_completed(notification)
+    puts "Build completed for stage #{notification.object.stage.name}"
   end
   
   def quit(sender)
