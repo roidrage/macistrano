@@ -174,8 +174,7 @@ class ProjectController < OSX::NSWindowController
    
   def create_status_bar
     @statusItem = OSX::NSStatusBar.systemStatusBar.statusItemWithLength(OSX::NSVariableStatusItemLength)
-    path = NSBundle.mainBundle.pathForResource_ofType("icon-failure", "png")
-    @statusItem.setImage NSImage.alloc.initByReferencingFile(path)
+    set_status_icon 'success'
     @statusItem.setHighlightMode true
     @statusItem.setMenu @status_menu
     @statusItem.setTarget self
