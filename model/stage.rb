@@ -89,7 +89,6 @@ class Stage < OSX::NSObject
   end
   
   def check_for_running_build_successful(data)
-    puts "got build data: #{data}"
     @build_check_running = false
     deployment = deployment_from_xml(data)
     if deployment.completed_at and @last_checked and deployment.completed_at >= (@last_checked - Rational(30, 86400))
