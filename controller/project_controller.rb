@@ -72,10 +72,14 @@ class ProjectController < OSX::NSWindowController
   def build_completed(notification)
     case notification.object.success
     when true:
-      @growl_notifier.notify(GROWL_MESSAGE_TYPES[:deployment_complete], "Deployment completed.", "Stage #{notification.object.stage.name} of project #{notification.object.stage.project.name} (Host: #{notification.object.stage.project.host.url})")
+      notify_growl GROWL_MESSAGE_TYPES[:deployment_complete], notification.object
     when false:
-      @growl_notifier.notify(GROWL_MESSAGE_TYPES[:deployment_failed], "Deployment failed.", "Stage #{notification.object.stage.name} of project #{notification.object.stage.project.name} (Host: #{notification.object.stage.project.host.url})")
+      notify_growl GROWL_MESSAGE_TYPES[:deployment_failed], notification.object
     end
+  end
+
+  def notify_growl(message, deployment)
+    @growl_notifier.notify(message, message, "Stage #{deployment.stage.name} of project #{deployment.stage.project.name} (Host: #{deployment.stage.project.host.url})")
   end
   
   def quit(sender)
