@@ -8,11 +8,12 @@
 
 require 'osx/cocoa'
 require 'rubygems'
+require 'growl_notifier'
 
 class ProjectController < OSX::NSWindowController
   include OSX
   include NotificationHub
-  
+  GROWL_MESSAGE_TYPES = {:deployment_complete => "Deployment completed", :deployment_started => "Deployment started", :deployment_failed => "Deployment failed"}
   notify :add_host, :when => :host_fully_loaded
   notify :remove_host, :when => :host_removed
   notify :remove_loading, :when => :all_hosts_loaded
@@ -20,7 +21,7 @@ class ProjectController < OSX::NSWindowController
   notify :build_running, :when => :stage_build_running
 
   attr_reader :status_menu
-  attr_accessor :loaded
+  attr_accessor :loaded, :growl_notifier
    
   ib_outlet :runTaskDialog
   ib_outlet :taskField
@@ -32,6 +33,12 @@ class ProjectController < OSX::NSWindowController
     @preferences_controller = PreferencesController.alloc.init
     @webistrano_controller.hosts = @preferences_controller.hosts
     create_status_bar
+    init_growl
+  end
+  
+  def init_growl
+    @growl_notifier = Growl::Notifier.alloc.init
+    @growl_notifier.start('Macistrano', GROWL_MESSAGE_TYPES.collect {|key, value| value})
   end
   
   def remove_loading(notification)
