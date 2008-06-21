@@ -13,7 +13,9 @@ require 'growl_notifier'
 class ProjectController < OSX::NSWindowController
   include OSX
   include NotificationHub
+  
   GROWL_MESSAGE_TYPES = {:deployment_complete => "Deployment completed", :deployment_started => "Deployment started", :deployment_failed => "Deployment failed"}
+  
   notify :add_host, :when => :host_fully_loaded
   notify :remove_host, :when => :host_removed
   notify :remove_loading, :when => :all_hosts_loaded
@@ -67,19 +69,27 @@ class ProjectController < OSX::NSWindowController
   
   def build_running(notification)
     puts "Build is running for stage #{notification.object.stage.name}"
+    set_status_icon("success-building")
   end
   
   def build_completed(notification)
     case notification.object.success
     when true:
       notify_growl GROWL_MESSAGE_TYPES[:deployment_complete], notification.object
+      set_status_icon "success"
     when false:
       notify_growl GROWL_MESSAGE_TYPES[:deployment_failed], notification.object
+      set_status_icon "failure"
     end
   end
 
   def notify_growl(message, deployment)
     @growl_notifier.notify(message, message, "Stage #{deployment.stage.name} of project #{deployment.stage.project.name} (Host: #{deployment.stage.project.host.url})")
+  end
+  
+  def set_status_icon(icon)
+    path = NSBundle.mainBundle.pathForResource_ofType("icon-#{icon}", "png")
+    @statusItem.setImage NSImage.alloc.initByReferencingFile(path)
   end
   
   def quit(sender)
