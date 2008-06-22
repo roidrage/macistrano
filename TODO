@@ -1,6 +1,6 @@
 + Poll stage build status regularly
 * Mark stage build status in status bar
-* Add HTTP timeouts
++ Add HTTP timeouts
 * Set check cycle
 * Set default timeout
 + Add growl notifications
