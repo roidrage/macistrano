@@ -28,11 +28,11 @@ class ProjectController < OSX::NSWindowController
   ib_outlet :runTaskDialog
   ib_outlet :taskField
   ib_outlet :descriptionField
+  ib_outlet :preferences_controller
    
   def awakeFromNib
     @webistrano_controller = WebistranoController.alloc.init
     @status_menu = OSX::NSMenu.alloc.init
-    @preferences_controller = PreferencesController.alloc.init
     @webistrano_controller.hosts = @preferences_controller.hosts
     create_status_bar
     init_growl

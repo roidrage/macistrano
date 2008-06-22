@@ -13,7 +13,6 @@
 		4DDCA70A0ACC9A6100E082CE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		4DDCA70C0ACC9A6100E082CE /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		4DDCA70D0ACC9A6100E082CE /* RubyCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8F5E24E03AEB6EC03A81C6F /* RubyCocoa.framework */; };
-		FE118E830DD38FA500BD2E9E /* preferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = FE118E810DD38FA500BD2E9E /* preferences.nib */; };
 		FE1191EC0DD89E120073164F /* task.rb in Resources */ = {isa = PBXBuildFile; fileRef = FE1191EB0DD89E120073164F /* task.rb */; };
 		FE17B5B60E0D7E0600682156 /* growl_notifier.rb in Resources */ = {isa = PBXBuildFile; fileRef = FE17B5B50E0D7E0600682156 /* growl_notifier.rb */; };
 		FE33BD980DDDFB3D003ACBAA /* load_operation.rb in Resources */ = {isa = PBXBuildFile; fileRef = FE33BD970DDDFB3D003ACBAA /* load_operation.rb */; };
@@ -69,7 +68,6 @@
 		4DDCA7120ACC9A6100E082CE /* macistrano.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = macistrano.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8F5E24E03AEB6EC03A81C6F /* RubyCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RubyCocoa.framework; path = /System/Library/Frameworks/RubyCocoa.framework; sourceTree = "<absolute>"; };
 		E8F5E25803AEB7C803A81C6F /* rb_main.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = rb_main.rb; sourceTree = "<group>"; };
-		FE118E820DD38FA500BD2E9E /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/preferences.nib; sourceTree = "<group>"; };
 		FE1191EB0DD89E120073164F /* task.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = task.rb; path = model/task.rb; sourceTree = "<group>"; };
 		FE17B5B50E0D7E0600682156 /* growl_notifier.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = growl_notifier.rb; sourceTree = "<group>"; };
 		FE33BD970DDDFB3D003ACBAA /* load_operation.rb */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text.script.ruby; name = load_operation.rb; path = model/load_operation.rb; sourceTree = "<group>"; };
@@ -187,7 +185,6 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				FE118E810DD38FA500BD2E9E /* preferences.nib */,
 				FEA76B820DD7547D00D171BE /* Security.bridgesupport */,
 				FE5F04220DC11D75009DA75F /* icon-success-building.png */,
 				FE5F04230DC11D75009DA75F /* icon-success.png */,
@@ -305,7 +302,6 @@
 				FEC8A4690DC26E300083B448 /* stage.rb in Resources */,
 				FE9BA8690DC65FA8008EF6F8 /* host.rb in Resources */,
 				FE68C2D40DD24F240053FC90 /* preferences_controller.rb in Resources */,
-				FE118E830DD38FA500BD2E9E /* preferences.nib in Resources */,
 				FEA76B830DD7547D00D171BE /* Security.bridgesupport in Resources */,
 				FEA76BB20DD75E4F00D171BE /* keychain.rb in Resources */,
 				FE1191EC0DD89E120073164F /* task.rb in Resources */,
@@ -354,14 +350,6 @@
 				29B97319FDCFA39411CA2CEA /* English */,
 			);
 			name = MainMenu.nib;
-			sourceTree = "<group>";
-		};
-		FE118E810DD38FA500BD2E9E /* preferences.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FE118E820DD38FA500BD2E9E /* English */,
-			);
-			name = preferences.nib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

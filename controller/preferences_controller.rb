@@ -19,12 +19,9 @@ class PreferencesController < OSX::NSWindowController
   ib_outlet :usernameField
   ib_outlet :passwordField
   
-  def awakeFromNib
-  end
-  
   def init
     init_hosts
-    self.initWithWindowNibName("preferences")
+    self
   end
 
   def register_defaults
