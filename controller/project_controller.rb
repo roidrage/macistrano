@@ -29,7 +29,11 @@ class ProjectController < OSX::NSWindowController
   ib_outlet :taskField
   ib_outlet :descriptionField
   ib_outlet :preferences_controller
-   
+  
+  ib_action :show_about do
+    NSApp.orderFrontStandardAboutPanel self
+  end
+  
   def awakeFromNib
     @webistrano_controller = WebistranoController.alloc.init
     @status_menu = OSX::NSMenu.alloc.init
@@ -186,11 +190,15 @@ class ProjectController < OSX::NSWindowController
     item.setEnabled false
     @statusItem.menu.insertItem_atIndex(item, 0)
     
-    item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("Quit", "quit:", "", 1)
+    item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("Preferences", "show_preferences:", "", 1)
     item.setTarget self
 
-    item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("Preferences", "show_preferences:", "", 2)
+    item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("About", "show_about:", "", 2)
     item.setTarget self
+
+    item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("Quit", "quit:", "", 3)
+    item.setTarget self
+
     fetch_projects
   end
   
