@@ -190,13 +190,15 @@ class ProjectController < OSX::NSWindowController
     item.setEnabled false
     @statusItem.menu.insertItem_atIndex(item, 0)
     
-    item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("Preferences", "show_preferences:", "", 1)
+    @statusItem.menu.insertItem_atIndex(NSMenuItem.separatorItem, 1)
+    item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("Preferences", "show_preferences:", "", 2)
     item.setTarget self
 
-    item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("About", "show_about:", "", 2)
+    item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("About", "show_about:", "", 3)
     item.setTarget self
+    @statusItem.menu.insertItem_atIndex(NSMenuItem.separatorItem, 4)
 
-    item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("Quit", "quit:", "", 3)
+    item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("Quit", "quit:", "", 5)
     item.setTarget self
 
     fetch_projects
