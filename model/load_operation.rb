@@ -20,7 +20,7 @@ class LoadOperation < OSX::NSOperation
   end
   
   def start
-    request = NSURLRequest.requestWithURL(@url)
+    request = NSURLRequest.requestWithURL_cachePolicy_timeoutInterval(@url, NSURLRequestReloadIgnoringLocalCacheData, 10.0)
     @connection = NSURLConnection.connectionWithRequest_delegate(request, self)
     setExecuting true
   end
@@ -72,6 +72,7 @@ class LoadOperation < OSX::NSOperation
   end
   
   def connectionDidFinishLoading(connection)
+    puts "finish"
     xml = @data.mutableBytes.bytestr(@length)
     unless on_success.nil?
       @delegate.send(on_success.to_sym, xml)

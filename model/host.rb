@@ -48,6 +48,7 @@ class Host < OSX::NSObject
   end
   
   def load_url_failed(url, error)
+    notify_host_load_failed self
   end
   
   def version_check_finished(data)

@@ -15,6 +15,7 @@ class WebistranoController < OSX::NSObject
   attr_accessor :hosts
 
   notify :host_loaded, :when => :host_fully_loaded
+  notify :host_loaded, :when => :host_load_failed
   notify :remove_host, :when => :host_removed
 
   def setup_build_check_timer
