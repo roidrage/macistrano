@@ -5,3 +5,4 @@
 * Set default timeout
 + Add growl notifications
 * Open preferences when no hosts configured
+* Floating window to watch deployment status
