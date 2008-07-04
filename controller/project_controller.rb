@@ -73,15 +73,17 @@ class ProjectController < OSX::NSWindowController
   
   def build_running(notification)
     set_status_icon("success-building")
-    set_stage_submenu_enabled(notification.object, false)
+    set_stage_submenu_enabled(notification.object, false, "success-building")
   end
   
-  def set_stage_submenu_enabled(deployment, enabled)
+  def set_stage_submenu_enabled(deployment, enabled, icon)
     index = @statusItem.menu.indexOfItemWithRepresentedObject deployment.stage.project
     unless index == -1
       project_menu = @statusItem.menu.itemAtIndex(index).submenu
       stage_menu_index = project_menu.indexOfItemWithRepresentedObject deployment.stage
-      stage_menu = project_menu.itemAtIndex(stage_menu_index).submenu
+      stage_menu_item = project_menu.itemAtIndex(stage_menu_index)
+      stage_menu_item.setImage get_icon(icon)
+      stage_menu = stage_menu_item.submenu
       stage_menu.itemArray.each do |item|
         item.setEnabled enabled
       end
@@ -89,15 +91,17 @@ class ProjectController < OSX::NSWindowController
   end
   
   def build_completed(notification)
+    icon = ""
     case notification.object.success
     when true:
       notify_growl GROWL_MESSAGE_TYPES[:deployment_complete], notification.object
-      set_status_icon "success"
+      icon = "success"
     when false:
       notify_growl GROWL_MESSAGE_TYPES[:deployment_failed], notification.object
-      set_status_icon "failure"
+      icon = "failure"
     end
-    set_stage_submenu_enabled(notification.object, true)
+    set_stage_submenu_enabled(notification.object, true, icon)
+    set_status_icon icon
   end
 
   def notify_growl(message, deployment)
@@ -105,8 +109,12 @@ class ProjectController < OSX::NSWindowController
   end
   
   def set_status_icon(icon)
+    @statusItem.setImage get_icon(icon)
+  end
+  
+  def get_icon(icon)
     path = NSBundle.mainBundle.pathForResource_ofType("icon-#{icon}", "png")
-    @statusItem.setImage NSImage.alloc.initByReferencingFile(path)
+    NSImage.alloc.initByReferencingFile(path)
   end
   
   def quit(sender)
