@@ -82,7 +82,6 @@ class Stage < OSX::NSObject
   end
   
   def check_for_running_build(notification)
-    puts "Checking for running builds"
     return if build_check_running?
     build_check_running!
     LoadOperationQueue.queue_request latest_deployment_url, self, {:username => project.host.username, :password => project.host.password, :on_success => :check_for_running_build_successful, :on_error => :check_for_running_build_failed}

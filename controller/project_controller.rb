@@ -55,7 +55,7 @@ class ProjectController < OSX::NSWindowController
   
   def add_host(notification)
     notification.object.projects.each do |project|
-      item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("#{project.name.to_s} (#{project.host.url})", nil, "", @statusItem.menu.numberOfItems)
+      item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("#{project.name.to_s} (#{project.host.url})", nil, "", 0)
       item.setTarget self
       item.setRepresentedObject project
       add_stages project
@@ -72,8 +72,20 @@ class ProjectController < OSX::NSWindowController
   end
   
   def build_running(notification)
-    puts "Build is running for stage #{notification.object.stage.name}"
     set_status_icon("success-building")
+    set_stage_submenu_enabled(notification.object, false)
+  end
+  
+  def set_stage_submenu_enabled(deployment, enabled)
+    index = @statusItem.menu.indexOfItemWithRepresentedObject deployment.stage.project
+    unless index == -1
+      project_menu = @statusItem.menu.itemAtIndex(index).submenu
+      stage_menu_index = project_menu.indexOfItemWithRepresentedObject deployment.stage
+      stage_menu = project_menu.itemAtIndex(stage_menu_index).submenu
+      stage_menu.itemArray.each do |item|
+        item.setEnabled enabled
+      end
+    end
   end
   
   def build_completed(notification)
@@ -85,6 +97,7 @@ class ProjectController < OSX::NSWindowController
       notify_growl GROWL_MESSAGE_TYPES[:deployment_failed], notification.object
       set_status_icon "failure"
     end
+    set_stage_submenu_enabled(notification.object, true)
   end
 
   def notify_growl(message, deployment)
@@ -165,6 +178,7 @@ class ProjectController < OSX::NSWindowController
       sub_item.setRepresentedObject task
       lastIndex += 1
     end
+    tasks_menu.setAutoenablesItems false
     stage_menu_item.setSubmenu tasks_menu
     stage_menu_item.setEnabled true
   end
