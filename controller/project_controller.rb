@@ -37,6 +37,7 @@ class ProjectController < OSX::NSWindowController
   def awakeFromNib
     @webistrano_controller = WebistranoController.alloc.init
     @status_menu = OSX::NSMenu.alloc.init
+    show_preferences self if @preferences_controller.hosts.empty?
     @webistrano_controller.hosts = @preferences_controller.hosts
     create_status_bar
     init_growl
