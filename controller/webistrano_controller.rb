@@ -19,13 +19,11 @@ class WebistranoController < OSX::NSObject
   notify :remove_host, :when => :host_removed
 
   def setup_build_check_timer
-    puts "Setting up build check timer"
     @build_status_timer = OSX::NSTimer.scheduledTimerWithTimeInterval_target_selector_userInfo_repeats_(30.0, self, :check_for_running_builds, nil, true)
     @build_status_timer.fire
   end
   
   def check_for_running_builds
-    puts "tick!"
     notify_check_for_running_builds nil
   end
 
