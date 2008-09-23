@@ -29,9 +29,14 @@ class ProjectController < OSX::NSWindowController
   ib_outlet :taskField
   ib_outlet :descriptionField
   ib_outlet :preferences_controller
+  ib_outlet :statusHudWindow
   
   ib_action :show_about do
     NSApp.orderFrontStandardAboutPanel self
+  end
+  
+  ib_action :show_status do
+    @statusHudWindow.makeKeyAndOrderFront(self)
   end
   
   def awakeFromNib
@@ -41,6 +46,7 @@ class ProjectController < OSX::NSWindowController
     @webistrano_controller.hosts = @preferences_controller.hosts
     create_status_bar
     init_growl
+    @statusHudWindow.setFloatingPanel true
   end
   
   def init_growl
@@ -215,6 +221,9 @@ class ProjectController < OSX::NSWindowController
     
     @statusItem.menu.insertItem_atIndex(NSMenuItem.separatorItem, 1)
     item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("Preferences", "show_preferences:", "", 2)
+    item.setTarget self
+
+    item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("Show Status Window", "show_status:", "", 2)
     item.setTarget self
 
     item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("About", "show_about:", "", 3)

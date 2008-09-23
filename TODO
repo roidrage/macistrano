@@ -4,5 +4,7 @@
 * Set check cycle
 * Set default timeout
 + Add growl notifications
-* Open preferences when no hosts configured
++ Open preferences when no hosts configured
 * Floating window to watch deployment status
+* Display notification when a host is not reachable, or throws an error, then disable it, but recheck it on every run, and don't display a notification when it's still failing
+* Update changed project data in the menu
