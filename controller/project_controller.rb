@@ -220,17 +220,17 @@ class ProjectController < OSX::NSWindowController
     @statusItem.menu.insertItem_atIndex(item, 0)
     
     @statusItem.menu.insertItem_atIndex(NSMenuItem.separatorItem, 1)
-    item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("Preferences", "show_preferences:", "", 2)
-    item.setTarget self
-
     item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("Show Status Window", "show_status:", "", 2)
     item.setTarget self
 
-    item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("About", "show_about:", "", 3)
+    item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("Preferences", "show_preferences:", "", 3)
     item.setTarget self
-    @statusItem.menu.insertItem_atIndex(NSMenuItem.separatorItem, 4)
 
-    item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("Quit", "quit:", "", 5)
+    item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("About", "show_about:", "", 4)
+    item.setTarget self
+    @statusItem.menu.insertItem_atIndex(NSMenuItem.separatorItem, 5)
+
+    item = @statusItem.menu.insertItemWithTitle_action_keyEquivalent_atIndex_("Quit", "quit:", "", 6)
     item.setTarget self
 
     fetch_projects

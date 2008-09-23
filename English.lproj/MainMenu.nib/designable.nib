@@ -626,32 +626,32 @@
 			<object class="NSCustomObject" id="692680910">
 				<string key="NSClassName">PreferencesController</string>
 			</object>
-			<object class="NSWindowTemplate" id="986381781">
+			<object class="NSWindowTemplate" id="656593551">
 				<int key="NSWindowStyleMask">8223</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{196, 206}, {361, 304}}</string>
+				<string key="NSWindowRect">{{1451, 764}, {361, 304}}</string>
 				<int key="NSWTFlags">603979776</int>
 				<string key="NSWindowTitle">Deployment Status</string>
 				<string key="NSWindowClass">NSPanel</string>
 				<nil key="NSViewClass"/>
 				<string key="NSWindowContentMinSize">{361, 304}</string>
-				<object class="NSView" key="NSWindowView" id="537242732">
+				<object class="NSView" key="NSWindowView" id="509786709">
 					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">-2147483392</int>
 					<object class="NSMutableArray" key="NSSubviews">
 						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSTextField" id="5419387">
-							<reference key="NSNextResponder" ref="537242732"/>
+						<object class="NSTextField" id="665021120">
+							<reference key="NSNextResponder" ref="509786709"/>
 							<int key="NSvFlags">274</int>
 							<string key="NSFrame">{{17, 57}, {324, 227}}</string>
-							<reference key="NSSuperview" ref="537242732"/>
+							<reference key="NSSuperview" ref="509786709"/>
 							<bool key="NSEnabled">YES</bool>
-							<object class="NSTextFieldCell" key="NSCell" id="441104402">
+							<object class="NSTextFieldCell" key="NSCell" id="529214944">
 								<int key="NSCellFlags">-1272840703</int>
 								<int key="NSCellFlags2">272760832</int>
 								<string key="NSContents"/>
 								<reference key="NSSupport" ref="26"/>
-								<reference key="NSControlView" ref="5419387"/>
+								<reference key="NSControlView" ref="665021120"/>
 								<bool key="NSDrawsBackground">YES</bool>
 								<object class="NSColor" key="NSBackgroundColor">
 									<int key="NSColorSpace">1</int>
@@ -858,7 +858,7 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">statusHudWindow</string>
 						<reference key="source" ref="306027223"/>
-						<reference key="destination" ref="986381781"/>
+						<reference key="destination" ref="656593551"/>
 					</object>
 					<int key="connectionID">504</int>
 				</object>
@@ -1268,35 +1268,35 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">494</int>
-						<reference key="object" ref="986381781"/>
+						<reference key="object" ref="656593551"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="537242732"/>
+							<reference ref="509786709"/>
 						</object>
 						<reference key="parent" ref="1049"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">495</int>
-						<reference key="object" ref="537242732"/>
+						<reference key="object" ref="509786709"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="5419387"/>
+							<reference ref="665021120"/>
 						</object>
-						<reference key="parent" ref="986381781"/>
+						<reference key="parent" ref="656593551"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">498</int>
-						<reference key="object" ref="5419387"/>
+						<reference key="object" ref="665021120"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="441104402"/>
+							<reference ref="529214944"/>
 						</object>
-						<reference key="parent" ref="537242732"/>
+						<reference key="parent" ref="509786709"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">499</int>
-						<reference key="object" ref="441104402"/>
-						<reference key="parent" ref="5419387"/>
+						<reference key="object" ref="529214944"/>
+						<reference key="parent" ref="665021120"/>
 					</object>
 				</object>
 			</object>
