@@ -6,11 +6,12 @@ module NotificationHub
     base.extend(ClassMethods)
   end
 
-  def initialize
+  def initialize(*args)
     registered_notifications = self.class.instance_variable_get(:@registered_notifications)
     registered_notifications.each do |on, method|
       OSX::NSNotificationCenter.defaultCenter.addObserver_selector_name_object self, "#{method.to_s}:", on.to_s, nil
     end unless registered_notifications.nil?
+    super(*args)
   end
   
   def method_missing(name, *args)
@@ -26,7 +27,7 @@ module NotificationHub
     
     def notify method, options
       @registered_notifications ||= {}
-      @registered_notifications[options[:when]] = method
+      @registered_notifications[options[:when].to_s.gsub(/ /, "_").to_sym] = method
     end
   end
 end
