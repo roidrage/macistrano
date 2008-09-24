@@ -9,6 +9,7 @@
 require 'osx/cocoa'
 require 'rubygems'
 require 'growl_notifier'
+require 'notification_hub'
 
 class ProjectController < OSX::NSWindowController
   include OSX
