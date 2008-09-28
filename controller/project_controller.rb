@@ -22,8 +22,9 @@ class ProjectController < OSX::NSWindowController
   notify :remove_loading, :when => :all_hosts_loaded
   notify :build_completed, :when => :stage_build_completed
   notify :build_running, :when => :stage_build_running
-
-  attr_reader :status_menu
+  notify :update_status_window, :when => :deployment_status_updated
+  
+  attr_reader :status_menu, :webistrano_controller
   attr_accessor :loaded, :growl_notifier
    
   ib_outlet :runTaskDialog
@@ -31,6 +32,7 @@ class ProjectController < OSX::NSWindowController
   ib_outlet :descriptionField
   ib_outlet :preferences_controller
   ib_outlet :statusHudWindow
+  ib_outlet :statusHudWindowText
   
   ib_action :show_about do
     NSApp.orderFrontStandardAboutPanel self
@@ -44,7 +46,7 @@ class ProjectController < OSX::NSWindowController
     @webistrano_controller = WebistranoController.alloc.init
     @status_menu = OSX::NSMenu.alloc.init
     show_preferences self if @preferences_controller.hosts.empty?
-    @webistrano_controller.hosts = @preferences_controller.hosts
+    webistrano_controller.hosts = @preferences_controller.hosts
     create_status_bar
     init_growl
     @statusHudWindow.setFloatingPanel true
@@ -58,7 +60,7 @@ class ProjectController < OSX::NSWindowController
   def remove_loading(notification)
     item = @statusItem.menu.itemWithTitle("Loading...")
     @statusItem.menu.removeItem(item) unless item.nil?
-    @webistrano_controller.setup_build_check_timer
+    webistrano_controller.setup_build_check_timer
   end
   
   def add_host(notification)
@@ -82,6 +84,7 @@ class ProjectController < OSX::NSWindowController
   def build_running(notification)
     set_status_icon("success-building")
     set_stage_submenu_enabled(notification.object, false, "success-building")
+    webistrano_controller.setup_deployment_status_timer(notification.object)
   end
   
   def set_stage_submenu_enabled(deployment, enabled, icon)
@@ -96,6 +99,11 @@ class ProjectController < OSX::NSWindowController
         item.setEnabled enabled
       end
     end
+  end
+  
+  def update_status_window(notification)
+    puts "hello"
+    @statusHudWindowText.setStringValue notification.object.log
   end
   
   def build_completed(notification)

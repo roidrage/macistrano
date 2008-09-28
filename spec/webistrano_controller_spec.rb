@@ -1,9 +1,8 @@
 require File.join(File.dirname(__FILE__), '/spec_helper')
 
-require 'rubygems'
-gem 'rspec'
 require 'webistrano_controller'
 require 'host'
+require 'deployment'
 
 describe WebistranoController, "when notified of loaded hosts" do
   before do
@@ -44,4 +43,24 @@ describe WebistranoController, "when notified of removed hosts" do
     @controller.hosts.should == nil
   end
   
+end
+
+describe WebistranoController, "when setting up the deployment check timer" do
+  before do
+    @controller = WebistranoController.new
+    @deployment = Deployment.new
+    @deployment.webistrano_id = 1
+  end
+  
+  it "should create a timer for the deployment" do
+    @controller.setup_deployment_status_timer @deployment
+    @controller.deployment_timers.should have(1).item
+  end
+  
+  it "should not create several timers for the same deployment" do
+    @controller.setup_deployment_status_timer @deployment
+    @controller.setup_deployment_status_timer @deployment
+    @controller.setup_deployment_status_timer @deployment
+    @controller.deployment_timers.should have(1).item
+  end
 end
