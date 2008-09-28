@@ -16,6 +16,7 @@
 		FE1191EC0DD89E120073164F /* task.rb in Resources */ = {isa = PBXBuildFile; fileRef = FE1191EB0DD89E120073164F /* task.rb */; };
 		FE17B5B60E0D7E0600682156 /* growl_notifier.rb in Resources */ = {isa = PBXBuildFile; fileRef = FE17B5B50E0D7E0600682156 /* growl_notifier.rb */; };
 		FE33BD980DDDFB3D003ACBAA /* load_operation.rb in Resources */ = {isa = PBXBuildFile; fileRef = FE33BD970DDDFB3D003ACBAA /* load_operation.rb */; };
+		FE3CB0830E902DF8009138A1 /* macistrano.icns in Resources */ = {isa = PBXBuildFile; fileRef = FE3CB0820E902DF8009138A1 /* macistrano.icns */; };
 		FE517D860DDF2B5B00CA0249 /* load_operation_queue.rb in Resources */ = {isa = PBXBuildFile; fileRef = FE517D850DDF2B5B00CA0249 /* load_operation_queue.rb */; };
 		FE5F03D90DC11830009DA75F /* webistrano_controller.rb in Resources */ = {isa = PBXBuildFile; fileRef = FE5F03D80DC11830009DA75F /* webistrano_controller.rb */; };
 		FE5F041F0DC11D5B009DA75F /* icon-failure.png in Resources */ = {isa = PBXBuildFile; fileRef = FE5F041E0DC11D5B009DA75F /* icon-failure.png */; };
@@ -71,6 +72,7 @@
 		FE1191EB0DD89E120073164F /* task.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = task.rb; path = model/task.rb; sourceTree = "<group>"; };
 		FE17B5B50E0D7E0600682156 /* growl_notifier.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = growl_notifier.rb; sourceTree = "<group>"; };
 		FE33BD970DDDFB3D003ACBAA /* load_operation.rb */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text.script.ruby; name = load_operation.rb; path = model/load_operation.rb; sourceTree = "<group>"; };
+		FE3CB0820E902DF8009138A1 /* macistrano.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = macistrano.icns; sourceTree = "<group>"; };
 		FE517D850DDF2B5B00CA0249 /* load_operation_queue.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = load_operation_queue.rb; path = model/load_operation_queue.rb; sourceTree = "<group>"; };
 		FE5F03D80DC11830009DA75F /* webistrano_controller.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = webistrano_controller.rb; path = controller/webistrano_controller.rb; sourceTree = "<group>"; };
 		FE5F041E0DC11D5B009DA75F /* icon-failure.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-failure.png"; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 		29B97314FDCFA39411CA2CEA /* macistrano */ = {
 			isa = PBXGroup;
 			children = (
+				FE3CB0820E902DF8009138A1 /* macistrano.icns */,
 				FEC9EB6A0DE099B900ABA9C8 /* model */,
 				FE68C24C0DD238260053FC90 /* Specs */,
 				080E96DDFE201D6D7F000001 /* Classes */,
@@ -319,6 +322,7 @@
 				FEC9EB7A0DE099B900ABA9C8 /* task.rb in Resources */,
 				FEA6558B0E042F0200410820 /* deployment.rb in Resources */,
 				FE17B5B60E0D7E0600682156 /* growl_notifier.rb in Resources */,
+				FE3CB0830E902DF8009138A1 /* macistrano.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
