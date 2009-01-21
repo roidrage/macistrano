@@ -52,7 +52,6 @@ class LoadOperation < OSX::NSOperation
   
   def connection_didReceiveResponse(connection, response)
     if response.statusCode == 404
-      puts "got 404 error"
       connection.cancel
       unless on_error.nil?
         @delegate.send(on_error.to_sym, @url, 404)

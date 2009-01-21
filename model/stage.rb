@@ -95,11 +95,9 @@ class Stage < OSX::NSObject
     elsif deployment.completed_at.nil?
       notify_stage_build_running(deployment)
     end
-    
   end
   
   def check_for_running_build_failed(url, error)
-    puts "Error checking for build"
     @build_check_running = false
   end
   

@@ -38,6 +38,10 @@ class WebistranoController < OSX::NSObject
     deployment_timers[notification.object.webistrano_id] = nil
   end
   
+  def setup_one_time_deployment_status_timer
+    OSX::NSTimer.scheduledTimerWithTimeInterval_target_selector_userInfo_repeats_(10.0, self, :check_for_running_builds, nil, false)
+  end
+  
   def check_for_running_builds
     notify_check_for_running_builds nil
   end

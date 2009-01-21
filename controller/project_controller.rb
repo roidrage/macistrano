@@ -37,6 +37,7 @@ class ProjectController < OSX::NSWindowController
   ib_outlet :statusHudWindow
   ib_outlet :statusHudWindowText
   ib_outlet :show_status_window_checkbox
+  ib_outlet :deployment_status_spinner
   
   ib_action :show_about do
     NSApp.orderFrontStandardAboutPanel self
@@ -49,7 +50,7 @@ class ProjectController < OSX::NSWindowController
   def awakeFromNib
     @webistrano_controller = WebistranoController.alloc.init
     @status_menu = OSX::NSMenu.alloc.init
-    show_preferences self if @preferences_controller.hosts.empty?
+    show_preferences(self) if @preferences_controller.hosts.empty?
     webistrano_controller.hosts = @preferences_controller.hosts
     create_status_bar
     init_growl
@@ -88,6 +89,7 @@ class ProjectController < OSX::NSWindowController
   def build_running(notification)
     set_status_icon("success-building")
     set_stage_submenu_enabled(notification.object, false, "success-building")
+    @deployment_status_spinner.startAnimation(self)
     webistrano_controller.setup_deployment_status_timer(notification.object)
   end
   
@@ -123,6 +125,7 @@ class ProjectController < OSX::NSWindowController
     end
     set_stage_submenu_enabled(notification.object, true, icon)
     set_status_icon icon
+    @deployment_status_spinner.stopAnimation(self)
   end
 
   def notify_growl(message, deployment)
@@ -176,6 +179,7 @@ class ProjectController < OSX::NSWindowController
       @statusHudWindow.close
     end
     @runTaskDialog.close
+    webistrano_controller.setup_one_time_deployment_status_timer
     reset_fields
   end
    

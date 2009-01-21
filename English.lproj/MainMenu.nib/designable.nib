@@ -10,7 +10,7 @@
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<integer value="437"/>
 			<integer value="424"/>
-			<integer value="509"/>
+			<integer value="510"/>
 			<integer value="406"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
@@ -658,7 +658,7 @@
 			<object class="NSWindowTemplate" id="289870146">
 				<int key="NSWindowStyleMask">8223</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{196, 207}, {571, 303}}</string>
+				<string key="NSWindowRect">{{196, 183}, {571, 327}}</string>
 				<int key="NSWTFlags">1677721600</int>
 				<string key="NSWindowTitle">Deployment Status</string>
 				<string key="NSWindowClass">NSPanel</string>
@@ -673,14 +673,18 @@
 						<object class="NSTextField" id="135332522">
 							<reference key="NSNextResponder" ref="84330098"/>
 							<int key="NSvFlags">274</int>
-							<string key="NSFrame">{{20, 20}, {531, 263}}</string>
+							<string key="NSFrame">{{20, 44}, {531, 263}}</string>
 							<reference key="NSSuperview" ref="84330098"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="2967395">
-								<int key="NSCellFlags">-1808662975</int>
+								<int key="NSCellFlags">-2079195584</int>
 								<int key="NSCellFlags2">272630784</int>
 								<string key="NSContents"/>
-								<reference key="NSSupport" ref="679626468"/>
+								<object class="NSFont" key="NSSupport">
+									<string key="NSName">LucidaGrande</string>
+									<double key="NSSize">1.000000e+01</double>
+									<int key="NSfFlags">16</int>
+								</object>
 								<reference key="NSControlView" ref="135332522"/>
 								<bool key="NSDrawsBackground">YES</bool>
 								<object class="NSColor" key="NSBackgroundColor">
@@ -693,8 +697,18 @@
 								</object>
 							</object>
 						</object>
+						<object class="NSProgressIndicator" id="423011419">
+							<reference key="NSNextResponder" ref="84330098"/>
+							<int key="NSvFlags">1292</int>
+							<object class="NSPSMatrix" key="NSDrawMatrix"/>
+							<string key="NSFrame">{{20, 20}, {99, 12}}</string>
+							<reference key="NSSuperview" ref="84330098"/>
+							<int key="NSpiFlags">24842</int>
+							<double key="NSMinValue">1.600000e+01</double>
+							<double key="NSMaxValue">1.000000e+02</double>
+						</object>
 					</object>
-					<string key="NSFrameSize">{571, 303}</string>
+					<string key="NSFrameSize">{571, 327}</string>
 					<reference key="NSSuperview"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1920, 1178}}</string>
@@ -904,6 +918,14 @@
 						<reference key="destination" ref="709926930"/>
 					</object>
 					<int key="connectionID">517</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">deployment_status_spinner</string>
+						<reference key="source" ref="306027223"/>
+						<reference key="destination" ref="423011419"/>
+					</object>
+					<int key="connectionID">519</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1325,6 +1347,7 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="135332522"/>
+							<reference ref="423011419"/>
 						</object>
 						<reference key="parent" ref="289870146"/>
 					</object>
@@ -1355,6 +1378,11 @@
 						<int key="objectID">516</int>
 						<reference key="object" ref="433510556"/>
 						<reference key="parent" ref="709926930"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">518</int>
+						<reference key="object" ref="423011419"/>
+						<reference key="parent" ref="84330098"/>
 					</object>
 				</object>
 			</object>
@@ -1445,10 +1473,15 @@
 					<string>509.windowTemplate.hasMinSize</string>
 					<string>509.windowTemplate.minSize</string>
 					<string>510.IBPluginDependency</string>
+					<string>510.IBViewIntegration.shadowBlurRadius</string>
+					<string>510.IBViewIntegration.shadowColor</string>
+					<string>510.IBViewIntegration.shadowOffsetHeight</string>
+					<string>510.IBViewIntegration.shadowOffsetWidth</string>
 					<string>511.IBPluginDependency</string>
 					<string>512.IBPluginDependency</string>
 					<string>515.IBPluginDependency</string>
 					<string>516.IBPluginDependency</string>
+					<string>518.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1528,12 +1561,17 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<reference ref="5"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{305, 679}, {571, 303}}</string>
+					<string>{{522, 127}, {571, 327}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{305, 679}, {571, 303}}</string>
+					<string>{{522, 127}, {571, 327}}</string>
 					<reference ref="6"/>
 					<reference ref="5"/>
 					<string>{571, 303}</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<real value="0.000000e+00"/>
+					<reference ref="1011511934"/>
+					<real value="0.000000e+00"/>
+					<real value="0.000000e+00"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1561,7 +1599,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">517</int>
+			<int key="maxID">519</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1642,6 +1680,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSMutableArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>deployment_status_spinner</string>
 							<string>descriptionField</string>
 							<string>preferences_controller</string>
 							<string>runTaskDialog</string>
@@ -1652,6 +1691,7 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
