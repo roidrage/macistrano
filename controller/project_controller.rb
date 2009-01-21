@@ -102,7 +102,6 @@ class ProjectController < OSX::NSWindowController
   end
   
   def update_status_window(notification)
-    puts "hello"
     @statusHudWindowText.setStringValue notification.object.log
   end
   
@@ -216,7 +215,7 @@ class ProjectController < OSX::NSWindowController
    
   def create_status_bar
     @statusItem = OSX::NSStatusBar.systemStatusBar.statusItemWithLength(OSX::NSVariableStatusItemLength)
-    set_status_icon 'success'
+    set_status_icon 'webistrano-small'
     @statusItem.setHighlightMode true
     @statusItem.setMenu @status_menu
     @statusItem.setTarget self

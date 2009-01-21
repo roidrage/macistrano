@@ -24,6 +24,7 @@
 		FE5F04240DC11D75009DA75F /* icon-success-building.png in Resources */ = {isa = PBXBuildFile; fileRef = FE5F04220DC11D75009DA75F /* icon-success-building.png */; };
 		FE5F04250DC11D75009DA75F /* icon-success.png in Resources */ = {isa = PBXBuildFile; fileRef = FE5F04230DC11D75009DA75F /* icon-success.png */; };
 		FE68C2D40DD24F240053FC90 /* preferences_controller.rb in Resources */ = {isa = PBXBuildFile; fileRef = FE68C2D30DD24F240053FC90 /* preferences_controller.rb */; };
+		FE874BA70F27330600AE5935 /* icon-webistrano-small.png in Resources */ = {isa = PBXBuildFile; fileRef = FE874BA60F27330600AE5935 /* icon-webistrano-small.png */; };
 		FE9BA8690DC65FA8008EF6F8 /* host.rb in Resources */ = {isa = PBXBuildFile; fileRef = FE9BA8680DC65FA8008EF6F8 /* host.rb */; };
 		FEA6558B0E042F0200410820 /* deployment.rb in Resources */ = {isa = PBXBuildFile; fileRef = FEA6558A0E042F0200410820 /* deployment.rb */; };
 		FEA76B830DD7547D00D171BE /* Security.bridgesupport in Resources */ = {isa = PBXBuildFile; fileRef = FEA76B820DD7547D00D171BE /* Security.bridgesupport */; };
@@ -66,7 +67,7 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		4DDCA7110ACC9A6100E082CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4DDCA7120ACC9A6100E082CE /* macistrano.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = macistrano.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4DDCA7120ACC9A6100E082CE /* Macistrano.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Macistrano.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8F5E24E03AEB6EC03A81C6F /* RubyCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RubyCocoa.framework; path = /System/Library/Frameworks/RubyCocoa.framework; sourceTree = "<absolute>"; };
 		E8F5E25803AEB7C803A81C6F /* rb_main.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = rb_main.rb; sourceTree = "<group>"; };
 		FE1191EB0DD89E120073164F /* task.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = task.rb; path = model/task.rb; sourceTree = "<group>"; };
@@ -83,6 +84,7 @@
 		FE68C2630DD23FC00053FC90 /* host_spec.rb */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text.script.ruby; name = host_spec.rb; path = spec/host_spec.rb; sourceTree = "<group>"; };
 		FE68C2640DD23FC00053FC90 /* project_spec.rb */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text.script.ruby; name = project_spec.rb; path = spec/project_spec.rb; sourceTree = "<group>"; };
 		FE68C2D30DD24F240053FC90 /* preferences_controller.rb */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text.script.ruby; name = preferences_controller.rb; path = controller/preferences_controller.rb; sourceTree = "<group>"; };
+		FE874BA60F27330600AE5935 /* icon-webistrano-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-webistrano-small.png"; sourceTree = "<group>"; };
 		FE9BA8680DC65FA8008EF6F8 /* host.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = host.rb; path = model/host.rb; sourceTree = "<group>"; };
 		FEA6558A0E042F0200410820 /* deployment.rb */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text.script.ruby; path = deployment.rb; sourceTree = "<group>"; };
 		FEA76B820DD7547D00D171BE /* Security.bridgesupport */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text.xml; path = Security.bridgesupport; sourceTree = "<group>"; };
@@ -155,7 +157,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4DDCA7120ACC9A6100E082CE /* macistrano.app */,
+				4DDCA7120ACC9A6100E082CE /* Macistrano.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -163,6 +165,7 @@
 		29B97314FDCFA39411CA2CEA /* macistrano */ = {
 			isa = PBXGroup;
 			children = (
+				FE874BA60F27330600AE5935 /* icon-webistrano-small.png */,
 				FE3CB0820E902DF8009138A1 /* macistrano.icns */,
 				FEC9EB6A0DE099B900ABA9C8 /* model */,
 				FE68C24C0DD238260053FC90 /* Specs */,
@@ -250,9 +253,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		4DDCA7030ACC9A6100E082CE /* macistrano */ = {
+		4DDCA7030ACC9A6100E082CE /* Macistrano */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4DDCA70E0ACC9A6100E082CE /* Build configuration list for PBXNativeTarget "macistrano" */;
+			buildConfigurationList = 4DDCA70E0ACC9A6100E082CE /* Build configuration list for PBXNativeTarget "Macistrano" */;
 			buildPhases = (
 				FEA76B850DD754D700D171BE /* Copy Frameworks */,
 				4DDCA7040ACC9A6100E082CE /* Headers */,
@@ -264,10 +267,10 @@
 			);
 			dependencies = (
 			);
-			name = macistrano;
+			name = Macistrano;
 			productInstallPath = "$(HOME)/Applications";
-			productName = macistrano;
-			productReference = 4DDCA7120ACC9A6100E082CE /* macistrano.app */;
+			productName = Macistrano;
+			productReference = 4DDCA7120ACC9A6100E082CE /* Macistrano.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -282,7 +285,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4DDCA7030ACC9A6100E082CE /* macistrano */,
+				4DDCA7030ACC9A6100E082CE /* Macistrano */,
 			);
 		};
 /* End PBXProject section */
@@ -323,6 +326,7 @@
 				FEA6558B0E042F0200410820 /* deployment.rb in Resources */,
 				FE17B5B60E0D7E0600682156 /* growl_notifier.rb in Resources */,
 				FE3CB0830E902DF8009138A1 /* macistrano.icns in Resources */,
+				FE874BA70F27330600AE5935 /* icon-webistrano-small.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,6 +366,8 @@
 		4D7A7B580ABF745500C2D4C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
@@ -398,7 +404,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				PRODUCT_NAME = macistrano;
+				PRODUCT_NAME = Macistrano;
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = YES;
 			};
@@ -418,7 +424,7 @@
 				GCC_MODEL_TUNING = G5;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				PRODUCT_NAME = macistrano;
+				PRODUCT_NAME = Macistrano;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -435,7 +441,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4DDCA70E0ACC9A6100E082CE /* Build configuration list for PBXNativeTarget "macistrano" */ = {
+		4DDCA70E0ACC9A6100E082CE /* Build configuration list for PBXNativeTarget "Macistrano" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4DDCA70F0ACC9A6100E082CE /* Debug */,
