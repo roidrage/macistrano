@@ -57,6 +57,8 @@ describe ProjectController, "when running a task" do
     @controller.instance_variable_set(:@statusHudWindow, @status_window)
     @run_task_dialog = stub(:run_task_dialog, :close => nil)
     @controller.instance_variable_set(:@runTaskDialog, @run_task_dialog)
+    @status_window_text = stub(:status_window_text, :setStringValue => nil)
+    @controller.instance_variable_set(:@statusHudWindowText, @status_window_text)
     @webistrano_controller = WebistranoController.alloc.init
     @controller.instance_variable_set(:@webistrano_controller, @webistrano_controller)
   end
@@ -92,6 +94,11 @@ describe ProjectController, "when running a task" do
     @webistrano_controller.should_receive(:setup_one_time_deployment_status_timer)
     @controller.runTask
   end
+  
+  it "should reset the status window" do
+    @status_window_text.should_receive(:setStringValue).with("")
+    @controller.runTask
+  end
 end
 
 describe ProjectController, "when awaking from nib" do
@@ -124,10 +131,17 @@ describe ProjectController, "when notified of a completed build" do
     @controller.stub!(:set_stage_submenu_enabled)
     @controller.stub!(:set_status_icon)
     @deployment = Deployment.alloc.init
+    @webistrano_controller = WebistranoController.alloc.init
+    @controller.instance_variable_set(:@webistrano_controller, @webistrano_controller)
   end
   
   it "should stop the spinner animation" do
     @spinner.should_receive(:stopAnimation).with(@controller)
     @controller.build_completed(stub(:notification, :object => @deployment))
+  end
+  
+  it "should stop the deployment update timer" do
+    @webistrano_controller.should_receive(:remove_deployment_timer)
+    @controller.build_completed(stub(:notification, :object => @deployment)) 
   end
 end

@@ -13,7 +13,7 @@ class Deployment < OSX::NSObject
     LoadOperationQueue.queue_request(deployment_url, self, :username => stage.project.host.username, :password => stage.project.host.password, :on_success => :deployment_update_finished, :on_error => :deployment_update_failed)
   end
   
-  def deployment_update_failed(data)
+  def deployment_update_failed(data, error)
   end
   
   def deployment_update_finished(data)

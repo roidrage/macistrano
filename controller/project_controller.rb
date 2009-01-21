@@ -125,6 +125,7 @@ class ProjectController < OSX::NSWindowController
     end
     set_stage_submenu_enabled(notification.object, true, icon)
     set_status_icon icon
+    @webistrano_controller.remove_deployment_timer(notification)
     @deployment_status_spinner.stopAnimation(self)
   end
 
@@ -180,6 +181,7 @@ class ProjectController < OSX::NSWindowController
     end
     @runTaskDialog.close
     webistrano_controller.setup_one_time_deployment_status_timer
+    @statusHudWindowText.setStringValue ""
     reset_fields
   end
    

@@ -17,7 +17,6 @@ class WebistranoController < OSX::NSObject
   notify :host_loaded, :when => :host_fully_loaded
   notify :host_loaded, :when => :host_load_failed
   notify :remove_host, :when => :host_removed
-  notify :remove_deployment_timer, :when => :deployment_status_updated
 
   def setup_build_check_timer
     @build_status_timer = OSX::NSTimer.scheduledTimerWithTimeInterval_target_selector_userInfo_repeats_(30.0, self, :check_for_running_builds, nil, true)
@@ -35,11 +34,12 @@ class WebistranoController < OSX::NSObject
   end
 
   def remove_deployment_timer(notification)
+    deployment_timers[notification.object.webistrano_id].invalidate if deployment_timers[notification.object.webistrano_id]
     deployment_timers[notification.object.webistrano_id] = nil
   end
   
   def setup_one_time_deployment_status_timer
-    OSX::NSTimer.scheduledTimerWithTimeInterval_target_selector_userInfo_repeats_(10.0, self, :check_for_running_builds, nil, false)
+    OSX::NSTimer.scheduledTimerWithTimeInterval_target_selector_userInfo_repeats_(5.0, self, :check_for_running_builds, nil, false)
   end
   
   def check_for_running_builds
