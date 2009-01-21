@@ -9,7 +9,7 @@ require 'pathname'
 # Application own Settings
 APPNAME               = "Macistrano"
 TARGET                = "#{APPNAME}.app"
-#APPVERSION           = "rev#{`svn info`[/Revision: (\d+)/, 1]}"
+APPVERSION            = "0.1.0"
 APPVERSION            = Time.now.strftime("%Y-%m-%d")
 PUBLISH               = 'yourname@yourhost:path'
 DEFAULT_TARGET        = 'macistrano'

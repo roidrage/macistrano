@@ -30,12 +30,12 @@ class ProjectController < OSX::NSWindowController
   attr_reader :status_menu, :webistrano_controller
   attr_accessor :loaded, :growl_notifier
    
-  ib_outlet :runTaskDialog
-  ib_outlet :taskField
-  ib_outlet :descriptionField
+  ib_outlet :run_task_dialog
+  ib_outlet :task_field
+  ib_outlet :description_field
   ib_outlet :preferences_controller
-  ib_outlet :statusHudWindow
-  ib_outlet :statusHudWindowText
+  ib_outlet :status_hud_window
+  ib_outlet :status_hud_window_text
   ib_outlet :show_status_window_checkbox
   ib_outlet :deployment_status_spinner
   
@@ -44,7 +44,7 @@ class ProjectController < OSX::NSWindowController
   end
   
   ib_action :show_status do
-    @statusHudWindow.makeKeyAndOrderFront(self)
+    @status_hud_window.makeKeyAndOrderFront(self)
   end
   
   def awakeFromNib
@@ -54,7 +54,7 @@ class ProjectController < OSX::NSWindowController
     webistrano_controller.hosts = @preferences_controller.hosts
     create_status_bar
     init_growl
-    @statusHudWindow.setFloatingPanel true
+    @status_hud_window.setFloatingPanel true
   end
   
   def init_growl
@@ -108,7 +108,7 @@ class ProjectController < OSX::NSWindowController
   end
   
   def update_status_window(notification)
-    @statusHudWindowText.setStringValue notification.object.log
+    @status_hud_window_text.setStringValue notification.object.log
   end
   
   def build_completed(notification)
@@ -152,12 +152,12 @@ class ProjectController < OSX::NSWindowController
   
   def clicked(sender)
     @selected_stage = sender.representedObject.stage
-    @taskField.setStringValue sender.representedObject.name
-    NSApp.activateIgnoringOtherApps true
-    @runTaskDialog.makeFirstResponder @descriptionField
-    @runTaskDialog.setTitle("Run Task")
-    @runTaskDialog.makeKeyAndOrderFront(self)
-    @runTaskDialog.center
+    @task_field.setStringValue(sender.representedObject.name)
+    NSApp.activateIgnoringOtherApps(true)
+    @run_task_dialog.makeFirstResponder(@description_field)
+    @run_task_dialog.setTitle("Run Task")
+    @run_task_dialog.makeKeyAndOrderFront(self)
+    @run_task_dialog.center
   end
   
   def add_projects(notification)
@@ -169,25 +169,26 @@ class ProjectController < OSX::NSWindowController
     end
   end
   
-  ib_action :runTask do
-    taskName = @taskField.stringValue.to_s
-    description = @descriptionField.stringValue.to_s
+  def run_task(sender = nil)
+    taskName = @task_field.stringValue.to_s
+    description = @description_field.stringValue.to_s
     @selected_stage.run_stage taskName, description
     case @show_status_window_checkbox.state.to_i
     when 1:
       show_status
     when 0:
-      @statusHudWindow.close
+      @status_hud_window.close
     end
-    @runTaskDialog.close
+    @run_task_dialog.close
     webistrano_controller.setup_one_time_deployment_status_timer
     @deployment_status_spinner.startAnimation(self)
-    @statusHudWindowText.setStringValue("")
+    @status_hud_window_text.setStringValue("")
     reset_fields
   end
+  ib_action :run_task
    
   ib_action :closeTaskWindow do
-    @runTaskDialog.close
+    @run_task_dialog.close
     reset_fields
   end
   
@@ -228,8 +229,8 @@ class ProjectController < OSX::NSWindowController
   private
   
   def reset_fields
-    @taskField.setStringValue ""
-    @descriptionField.setStringValue ""
+    @task_field.setStringValue ""
+    @description_field.setStringValue ""
   end
    
   def create_status_bar

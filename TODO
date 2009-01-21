@@ -1,10 +1,13 @@
-+ Poll stage build status regularly
-+ Mark stage build status in status bar
-+ Add HTTP timeouts
-* Set check cycle
+* Add HTTP timeouts
 * Set default timeout
-+ Add growl notifications
-+ Open preferences when no hosts configured
-* Floating window to watch deployment status
 * Display notification when a host is not reachable, or throws an error, then disable it, but recheck it on every run, and don't display a notification when it's still failing
-* Update changed project data in the menu
+* Update changed project data in the menu, project refresh
+
+Done:
+
+* Floating window to watch deployment status
+* Set check cycle
+* Mark stage build status in status bar
+* Poll stage build status regularly
+* Open preferences when no hosts configured
+* Add growl notifications
