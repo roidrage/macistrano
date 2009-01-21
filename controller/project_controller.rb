@@ -15,7 +15,10 @@ class ProjectController < OSX::NSWindowController
   include OSX
   include NotificationHub
   
-  GROWL_MESSAGE_TYPES = {:deployment_complete => "Deployment completed", :deployment_started => "Deployment started", :deployment_failed => "Deployment failed"}
+  GROWL_MESSAGE_TYPES = {:deployment_complete => "Deployment completed",
+                         :deployment_started => "Deployment started",
+                         :deployment_failed => "Deployment failed",
+                         :deployment_canceled => "Deployment cancelled"}
   
   notify :add_host, :when => :host_fully_loaded
   notify :remove_host, :when => :host_removed
@@ -33,6 +36,7 @@ class ProjectController < OSX::NSWindowController
   ib_outlet :preferences_controller
   ib_outlet :statusHudWindow
   ib_outlet :statusHudWindowText
+  ib_outlet :show_status_window_checkbox
   
   ib_action :show_about do
     NSApp.orderFrontStandardAboutPanel self
@@ -106,14 +110,16 @@ class ProjectController < OSX::NSWindowController
   end
   
   def build_completed(notification)
-    icon = ""
-    case notification.object.success
-    when true:
+    icon = case notification.object.status
+    when "success":
       notify_growl GROWL_MESSAGE_TYPES[:deployment_complete], notification.object
-      icon = "success"
-    when false:
+      "success"
+    when "canceled":
+      notify_growl GROWL_MESSAGE_TYPES[:deployment_canceled], notification.object
+      "canceled"
+    when "failed":
       notify_growl GROWL_MESSAGE_TYPES[:deployment_failed], notification.object
-      icon = "failure"
+      "failure"
     end
     set_stage_submenu_enabled(notification.object, true, icon)
     set_status_icon icon
@@ -141,7 +147,7 @@ class ProjectController < OSX::NSWindowController
   end
   
   def clicked(sender)
-    @runStage = sender.representedObject.stage
+    @selected_stage = sender.representedObject.stage
     @taskField.setStringValue sender.representedObject.name
     NSApp.activateIgnoringOtherApps true
     @runTaskDialog.makeFirstResponder @descriptionField
@@ -162,7 +168,13 @@ class ProjectController < OSX::NSWindowController
   ib_action :runTask do
     taskName = @taskField.stringValue.to_s
     description = @descriptionField.stringValue.to_s
-    @runStage.run_stage taskName, description
+    @selected_stage.run_stage taskName, description
+    case @show_status_window_checkbox.state.to_i
+    when 1:
+      show_status
+    when 0:
+      @statusHudWindow.close
+    end
     @runTaskDialog.close
     reset_fields
   end
@@ -222,7 +234,7 @@ class ProjectController < OSX::NSWindowController
     update_menu
   end
    
-  def update_menu hosts_list = nil
+  def update_menu(hosts_list = nil)
     item = NSMenuItem.alloc.initWithTitle_action_keyEquivalent("Loading...", nil, "")
     item.setEnabled false
     @statusItem.menu.insertItem_atIndex(item, 0)

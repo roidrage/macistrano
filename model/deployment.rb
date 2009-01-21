@@ -3,7 +3,7 @@ require 'notification_hub'
 
 class Deployment < OSX::NSObject
   include NotificationHub
-  attr_accessor :webistrano_id, :task, :created_at, :completed_at, :success, :stage, :log
+  attr_accessor :webistrano_id, :task, :created_at, :completed_at, :success, :stage, :log, :status
   
   def deployment_url
     "#{stage.project.host.url}/projects/#{stage.project.webistrano_id}/stages/#{stage.webistrano_id}/deployments/#{webistrano_id}.xml"

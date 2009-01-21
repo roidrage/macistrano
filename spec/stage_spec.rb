@@ -104,6 +104,7 @@ describe Stage, "when converting xml to a  deployment" do
   <task>deploy:start</task>
   <updated-at type="datetime">2008-05-18T19:31:00Z</updated-at>
   <user-id type="integer">1</user-id>
+  <status>success</status>
 </deployment>
 END
   end
@@ -148,6 +149,11 @@ END
     deployment.success.should be_false
   end
   
+  it "should set the status" do
+    deployment = @stage.deployment_from_xml(@xml_data)
+    deployment.status.should == "success"
+  end
+  
   it "should not set completed_at when it's nil" do
     @xml_data = <<END
 <?xml version="1.0" encoding="UTF-8"?>
@@ -170,6 +176,7 @@ END
   <task>deploy:start</task>
   <updated-at type="datetime">2008-05-18T19:31:00Z</updated-at>
   <user-id type="integer">1</user-id>
+  <status>success</status>
 </deployment>
 END
     deployment = @stage.deployment_from_xml(@xml_data)
@@ -184,7 +191,7 @@ describe Stage, "when checking the deployment status was successful" do
   end
   
   it "should notify of a completed deployment if it was successful and has completed since the last check" do
-    @deployment.success = 1
+    @deployment.success = "succss"
     @deployment.completed_at = Time.now
     @stage.last_checked = Time.now - 20
     @stage.stub!(:deployment_from_xml).and_return @deployment

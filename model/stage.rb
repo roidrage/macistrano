@@ -113,6 +113,7 @@ class Stage < OSX::NSObject
       deployment.created_at = DateTime.parse((deployment_data/:"created-at").text)
       deployment.log = (deployment_data/:log).text
       deployment.success = (deployment_data/:success).text == "1"
+      deployment.status = (deployment_data/:status).text
       deployment.stage = self
     end
     deployment
