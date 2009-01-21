@@ -61,6 +61,8 @@ describe ProjectController, "when running a task" do
     @controller.instance_variable_set(:@statusHudWindowText, @status_window_text)
     @webistrano_controller = WebistranoController.alloc.init
     @controller.instance_variable_set(:@webistrano_controller, @webistrano_controller)
+    @deployment_status_spinner = stub(:deployment_status_spinner, :startAnimation => nil)
+    @controller.instance_variable_set(:@deployment_status_spinner, @deployment_status_spinner)
   end
   
   it "should run the selected stage" do
@@ -97,6 +99,11 @@ describe ProjectController, "when running a task" do
   
   it "should reset the status window" do
     @status_window_text.should_receive(:setStringValue).with("")
+    @controller.runTask
+  end
+  
+  it "should activate the progress indicator" do
+    @deployment_status_spinner.should_receive(:startAnimation)
     @controller.runTask
   end
 end

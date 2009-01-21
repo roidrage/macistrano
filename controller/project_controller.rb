@@ -181,7 +181,8 @@ class ProjectController < OSX::NSWindowController
     end
     @runTaskDialog.close
     webistrano_controller.setup_one_time_deployment_status_timer
-    @statusHudWindowText.setStringValue ""
+    @deployment_status_spinner.startAnimation(self)
+    @statusHudWindowText.setStringValue("")
     reset_fields
   end
    
