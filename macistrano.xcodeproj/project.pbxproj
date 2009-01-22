@@ -44,6 +44,7 @@
 		FEC9EB790DE099B900ABA9C8 /* stage.rb in Resources */ = {isa = PBXBuildFile; fileRef = FEC9EB710DE099B900ABA9C8 /* stage.rb */; };
 		FEC9EB7A0DE099B900ABA9C8 /* task.rb in Resources */ = {isa = PBXBuildFile; fileRef = FEC9EB720DE099B900ABA9C8 /* task.rb */; };
 		FEE6BA300F2879F700402101 /* growl_support.rb in Resources */ = {isa = PBXBuildFile; fileRef = FEE6BA2F0F2879F700402101 /* growl_support.rb */; };
+		FEE6BA540F2892FC00402101 /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = FEE6BA530F2892FC00402101 /* Credits.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -105,6 +106,7 @@
 		FEC9EB710DE099B900ABA9C8 /* stage.rb */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text.script.ruby; path = stage.rb; sourceTree = "<group>"; };
 		FEC9EB720DE099B900ABA9C8 /* task.rb */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text.script.ruby; path = task.rb; sourceTree = "<group>"; };
 		FEE6BA2F0F2879F700402101 /* growl_support.rb */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text.script.ruby; name = growl_support.rb; path = model/growl_support.rb; sourceTree = "<group>"; };
+		FEE6BA530F2892FC00402101 /* Credits.html */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text.html; path = Credits.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 		29B97314FDCFA39411CA2CEA /* macistrano */ = {
 			isa = PBXGroup;
 			children = (
+				FEE6BA530F2892FC00402101 /* Credits.html */,
 				FE874BA60F27330600AE5935 /* icon-webistrano-small.png */,
 				FE3CB0820E902DF8009138A1 /* macistrano.icns */,
 				FEC9EB6A0DE099B900ABA9C8 /* model */,
@@ -331,6 +334,7 @@
 				FE3CB0830E902DF8009138A1 /* macistrano.icns in Resources */,
 				FE874BA70F27330600AE5935 /* icon-webistrano-small.png in Resources */,
 				FEE6BA300F2879F700402101 /* growl_support.rb in Resources */,
+				FEE6BA540F2892FC00402101 /* Credits.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

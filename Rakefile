@@ -10,9 +10,8 @@ require 'pathname'
 APPNAME               = "Macistrano"
 TARGET                = "#{APPNAME}.app"
 APPVERSION            = "0.1.0"
-APPVERSION            = Time.now.strftime("%Y-%m-%d")
 PUBLISH               = 'yourname@yourhost:path'
-DEFAULT_TARGET        = 'macistrano'
+DEFAULT_TARGET        = 'Macistrano'
 DEFAULT_CONFIGURATION = 'Release'
 RELEASE_CONFIGURATION = 'Release'
 
@@ -67,14 +66,17 @@ end
 desc "Package the application"
 task :package => ["xcode:build:#{DEFAULT_TARGET}:#{RELEASE_CONFIGURATION}", "pkg"] do
   name = "#{APPNAME}.#{APPVERSION}"
-  mkdir "image"
-  sh %{rubycocoa standaloneify "build/#{DEFAULT_CONFIGURATION}/#{APPNAME}.app" "image/#{APPNAME}.app"}
-  puts 'Creating Image...'
+  mkdir_p "image"
+  mkdir_p "releases"
+  sh %{ruby ~/bin/standaloneify -d "image/#{APPNAME}.app" "build/#{DEFAULT_CONFIGURATION}/#{APPNAME}.app"}
+  puts 'Creating package...'
   sh %{
-  hdiutil create -volname '#{name}' -srcfolder image '#{name}'.dmg
-  rm -rf image
-  mv '#{name}.dmg' pkg
+    cd image
+    zip -r #{name}.zip #{APPNAME}.app
+    cd ..
+    mv image/'#{name}.zip' releases
   }
+  sh %{rm -rf image/#{APPNAME}.app}
 end
 
 directory 'pkg'

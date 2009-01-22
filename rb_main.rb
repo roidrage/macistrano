@@ -3,8 +3,12 @@
 #  macistrano
 #
 #  Created by Pom on 22.04.08.
-#  Copyright (c) 2008 __MyCompanyName__. All rights reserved.
+#  Copyright (c) 2008, 2009 Mathias Meyer. All rights reserved.
 #
+
+if defined?(COCOA_APP_RESOURCES_DIR)
+  $LOAD_PATH << File.join(File.dirname(COCOA_APP_RESOURCES_DIR),"Frameworks","RubyCocoa.framework", "Resources", "ruby")
+end
 
 require 'osx/cocoa'
 
