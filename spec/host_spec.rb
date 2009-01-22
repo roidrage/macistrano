@@ -153,8 +153,25 @@ describe Host, "version_eql_or_higher" do
   end
 end
 
-describe Host, "when checking for the host version" do
+describe Host, "when setting the url" do
+  before(:each) do
+    @host = Host.new
+  end
   
+  it "should append http:// if url is not complete" do
+    @host.url = "webistrano.local"
+    @host.url.should == "http://webistrano.local"
+  end
+  
+  it "should not append http:// if url has http:// set" do
+    @host.url = "http://webistrano.local"
+    @host.url.should == "http://webistrano.local"
+  end
+  
+  it "should not append http:// if url has https:// set" do
+    @host.url = "https://webistrano.local"
+    @host.url.should == "https://webistrano.local"
+  end
 end
 
 describe Host, "when notified that a project finished loading" do

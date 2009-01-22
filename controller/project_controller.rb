@@ -155,7 +155,6 @@ class ProjectController < OSX::NSWindowController
     @task_field.setStringValue(sender.representedObject.name)
     NSApp.activateIgnoringOtherApps(true)
     @run_task_dialog.makeFirstResponder(@description_field)
-    @run_task_dialog.setTitle("Run Task")
     @run_task_dialog.makeKeyAndOrderFront(self)
     @run_task_dialog.center
   end

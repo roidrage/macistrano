@@ -24,8 +24,13 @@ class Host < OSX::NSObject
     @projects = []
     self
   end
+
+  def url=(url)
+    url = "http://#{url}" unless url.index("http://") == 0 or url.index("https://") == 0
+    @url = url
+  end
   
-  def read_xml path
+  def read_xml(path)
     io = open("#{url}#{path}", :http_basic_authentication => [username, password])
     io.read
   end

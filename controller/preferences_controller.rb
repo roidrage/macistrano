@@ -9,15 +9,13 @@ class PreferencesController < OSX::NSWindowController
   notify :host_version_not_accepted, :when => :host_version_inacceptable
   notify :host_credentials_invalid, :when => :host_credentials_invalid
   
-  ib_outlet :preferencesWindow
-  ib_outlet :tableView
-  ib_outlet :newHostSheet
-  ib_outlet :addButton
-  ib_outlet :cancelButton
+  ib_outlet :preferences_window
+  ib_outlet :table_view
+  ib_outlet :new_host_sheet
   ib_outlet :spinner
-  ib_outlet :hostField
-  ib_outlet :usernameField
-  ib_outlet :passwordField
+  ib_outlet :host_field
+  ib_outlet :username_field
+  ib_outlet :password_field
   
   def init
     init_hosts
@@ -53,53 +51,52 @@ class PreferencesController < OSX::NSWindowController
   def showPreferences
     NSApp.activateIgnoringOtherApps true
     self.showWindow(self)
-    @preferencesWindow.makeKeyAndOrderFront(self)
-    @preferencesWindow.setTitle("Preferences")
+    @preferences_window.makeKeyAndOrderFront(self)
   end
   
-  def numberOfRowsInTableView(tableView)
+  def numberOfRowsInTableView(table_view)
     @hosts.size
   end
   
-  def tableView_objectValueForTableColumn_row(tableView, column, row)
+  def tableView_objectValueForTableColumn_row(table_view, column, row)
     @hosts[row].url
   end
   
   ib_action :add do
-    NSApp.beginSheet_modalForWindow_modalDelegate_didEndSelector_contextInfo(@newHostSheet, @preferencesWindow, nil, nil, nil)
-    NSApp.endSheet @newHostSheet
+    NSApp.beginSheet_modalForWindow_modalDelegate_didEndSelector_contextInfo(@new_host_sheet, @preferences_window, nil, nil, nil)
+    NSApp.endSheet @new_host_sheet
   end
   
   ib_action :addFromSheet do
     @spinner.startAnimation(self)
     @spinner.setHidden(false)
     host = Host.new
-    host.url = @hostField.stringValue
-    host.username = @usernameField.stringValue
-    host.password = @passwordField.stringValue.to_s
+    host.url = @host_field.stringValue
+    host.username = @username_field.stringValue
+    host.password = @password_field.stringValue.to_s
     host.schedule_version_check
   end
 
   def host_version_accepted(notification)
     # ignore messages to instances not connected to the nib. weird side effect of having an instance
     # of the controller in the project_controller
-    return if @hostField.nil?
+    return if @host_field.nil?
     host = notification.object
     add_host host
-    @newHostSheet.orderOut self
-    @tableView.reloadData
+    @new_host_sheet.orderOut self
+    @table_view.reloadData
     host.find_projects
   end
   
   def host_version_not_accepted(notification)
-    return if @hostField.nil?
+    return if @host_field.nil?
     host = notification.object
     show_alert("The Webistrano version you're running is not suitable for use with Macistrano", "You need at least version #{Host::ACCEPT_VERSION.join(".")}.")
     reset_spinner
   end
 
   def host_credentials_invalid(notification)
-    return if @hostField.nil?
+    return if @host_field.nil?
     show_alert("The specified credentials are invalid.", "Please check username and password and try again.")
     reset_spinner
   end
@@ -126,18 +123,18 @@ class PreferencesController < OSX::NSWindowController
   end
 
   ib_action :removeHost do
-    unless @tableView.selectedRow < 0
-      host = @hosts[@tableView.selectedRow]
+    unless @table_view.selectedRow < 0
+      host = @hosts[@table_view.selectedRow]
       Keychain.remove_password host
-      @hosts.delete_at(@tableView.selectedRow)
+      @hosts.delete_at(@table_view.selectedRow)
       save_hosts_to_preferences
       notify_host_removed host
-      @tableView.reloadData
+      @table_view.reloadData
     end
   end
   
   def closeSheet
-    @newHostSheet.orderOut self
+    @new_host_sheet.orderOut self
   end
   
   def add_host host
@@ -160,9 +157,9 @@ class PreferencesController < OSX::NSWindowController
   end
   
   def reset_fields
-    @hostField.setStringValue ""
-    @newHostSheet.makeFirstResponder @hostField
-    @passwordField.setStringValue ""
-    @usernameField.setStringValue ""
+    @host_field.setStringValue ""
+    @new_host_sheet.makeFirstResponder @host_field
+    @password_field.setStringValue ""
+    @username_field.setStringValue ""
   end
 end

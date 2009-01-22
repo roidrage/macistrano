@@ -8,10 +8,10 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="437"/>
-			<integer value="406"/>
-			<integer value="424"/>
 			<integer value="510"/>
+			<integer value="405"/>
+			<integer value="437"/>
+			<integer value="424"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -40,7 +40,7 @@
 				<int key="NSWindowBacking">2</int>
 				<string key="NSWindowRect">{{196, 216}, {285, 294}}</string>
 				<int key="NSWTFlags">1677722624</int>
-				<string key="NSWindowTitle">Window</string>
+				<string key="NSWindowTitle">Run Task</string>
 				<string key="NSWindowClass">NSWindow</string>
 				<nil key="NSViewClass"/>
 				<string key="NSWindowContentMaxSize">{3.40282e+38, 3.40282e+38}</string>
@@ -227,9 +227,7 @@
 				<int key="NSWindowBacking">2</int>
 				<string key="NSWindowRect">{{363, 594}, {332, 396}}</string>
 				<int key="NSWTFlags">1886912512</int>
-				<object class="NSMutableString" key="NSWindowTitle">
-					<characters key="NS.bytes">Window</characters>
-				</object>
+				<string key="NSWindowTitle">Preferences</string>
 				<object class="NSMutableString" key="NSWindowClass">
 					<characters key="NS.bytes">NSWindow</characters>
 				</object>
@@ -769,59 +767,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">hostField</string>
-						<reference key="source" ref="692680910"/>
-						<reference key="destination" ref="683084375"/>
-					</object>
-					<int key="connectionID">482</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">newHostSheet</string>
-						<reference key="source" ref="692680910"/>
-						<reference key="destination" ref="428999088"/>
-					</object>
-					<int key="connectionID">483</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">passwordField</string>
-						<reference key="source" ref="692680910"/>
-						<reference key="destination" ref="426858088"/>
-					</object>
-					<int key="connectionID">484</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">preferencesWindow</string>
-						<reference key="source" ref="692680910"/>
-						<reference key="destination" ref="310173232"/>
-					</object>
-					<int key="connectionID">485</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">spinner</string>
 						<reference key="source" ref="692680910"/>
 						<reference key="destination" ref="879560323"/>
 					</object>
 					<int key="connectionID">486</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">tableView</string>
-						<reference key="source" ref="692680910"/>
-						<reference key="destination" ref="667347660"/>
-					</object>
-					<int key="connectionID">487</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">usernameField</string>
-						<reference key="source" ref="692680910"/>
-						<reference key="destination" ref="596052573"/>
-					</object>
-					<int key="connectionID">488</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -926,6 +876,54 @@
 						<reference key="destination" ref="574999143"/>
 					</object>
 					<int key="connectionID">525</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">preferences_window</string>
+						<reference key="source" ref="692680910"/>
+						<reference key="destination" ref="310173232"/>
+					</object>
+					<int key="connectionID">526</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">table_view</string>
+						<reference key="source" ref="692680910"/>
+						<reference key="destination" ref="667347660"/>
+					</object>
+					<int key="connectionID">527</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">new_host_sheet</string>
+						<reference key="source" ref="692680910"/>
+						<reference key="destination" ref="428999088"/>
+					</object>
+					<int key="connectionID">528</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">host_field</string>
+						<reference key="source" ref="692680910"/>
+						<reference key="destination" ref="683084375"/>
+					</object>
+					<int key="connectionID">529</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">password_field</string>
+						<reference key="source" ref="692680910"/>
+						<reference key="destination" ref="426858088"/>
+					</object>
+					<int key="connectionID">530</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">username_field</string>
+						<reference key="source" ref="692680910"/>
+						<reference key="destination" ref="596052573"/>
+					</object>
+					<int key="connectionID">531</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1533,9 +1531,9 @@
 					<reference ref="5"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<reference ref="5"/>
-					<string>{{557, 344}, {371, 206}}</string>
+					<string>{{647, 562}, {371, 206}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{557, 344}, {371, 206}}</string>
+					<string>{{647, 562}, {371, 206}}</string>
 					<reference ref="5"/>
 					<string>{{120, 647}, {371, 206}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1561,9 +1559,9 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<reference ref="5"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{502, 604}, {571, 327}}</string>
+					<string>{{418, 604}, {571, 327}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{502, 604}, {571, 327}}</string>
+					<string>{{418, 604}, {571, 327}}</string>
 					<reference ref="6"/>
 					<reference ref="5"/>
 					<string>{571, 303}</string>
@@ -1599,7 +1597,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">525</int>
+			<int key="maxID">531</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1628,20 +1626,16 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSMutableArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>addButton</string>
-							<string>cancelButton</string>
-							<string>hostField</string>
-							<string>newHostSheet</string>
-							<string>passwordField</string>
-							<string>preferencesWindow</string>
+							<string>host_field</string>
+							<string>new_host_sheet</string>
+							<string>password_field</string>
+							<string>preferences_window</string>
 							<string>spinner</string>
-							<string>tableView</string>
-							<string>usernameField</string>
+							<string>table_view</string>
+							<string>username_field</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
