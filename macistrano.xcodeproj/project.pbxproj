@@ -19,7 +19,7 @@
 		FE3CB0830E902DF8009138A1 /* macistrano.icns in Resources */ = {isa = PBXBuildFile; fileRef = FE3CB0820E902DF8009138A1 /* macistrano.icns */; };
 		FE517D860DDF2B5B00CA0249 /* load_operation_queue.rb in Resources */ = {isa = PBXBuildFile; fileRef = FE517D850DDF2B5B00CA0249 /* load_operation_queue.rb */; };
 		FE5F03D90DC11830009DA75F /* webistrano_controller.rb in Resources */ = {isa = PBXBuildFile; fileRef = FE5F03D80DC11830009DA75F /* webistrano_controller.rb */; };
-		FE5F041F0DC11D5B009DA75F /* icon-failure.png in Resources */ = {isa = PBXBuildFile; fileRef = FE5F041E0DC11D5B009DA75F /* icon-failure.png */; };
+		FE5F041F0DC11D5B009DA75F /* icon-failed.png in Resources */ = {isa = PBXBuildFile; fileRef = FE5F041E0DC11D5B009DA75F /* icon-failed.png */; };
 		FE5F04210DC11D6A009DA75F /* icon-inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = FE5F04200DC11D6A009DA75F /* icon-inactive.png */; };
 		FE5F04240DC11D75009DA75F /* icon-success-building.png in Resources */ = {isa = PBXBuildFile; fileRef = FE5F04220DC11D75009DA75F /* icon-success-building.png */; };
 		FE5F04250DC11D75009DA75F /* icon-success.png in Resources */ = {isa = PBXBuildFile; fileRef = FE5F04230DC11D75009DA75F /* icon-success.png */; };
@@ -43,6 +43,7 @@
 		FEC9EB780DE099B900ABA9C8 /* project.rb in Resources */ = {isa = PBXBuildFile; fileRef = FEC9EB700DE099B900ABA9C8 /* project.rb */; };
 		FEC9EB790DE099B900ABA9C8 /* stage.rb in Resources */ = {isa = PBXBuildFile; fileRef = FEC9EB710DE099B900ABA9C8 /* stage.rb */; };
 		FEC9EB7A0DE099B900ABA9C8 /* task.rb in Resources */ = {isa = PBXBuildFile; fileRef = FEC9EB720DE099B900ABA9C8 /* task.rb */; };
+		FEE6BA300F2879F700402101 /* growl_support.rb in Resources */ = {isa = PBXBuildFile; fileRef = FEE6BA2F0F2879F700402101 /* growl_support.rb */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -76,7 +77,7 @@
 		FE3CB0820E902DF8009138A1 /* macistrano.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = macistrano.icns; sourceTree = "<group>"; };
 		FE517D850DDF2B5B00CA0249 /* load_operation_queue.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = load_operation_queue.rb; path = model/load_operation_queue.rb; sourceTree = "<group>"; };
 		FE5F03D80DC11830009DA75F /* webistrano_controller.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = webistrano_controller.rb; path = controller/webistrano_controller.rb; sourceTree = "<group>"; };
-		FE5F041E0DC11D5B009DA75F /* icon-failure.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-failure.png"; sourceTree = "<group>"; };
+		FE5F041E0DC11D5B009DA75F /* icon-failed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-failed.png"; sourceTree = "<group>"; };
 		FE5F04200DC11D6A009DA75F /* icon-inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-inactive.png"; sourceTree = "<group>"; };
 		FE5F04220DC11D75009DA75F /* icon-success-building.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-success-building.png"; sourceTree = "<group>"; };
 		FE5F04230DC11D75009DA75F /* icon-success.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-success.png"; sourceTree = "<group>"; };
@@ -103,6 +104,7 @@
 		FEC9EB700DE099B900ABA9C8 /* project.rb */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text.script.ruby; path = project.rb; sourceTree = "<group>"; };
 		FEC9EB710DE099B900ABA9C8 /* stage.rb */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text.script.ruby; path = stage.rb; sourceTree = "<group>"; };
 		FEC9EB720DE099B900ABA9C8 /* task.rb */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text.script.ruby; path = task.rb; sourceTree = "<group>"; };
+		FEE6BA2F0F2879F700402101 /* growl_support.rb */ = {isa = PBXFileReference; fileEncoding = 7; lastKnownFileType = text.script.ruby; name = growl_support.rb; path = model/growl_support.rb; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				FEE6BA2F0F2879F700402101 /* growl_support.rb */,
 				FE33BD970DDDFB3D003ACBAA /* load_operation.rb */,
 				FEA7AD5C0DDCB2E00032FE31 /* notification_hub.rb */,
 				FE1191EB0DD89E120073164F /* task.rb */,
@@ -195,7 +198,7 @@
 				FE5F04220DC11D75009DA75F /* icon-success-building.png */,
 				FE5F04230DC11D75009DA75F /* icon-success.png */,
 				FE5F04200DC11D6A009DA75F /* icon-inactive.png */,
-				FE5F041E0DC11D5B009DA75F /* icon-failure.png */,
+				FE5F041E0DC11D5B009DA75F /* icon-failed.png */,
 				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 			);
@@ -300,7 +303,7 @@
 				4DDCA7080ACC9A6100E082CE /* rb_main.rb in Resources */,
 				FEA7D49A0DC0F900001EFBE9 /* project_controller.rb in Resources */,
 				FE5F03D90DC11830009DA75F /* webistrano_controller.rb in Resources */,
-				FE5F041F0DC11D5B009DA75F /* icon-failure.png in Resources */,
+				FE5F041F0DC11D5B009DA75F /* icon-failed.png in Resources */,
 				FE5F04210DC11D6A009DA75F /* icon-inactive.png in Resources */,
 				FE5F04240DC11D75009DA75F /* icon-success-building.png in Resources */,
 				FE5F04250DC11D75009DA75F /* icon-success.png in Resources */,
@@ -327,6 +330,7 @@
 				FE17B5B60E0D7E0600682156 /* growl_notifier.rb in Resources */,
 				FE3CB0830E902DF8009138A1 /* macistrano.icns in Resources */,
 				FE874BA70F27330600AE5935 /* icon-webistrano-small.png in Resources */,
+				FEE6BA300F2879F700402101 /* growl_support.rb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

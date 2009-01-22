@@ -673,6 +673,7 @@
 							<int key="NSvFlags">274</int>
 							<string key="NSFrame">{{20, 44}, {531, 263}}</string>
 							<reference key="NSSuperview" ref="84330098"/>
+							<double key="NSViewAlphaValue">0.000000e+00</double>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="2967395">
 								<int key="NSCellFlags">-2079195584</int>
@@ -689,7 +690,7 @@
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MCAwIDAgMC43NQA</bytes>
 								</object>
-								<object class="NSColor" key="NSTextColor">
+								<object class="NSColor" key="NSTextColor" id="949216260">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MSAxIDEAA</bytes>
 								</object>
@@ -699,7 +700,7 @@
 							<reference key="NSNextResponder" ref="84330098"/>
 							<int key="NSvFlags">1292</int>
 							<object class="NSPSMatrix" key="NSDrawMatrix"/>
-							<string key="NSFrame">{{20, 20}, {99, 12}}</string>
+							<string key="NSFrame">{{20, 20}, {74, 12}}</string>
 							<reference key="NSSuperview" ref="84330098"/>
 							<int key="NSpiFlags">24842</int>
 							<double key="NSMinValue">1.600000e+01</double>
@@ -1480,6 +1481,10 @@
 					<string>515.IBPluginDependency</string>
 					<string>516.IBPluginDependency</string>
 					<string>518.IBPluginDependency</string>
+					<string>518.IBViewIntegration.shadowBlurRadius</string>
+					<string>518.IBViewIntegration.shadowColor</string>
+					<string>518.IBViewIntegration.shadowOffsetHeight</string>
+					<string>518.IBViewIntegration.shadowOffsetWidth</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1487,9 +1492,9 @@
 					<string>com.apple.InterfaceBuilderKit</string>
 					<string>com.apple.InterfaceBuilderKit</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{604, 354}, {285, 294}}</string>
+					<string>{{470, -846}, {285, 294}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{604, 354}, {285, 294}}</string>
+					<string>{{470, -846}, {285, 294}}</string>
 					<integer value="0" id="6"/>
 					<string>{{499, 593}, {285, 266}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1505,9 +1510,9 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{476, 235}, {332, 396}}</string>
+					<string>{{342, -965}, {332, 396}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{476, 235}, {332, 396}}</string>
+					<string>{{342, -965}, {332, 396}}</string>
 					<integer value="1" id="5"/>
 					<string>{{497, 550}, {332, 396}}</string>
 					<reference ref="6"/>
@@ -1531,9 +1536,9 @@
 					<reference ref="5"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<reference ref="5"/>
-					<string>{{647, 562}, {371, 206}}</string>
+					<string>{{513, -638}, {371, 206}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{647, 562}, {371, 206}}</string>
+					<string>{{513, -638}, {371, 206}}</string>
 					<reference ref="5"/>
 					<string>{{120, 647}, {371, 206}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1559,9 +1564,9 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<reference ref="5"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{418, 604}, {571, 327}}</string>
+					<string>{{255, -596}, {571, 327}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{418, 604}, {571, 327}}</string>
+					<string>{{255, -596}, {571, 327}}</string>
 					<reference ref="6"/>
 					<reference ref="5"/>
 					<string>{571, 303}</string>
@@ -1575,6 +1580,10 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<real value="4.000000e+00"/>
+					<reference ref="949216260"/>
+					<real value="0.000000e+00"/>
+					<real value="1.000000e+01"/>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">

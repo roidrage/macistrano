@@ -138,8 +138,12 @@ describe ProjectController, "when notified of a completed build" do
     @controller.stub!(:set_stage_submenu_enabled)
     @controller.stub!(:set_status_icon)
     @deployment = Deployment.alloc.init
+    @deployment.stage = Stage.new
+    @deployment.stage.project = Project.new
+    @deployment.stage.project.host = Host.new
     @webistrano_controller = WebistranoController.alloc.init
     @controller.instance_variable_set(:@webistrano_controller, @webistrano_controller)
+    @controller.init_growl
   end
   
   it "should stop the spinner animation" do

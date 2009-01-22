@@ -8,18 +8,12 @@
 
 require 'osx/cocoa'
 require 'rubygems'
-require 'growl_notifier'
 require 'notification_hub'
+require 'growl_support'
 
 class ProjectController < OSX::NSWindowController
-  include OSX
-  include NotificationHub
-  
-  GROWL_MESSAGE_TYPES = {:deployment_complete => "Deployment completed",
-                         :deployment_started => "Deployment started",
-                         :deployment_failed => "Deployment failed",
-                         :deployment_canceled => "Deployment cancelled"}
-  
+  include OSX, NotificationHub, GrowlSupport
+    
   notify :add_host, :when => :host_fully_loaded
   notify :remove_host, :when => :host_removed
   notify :remove_loading, :when => :all_hosts_loaded
@@ -55,11 +49,6 @@ class ProjectController < OSX::NSWindowController
     create_status_bar
     init_growl
     @status_hud_window.setFloatingPanel true
-  end
-  
-  def init_growl
-    @growl_notifier = Growl::Notifier.alloc.init
-    @growl_notifier.start('Macistrano', GROWL_MESSAGE_TYPES.collect {|key, value| value})
   end
   
   def remove_loading(notification)
@@ -112,27 +101,13 @@ class ProjectController < OSX::NSWindowController
   end
   
   def build_completed(notification)
-    icon = case notification.object.status
-    when "success":
-      notify_growl GROWL_MESSAGE_TYPES[:deployment_complete], notification.object
-      "success"
-    when "canceled":
-      notify_growl GROWL_MESSAGE_TYPES[:deployment_canceled], notification.object
-      "canceled"
-    when "failed":
-      notify_growl GROWL_MESSAGE_TYPES[:deployment_failed], notification.object
-      "failure"
-    end
-    set_stage_submenu_enabled(notification.object, true, icon)
-    set_status_icon icon
+    set_stage_submenu_enabled(notification.object, true, notification.object.status)
+    set_status_icon(notification.object.status)
+    notify_growl(notification)
     @webistrano_controller.remove_deployment_timer(notification)
     @deployment_status_spinner.stopAnimation(self)
   end
 
-  def notify_growl(message, deployment)
-    @growl_notifier.notify(message, message, "Stage #{deployment.stage.name} of project #{deployment.stage.project.name} (Host: #{deployment.stage.project.host.url})")
-  end
-  
   def set_status_icon(icon)
     @statusItem.setImage get_icon(icon)
   end
