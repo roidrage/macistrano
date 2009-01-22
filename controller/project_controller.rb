@@ -48,7 +48,6 @@ class ProjectController < OSX::NSWindowController
     webistrano_controller.hosts = @preferences_controller.hosts
     create_status_bar
     init_growl
-    @status_hud_window.setFloatingPanel true
   end
   
   def remove_loading(notification)
