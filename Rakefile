@@ -9,7 +9,7 @@ require 'pathname'
 # Application own Settings
 APPNAME               = "Macistrano"
 TARGET                = "#{APPNAME}.app"
-APPVERSION            = "0.1.0"
+APPVERSION            = "0.1.1"
 PUBLISH               = 'yourname@yourhost:path'
 DEFAULT_TARGET        = 'Macistrano'
 DEFAULT_CONFIGURATION = 'Release'

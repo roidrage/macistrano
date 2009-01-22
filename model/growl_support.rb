@@ -8,14 +8,15 @@ module GrowlSupport
 
   def notify_growl(notification)
     deployment = notification.object
-    message = case when "success":
-      GROWL_MESSAGE_TYPES[:deployment_complete]
-    when "canceled":
-      GROWL_MESSAGE_TYPES[:deployment_canceled]
-    when "failed":
-      GROWL_MESSAGE_TYPES[:deployment_failed]
-    end
-    @growl_notifier.notify(message, message, "Stage #{deployment.stage.name} of project #{deployment.stage.project.name} (Host: #{deployment.stage.project.host.url})")
+    message = case deployment.status 
+      when "success":
+        GROWL_MESSAGE_TYPES[:deployment_complete]
+      when "canceled":
+        GROWL_MESSAGE_TYPES[:deployment_canceled]
+      when "failed":
+        GROWL_MESSAGE_TYPES[:deployment_failed]
+      end
+    @growl_notifier.notify(message, message, "Stage #{deployment.stage.name} of project #{deployment.stage.project.name} (Host: #{deployment.stage.project.host.url})", nil, true)
   end
   
   def init_growl
