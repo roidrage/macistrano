@@ -8,6 +8,7 @@ class PreferencesController < OSX::NSWindowController
   notify :host_version_accepted, :when => :host_version_acceptable
   notify :host_version_not_accepted, :when => :host_version_inacceptable
   notify :host_credentials_invalid, :when => :host_credentials_invalid
+  notify :host_check_failed, :when => :host_check_failed
   
   ib_outlet :preferences_window
   ib_outlet :table_view
@@ -86,6 +87,13 @@ class PreferencesController < OSX::NSWindowController
     @new_host_sheet.orderOut self
     @table_view.reloadData
     host.find_projects
+  end
+  
+  def host_check_failed(notification)
+    return if @host_field.nil?
+    host = notification.object
+    show_alert("There was an error trying to fetch the data for the host, are you sure the URL is correct?", "Please have a good look at the data and try again.")
+    reset_spinner
   end
   
   def host_version_not_accepted(notification)

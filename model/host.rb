@@ -65,11 +65,15 @@ class Host < OSX::NSObject
   end
   
   def version_check_failed(url, error)
-    case error.code
+    puts "HELLO"
+    code = error.code unless error.is_a?(Fixnum)
+    case code
     when -1003:
       notify_host_unreachable self
     when -1012:
       notify_host_credentials_invalid self
+    else
+      notify_host_check_failed self
     end
   end
   
