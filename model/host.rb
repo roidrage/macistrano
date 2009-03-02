@@ -65,7 +65,6 @@ class Host < OSX::NSObject
   end
   
   def version_check_failed(url, error)
-    puts "HELLO"
     code = error.code unless error.is_a?(Fixnum)
     case code
     when -1003:
